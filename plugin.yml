@@ -1,0 +1,9 @@
+name: Clutch
+main: speedcubing.Main
+version: 1.0
+depend:
+  - speedcubingServer
+  - speedcubingLib
+commands:
+  reloadsubplugin:
+    usage: /reloadsubplugin
