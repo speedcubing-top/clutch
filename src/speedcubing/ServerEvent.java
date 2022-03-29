@@ -61,7 +61,7 @@ public class ServerEvent {
                 String text = formats[0] + player.getName();
                 String[] str = GlobalString.MessageFormat[0];
                 String[] out = new String[]{
-                        str[0].replace("%tyext%", text).replace("%text2%", formats[2] + message),
+                        str[0].replace("%text%", text).replace("%text2%", formats[2] + message),
                         str[1].replace("%text%", text).replace("%text2%", formats[2] + message),
                         str[2].replace("%text%", text).replace("%text2%", formats[2] + message),
                         str[3].replace("%text%", text).replace("%text2%", formats[2] + message)
