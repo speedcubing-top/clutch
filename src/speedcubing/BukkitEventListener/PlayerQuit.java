@@ -30,18 +30,13 @@ public class PlayerQuit implements Listener {
                     NormalClutch.Length.remove(uuid);
                     NormalClutch.used -= 1;
                     NormalClutch.rooms[NormalClutch.coordToRoom(Core.PlayerCoord.get(uuid))] = true;
-                    for (BlockPosition b : Core.Blocks.get(uuid)) {
-                        world.getBlockAt(b.getX(), b.getY(), b.getZ()).setType(Material.AIR);
-                    }
+                    Core.clear(uuid,world);
                 }
                 break;
                 case "inclined": {
                     InclinedClutch.Length.remove(uuid);
                     InclinedClutch.used -= 1;
                     InclinedClutch.rooms[InclinedClutch.coordToRoom(Core.PlayerCoord.get(uuid))] = true;
-                    for (BlockPosition b : Core.Blocks.get(uuid)) {
-                        world.getBlockAt(b.getX(), b.getY(), b.getZ()).setType(Material.AIR);
-                    }
                     player.teleport(new Location(Bukkit.getWorld("world"), 0.5, 1000, 0.5, 0, 0));
                 }
                 break;
@@ -55,17 +50,17 @@ public class PlayerQuit implements Listener {
             Core.Blocks.remove(uuid);
             Core.PlayerCoord.remove(uuid);
             new Thread(() -> {
-                String str = "";
+                StringBuilder str = new StringBuilder();
                 for (Integer ints : NormalClutch.KbCache.get(uuid)) {
                     if (ints == 0)
                         break;
-                    str += ints;
+                    str.append(ints);
                 }
-                String str2 = "";
+                StringBuilder str2 = new StringBuilder();
                 for (Integer ints : InclinedClutch.KbCache.get(uuid)) {
                     if (ints == 0)
                         break;
-                    str2 += ints;
+                    str2.append(ints);
                 }
                 Integer[] ints = Core.integerCache.get(uuid);
                 speedcubingServer.connection.update("playersdata",

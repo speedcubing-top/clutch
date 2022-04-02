@@ -39,9 +39,7 @@ public class PlayerMove implements Listener {
                         scoreboard.getTeam(sidebar[1]).setSuffix("0");
                         NormalClutch.Length.put(uuid, 0);
                         Core.CurrentDelay.put(uuid, Core.Delay.get(uuid));
-                        for (BlockPosition b : Core.Blocks.get(uuid)) {
-                            world.getBlockAt(b.getX(), b.getY(), b.getZ()).setType(Material.AIR);
-                        }
+                        Core.clear(uuid,world);
                         player.setLevel(0);
                         player.closeInventory();
                         Core.Blockplaced.put(uuid, 0);
@@ -65,9 +63,7 @@ public class PlayerMove implements Listener {
                         scoreboard.getTeam(sidebar[1]).setSuffix("0");
                         InclinedClutch.Length.put(uuid, new Integer[]{coord, coord});
                         Core.CurrentDelay.put(uuid, Core.Delay.get(uuid));
-                        for (BlockPosition b : Core.Blocks.get(uuid)) {
-                            world.getBlockAt(b.getX(), b.getY(), b.getZ()).setType(Material.AIR);
-                        }
+                        Core.clear(uuid,world);
                         player.setLevel(0);
                         player.closeInventory();
                         Core.Blockplaced.put(uuid, 0);

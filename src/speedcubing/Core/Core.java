@@ -1,6 +1,8 @@
 package speedcubing.Core;
 
 import net.minecraft.server.v1_8_R3.BlockPosition;
+import org.bukkit.Material;
+import org.bukkit.World;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,4 +17,8 @@ public class Core {
     public static final Map<UUID, Integer> CurrentDelay = new HashMap<>();
     public static final Map<UUID, Integer> CountDownTask = new HashMap<>();
     public static final Map<UUID, Integer[]> integerCache = new HashMap<>();
+
+    public static void clear(UUID uuid, World world) {
+        Core.Blocks.get(uuid).forEach(a -> world.getBlockAt(a.getX(), a.getY(), a.getZ()).setType(Material.AIR));
+    }
 }

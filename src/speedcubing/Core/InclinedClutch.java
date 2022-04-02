@@ -8,10 +8,7 @@ import net.minecraft.server.v1_8_R3.BlockPosition;
 import net.minecraft.server.v1_8_R3.ChatComponentText;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import net.minecraft.server.v1_8_R3.PlayerConnection;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -69,10 +66,8 @@ public class InclinedClutch {
         NormalClutch.Length.remove(uuid);
         NormalClutch.used -= 1;
         NormalClutch.rooms[NormalClutch.coordToRoom(Core.PlayerCoord.get(uuid))] = true;
-        for (BlockPosition b : Core.Blocks.get(uuid)) {
-            Bukkit.getWorld("world").getBlockAt(b.getX(), b.getY(), b.getZ()).setType(Material.AIR);
-        }
-
+        World world = Bukkit.getWorld("world");
+        Core.Blocks.get(uuid).forEach(a -> world.getBlockAt(a.getX(), a.getY(), a.getZ()).setType(Material.AIR));
         Core.Blocks.get(uuid).clear();
         Core.Blockplaced.put(uuid, 0);
 
