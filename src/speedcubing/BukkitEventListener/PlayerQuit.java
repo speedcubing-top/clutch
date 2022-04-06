@@ -30,17 +30,16 @@ public class PlayerQuit implements Listener {
                     NormalClutch.Length.remove(uuid);
                     NormalClutch.used -= 1;
                     NormalClutch.rooms[NormalClutch.coordToRoom(Core.PlayerCoord.get(uuid))] = true;
-                    Core.clear(uuid,world);
                 }
                 break;
                 case "inclined": {
                     InclinedClutch.Length.remove(uuid);
                     InclinedClutch.used -= 1;
                     InclinedClutch.rooms[InclinedClutch.coordToRoom(Core.PlayerCoord.get(uuid))] = true;
-                    player.teleport(new Location(Bukkit.getWorld("world"), 0.5, 1000, 0.5, 0, 0));
                 }
                 break;
             }
+            Core.clear(uuid,world);
             Bukkit.getScheduler().cancelTask(Core.CountDownTask.get(uuid));
             Core.CountDownTask.remove(uuid);
             Main.VeloSettings.remove(uuid);

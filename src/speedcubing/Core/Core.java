@@ -20,5 +20,6 @@ public class Core {
 
     public static void clear(UUID uuid, World world) {
         Core.Blocks.get(uuid).forEach(a -> world.getBlockAt(a.getX(), a.getY(), a.getZ()).setType(Material.AIR));
+        Core.Blocks.get(uuid).clear();
     }
 }

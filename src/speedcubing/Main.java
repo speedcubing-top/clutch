@@ -29,6 +29,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new BlockBreak(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDropItem(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerInteract(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerSpawnLocation(),this);
         Bukkit.getPluginCommand("reloadsubplugin").setExecutor(new configcache());
         Bukkit.getPluginCommand("reloadsubplugin").setTabCompleter(new configcache());
         Bukkit.getWorld("world").setDifficulty(Difficulty.PEACEFUL);

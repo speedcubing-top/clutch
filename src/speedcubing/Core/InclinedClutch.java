@@ -66,9 +66,7 @@ public class InclinedClutch {
         NormalClutch.Length.remove(uuid);
         NormalClutch.used -= 1;
         NormalClutch.rooms[NormalClutch.coordToRoom(Core.PlayerCoord.get(uuid))] = true;
-        World world = Bukkit.getWorld("world");
-        Core.Blocks.get(uuid).forEach(a -> world.getBlockAt(a.getX(), a.getY(), a.getZ()).setType(Material.AIR));
-        Core.Blocks.get(uuid).clear();
+        Core.clear(uuid,Bukkit.getWorld("world"));
         Core.Blockplaced.put(uuid, 0);
 
         int coord = 5 * (room * (room % 2 == 0 ? -1 : 1) + room % 2);

@@ -43,7 +43,6 @@ public class PlayerMove implements Listener {
                         player.setLevel(0);
                         player.closeInventory();
                         Core.Blockplaced.put(uuid, 0);
-                        Core.Blocks.get(uuid).clear();
                         player.getInventory().setItem(0, ItemStackList.Blocks);
                         Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> PlayerUtils.teleport(((CraftPlayer) player).getHandle().playerConnection, 0.5, 100, coord + 0.5, 90, 0));
                     }
@@ -67,7 +66,6 @@ public class PlayerMove implements Listener {
                         player.setLevel(0);
                         player.closeInventory();
                         Core.Blockplaced.put(uuid, 0);
-                        Core.Blocks.get(uuid).clear();
                         player.getInventory().setItem(0, ItemStackList.Blocks);
                         Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> PlayerUtils.teleport(((CraftPlayer) player).getHandle().playerConnection, coord + 0.5, 100, coord + 0.5, 45, 0));
                     }
