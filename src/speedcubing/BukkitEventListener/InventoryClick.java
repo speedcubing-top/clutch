@@ -1,7 +1,9 @@
 package speedcubing.BukkitEventListener;
 
 import cubingserver.StringList.GlobalString;
+import cubingserver.connection.SocketUtils;
 import cubingserver.libs.User;
+import cubingserver.speedcubingServer;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -222,6 +224,7 @@ public class InventoryClick implements Listener {
                         player.closeInventory();
                         player.sendMessage(GlobalString.inputInteger[User.getLang(uuid)].replace("%min%", "0.000").replace("%max%", "5.000"));
                         Main.VeloSettings.add(uuid);
+                        speedcubingServer.node(true,uuid);
                     } else if (RawSlot == 16) {
                         UUID uuid = player.getUniqueId();
                         if (PlayerInteract.display.contains(uuid)) {
