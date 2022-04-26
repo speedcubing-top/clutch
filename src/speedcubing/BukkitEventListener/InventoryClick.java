@@ -1,7 +1,6 @@
 package speedcubing.BukkitEventListener;
 
 import cubingserver.StringList.GlobalString;
-import cubingserver.connection.SocketUtils;
 import cubingserver.libs.User;
 import cubingserver.speedcubingServer;
 import org.bukkit.Bukkit;
