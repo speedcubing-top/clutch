@@ -1,14 +1,14 @@
 package speedcubing.Core;
 
-import cubing.lib.bukkit.PlayerUtils;
-import cubing.lib.bukkit.SideBarAPI;
 import cubingserver.StringList.GlobalString;
 import cubingserver.libs.User;
-import net.minecraft.server.v1_8_R3.BlockPosition;
 import net.minecraft.server.v1_8_R3.ChatComponentText;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import net.minecraft.server.v1_8_R3.PlayerConnection;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -22,6 +22,8 @@ import speedcubing.BukkitEventListener.PlayerInteract;
 import speedcubing.List.ItemStackList;
 import speedcubing.List.StringList;
 import speedcubing.Main;
+import speedcubing.lib.bukkit.PlayerUtils;
+import speedcubing.lib.bukkit.SideBarAPI;
 
 import java.util.HashMap;
 import java.util.Map;

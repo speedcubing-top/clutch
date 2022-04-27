@@ -1,9 +1,9 @@
 package speedcubing;
 
-import cubing.lib.bukkit.Event.ServerEventHandler;
-import cubing.lib.bukkit.Event.events.PlayInChatEvent;
-import cubing.lib.bukkit.packetwrapper.OutPlayerListHeaderFooter;
-import cubing.lib.utils.Console;
+import speedcubing.spigot.Event.ServerEventHandler;
+import speedcubing.spigot.Event.events.PlayInChatEvent;
+import speedcubing.lib.bukkit.packetwrapper.OutPlayerListHeaderFooter;
+import speedcubing.lib.utils.Console;
 import cubingserver.StringList.GlobalString;
 import cubingserver.customEvents.UDPEvent;
 import cubingserver.libs.User;
