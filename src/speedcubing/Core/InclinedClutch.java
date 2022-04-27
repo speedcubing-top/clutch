@@ -1,7 +1,7 @@
 package speedcubing.Core;
 
-import cubingserver.StringList.GlobalString;
-import cubingserver.libs.User;
+import speedcubing.server.StringList.GlobalString;
+import speedcubing.server.libs.User;
 import net.minecraft.server.v1_8_R3.ChatComponentText;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import net.minecraft.server.v1_8_R3.PlayerConnection;
@@ -68,7 +68,7 @@ public class InclinedClutch {
         NormalClutch.Length.remove(uuid);
         NormalClutch.used -= 1;
         NormalClutch.rooms[NormalClutch.coordToRoom(Core.PlayerCoord.get(uuid))] = true;
-        Core.clear(uuid,Bukkit.getWorld("world"));
+        Core.clear(uuid, Bukkit.getWorld("world"));
         Core.Blockplaced.put(uuid, 0);
 
         int coord = 5 * (room * (room % 2 == 0 ? -1 : 1) + room % 2);

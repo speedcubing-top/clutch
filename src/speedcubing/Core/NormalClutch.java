@@ -1,12 +1,11 @@
 package speedcubing.Core;
 
-import cubing.lib.bukkit.PlayerUtils;
-import cubing.lib.bukkit.SideBarAPI;
-import cubingserver.PluginMessage;
-import cubingserver.StringList.GlobalString;
-import cubingserver.libs.User;
-import cubingserver.speedcubingServer;
-import net.minecraft.server.v1_8_R3.BlockPosition;
+import speedcubing.lib.bukkit.PlayerUtils;
+import speedcubing.lib.bukkit.SideBarAPI;
+import speedcubing.server.PluginMessage;
+import speedcubing.server.StringList.GlobalString;
+import speedcubing.server.libs.User;
+import speedcubing.server.speedcubingServer;
 import net.minecraft.server.v1_8_R3.ChatComponentText;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import net.minecraft.server.v1_8_R3.PlayerConnection;
