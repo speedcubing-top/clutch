@@ -8,13 +8,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.scoreboard.Scoreboard;
-import speedcubing.Core.Core;
-import speedcubing.Core.InclinedClutch;
-import speedcubing.Core.NormalClutch;
 import speedcubing.List.ItemStackList;
 import speedcubing.List.StringList;
 import speedcubing.Member;
-import speedcubing.server.libs.User;
 
 import java.util.UUID;
 
