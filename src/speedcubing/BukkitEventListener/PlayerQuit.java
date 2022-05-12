@@ -1,17 +1,17 @@
 package speedcubing.BukkitEventListener;
 
-import speedcubing.server.speedcubingServer;
-import speedcubing.server.listeners.PlayerJoin;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
-import speedcubing.Core.Core;
 import speedcubing.Core.InclinedClutch;
 import speedcubing.Core.NormalClutch;
 import speedcubing.Main;
+import speedcubing.Member;
+import speedcubing.server.listeners.PlayerJoin;
+import speedcubing.server.speedcubingServer;
 
 import java.util.UUID;
 
@@ -22,43 +22,36 @@ public class PlayerQuit implements Listener {
         UUID uuid = player.getUniqueId();
         if (PlayerJoin.JoinPackets.containsKey(uuid)) {
             World world = player.getWorld();
+            Member member = Member.getMember(uuid);
             switch (world.getName()) {
                 case "world": {
-                    NormalClutch.Length.remove(uuid);
                     NormalClutch.used -= 1;
-                    NormalClutch.rooms[NormalClutch.coordToRoom(Core.PlayerCoord.get(uuid))] = true;
+                    NormalClutch.rooms[NormalClutch.coordToRoom(member.PlayerCoord)] = true;
                 }
                 break;
                 case "inclined": {
-                    InclinedClutch.Length.remove(uuid);
                     InclinedClutch.used -= 1;
-                    InclinedClutch.rooms[InclinedClutch.coordToRoom(Core.PlayerCoord.get(uuid))] = true;
+                    InclinedClutch.rooms[InclinedClutch.coordToRoom(member.PlayerCoord)] = true;
                 }
                 break;
             }
-            Core.clear(uuid,world);
-            Bukkit.getScheduler().cancelTask(Core.CountDownTask.get(uuid));
-            Core.CountDownTask.remove(uuid);
+            member.clear(world);
+            Bukkit.getScheduler().cancelTask(member.CountDownTask);
             Main.VeloSettings.remove(uuid);
-            Core.Delay.remove(uuid);
-            Core.CurrentDelay.remove(uuid);
-            Core.Blockplaced.remove(uuid);
-            Core.Blocks.remove(uuid);
-            Core.PlayerCoord.remove(uuid);
             new Thread(() -> {
                 StringBuilder str = new StringBuilder();
-                for (Integer ints : NormalClutch.KbCache.get(uuid)) {
+                for (int ints : member.KbCache) {
                     if (ints == 0)
                         break;
                     str.append(ints);
                 }
                 StringBuilder str2 = new StringBuilder();
-                for (Integer ints : InclinedClutch.KbCache.get(uuid)) {
+                for (int ints : member.KbCache2) {
                     if (ints == 0)
                         break;
                     str2.append(ints);
                 }
-                Integer[] ints = Core.integerCache.get(uuid);
+                int[] ints = member.integerCache;
                 speedcubingServer.connection.update("playersdata",
                         "clutch_blockskin=" + ints[0] +
                                 ",clutch_normal_ver=" + ints[1] +
@@ -68,9 +61,7 @@ public class PlayerQuit implements Listener {
                                 ",clutch_normal_hits='" + str + "'" +
                                 ",clutch_inclined_hits='" + str2 + "'"
                         , "uuid='" + uuid + "'");
-                Core.integerCache.remove(uuid);
-                InclinedClutch.KbCache.remove(uuid);
-                NormalClutch.KbCache.remove(uuid);
+                Member.users.remove(uuid);
             }).start();
         }
     }

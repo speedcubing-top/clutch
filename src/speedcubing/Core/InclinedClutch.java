@@ -1,7 +1,5 @@
 package speedcubing.Core;
 
-import speedcubing.server.libs.GlobalString;
-import speedcubing.server.libs.User;
 import net.minecraft.server.v1_8_R3.ChatComponentText;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import net.minecraft.server.v1_8_R3.PlayerConnection;
@@ -22,11 +20,12 @@ import speedcubing.BukkitEventListener.PlayerInteract;
 import speedcubing.List.ItemStackList;
 import speedcubing.List.StringList;
 import speedcubing.Main;
+import speedcubing.Member;
 import speedcubing.lib.bukkit.PlayerUtils;
 import speedcubing.lib.bukkit.SideBarAPI;
+import speedcubing.server.libs.GlobalString;
+import speedcubing.server.libs.User;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 public class InclinedClutch {
@@ -36,9 +35,6 @@ public class InclinedClutch {
     public static final int hitcount = 36;
     public static final InventoryHolder KB = () -> null;
     public static final boolean[] rooms = new boolean[size];
-
-    public static final Map<UUID, Integer[]> Length = new HashMap<>();
-    public static final Map<UUID, Integer[]> KbCache = new HashMap<>();
 
     public void Load() {
         for (int i = 0; i < size; i++) {
@@ -61,23 +57,23 @@ public class InclinedClutch {
         rooms[room] = false;
         used += 1;
         UUID uuid = player.getUniqueId();
-        int lang = User.getUser(uuid).lang;
-        Bukkit.getScheduler().cancelTask(Core.CountDownTask.get(uuid));
+        Member member = Member.getMember(uuid);
+        Bukkit.getScheduler().cancelTask(member.CountDownTask);
         Main.VeloSettings.remove(uuid);
-        NormalClutch.Length.remove(uuid);
+        member.Length = -1;
         NormalClutch.used -= 1;
-        NormalClutch.rooms[NormalClutch.coordToRoom(Core.PlayerCoord.get(uuid))] = true;
-        Core.clear(uuid, Bukkit.getWorld("world"));
-        Core.Blockplaced.put(uuid, 0);
+        NormalClutch.rooms[NormalClutch.coordToRoom(member.PlayerCoord)] = true;
+        member.clear(Bukkit.getWorld("world"));
+        member.Blockplaced = 0;
 
         int coord = 5 * (room * (room % 2 == 0 ? -1 : 1) + room % 2);
-        Core.PlayerCoord.put(uuid, coord);
+        member.PlayerCoord = coord;
         player.setLevel(0);
         player.teleport(new Location(Bukkit.getWorld("inclined"), coord + 0.5, 100, coord + 0.5, 45, 0));
         player.getInventory().setHeldItemSlot(0);
-        Core.CurrentDelay.put(uuid, 100);
-        Core.Delay.put(uuid, 100);
-        Core.CountDownTask.put(uuid, Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(Main.class), new Runnable() {
+        member.CurrentDelay = 100;
+        member.Delay = 100;
+        member.CountDownTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(Main.class), new Runnable() {
             int hitindex = 0;
             int hitdelay = 0;
 
@@ -85,42 +81,40 @@ public class InclinedClutch {
             public void run() {
                 if (player.getGameMode() != GameMode.CREATIVE) {
                     if (!player.getItemInHand().getType().equals(Material.INK_SACK)) {
-                        if (Core.CurrentDelay.get(uuid) == 0) {
+                        if (member.CurrentDelay == 0) {
                             if (hitdelay <= 0) {
-                                if (hitindex == hitcount || KbCache.get(uuid)[hitindex] == 0) {
-                                    Core.CurrentDelay.put(uuid, Core.Delay.get(uuid));
+                                if (hitindex == hitcount || member.KbCache2[hitindex] == 0) {
+                                    member.reset();
                                     hitindex = 0;
                                 } else {
-                                    int sub = 2 * (KbCache.get(uuid)[hitindex] - 1);
+                                    int sub = 2 * (member.KbCache2[hitindex] - 1);
                                     double velo = configcache.ReduceKB[sub + 10];
-                                    player.setVelocity(new Vector(velo, configcache.ReduceKB[sub + 11] * (Core.integerCache.get(uuid)[3] / 1000D), -velo));
+                                    player.setVelocity(new Vector(velo, configcache.ReduceKB[sub + 11] * (member.integerCache[3] / 1000D), -velo));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
-                                    player.getScoreboard().getTeam(StringList.SideBarInclined[lang][1]).setSuffix(Integer.toString(hitindex + 1));
+                                    player.getScoreboard().getTeam(StringList.SideBarInclined[member.lang][1]).setSuffix(Integer.toString(hitindex + 1));
                                     if (PlayerInteract.display.contains(uuid)) {
                                         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
                                         connection.sendPacket(new PacketPlayOutTitle(0, 60, 5));
                                         connection.sendPacket(new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, new ChatComponentText("§e" + (hitindex + 1))));
                                     }
                                     hitindex += 1;
-                                    hitdelay = Core.integerCache.get(uuid)[4];
+                                    hitdelay = member.integerCache[4];
                                     PlayerUtils.sendActionBar(((CraftPlayer) player).getHandle().playerConnection, "§aGo!");
                                 }
                             }
                             hitdelay -= 1;
                         } else {
-                            int currentdelay = Core.CurrentDelay.get(uuid);
-                            Core.CurrentDelay.put(uuid, currentdelay - 1);
+                            int currentdelay = member.CurrentDelay;
+                            member.CurrentDelay = currentdelay - 1;
                             if (currentdelay % 2 == 0)
                                 PlayerUtils.sendActionBar(((CraftPlayer) player).getHandle().playerConnection, "§e" + currentdelay / 20D);
-                            if (currentdelay == 0)
-                                hitdelay = 0;
                         }
                     } else {
-                        int dd = Core.CurrentDelay.get(uuid);
+                        int dd = member.CurrentDelay;
                         if (dd == 0) {
-                            int b = Core.Delay.get(uuid);
-                            Core.CurrentDelay.put(uuid, b);
+                            int b = member.Delay;
+                            member.CurrentDelay = b;
                             dd = b;
                             hitdelay = 0;
                             hitindex = 0;
@@ -129,11 +123,11 @@ public class InclinedClutch {
                     }
                 }
             }
-        }, 0, 1));
+        }, 0, 1);
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective objective = scoreboard.registerNewObjective("sidebar", "dummy");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-        String[] sidebar = StringList.SideBarInclined[lang];
+        String[] sidebar = StringList.SideBarInclined[member.lang];
         objective.setDisplayName(sidebar[11]);
         SideBarAPI.sidebarTeams(scoreboard, new String[][]{
                 {sidebar[10]},
@@ -149,11 +143,11 @@ public class InclinedClutch {
         }, new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1, 0
         });
         player.setScoreboard(scoreboard);
-        Length.put(uuid, new Integer[]{coord, coord});
+        member.Length2 = new int[]{coord, coord};
         Inventory inventory = player.getInventory();
         inventory.setItem(0, ItemStackList.Blocks);
-        inventory.setItem(8, ItemStackList.itemstacks[lang]);
-        inventory.setItem(7, ItemStackList.join[lang][0]);
+        inventory.setItem(8, ItemStackList.itemstacks[member.lang]);
+        inventory.setItem(7, ItemStackList.join[member.lang][0]);
     }
 
     public static int coordToRoom(int z) {

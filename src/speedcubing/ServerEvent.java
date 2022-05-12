@@ -1,17 +1,16 @@
 package speedcubing;
 
-import speedcubing.spigot.Event.ServerEventHandler;
-import speedcubing.spigot.Event.events.PlayInChatEvent;
-import speedcubing.lib.bukkit.packetwrapper.OutPlayerListHeaderFooter;
-import speedcubing.lib.utils.Console;
-import speedcubing.server.libs.GlobalString;
-import speedcubing.server.events.UDPEvent;
-import speedcubing.server.libs.User;
-import speedcubing.server.speedcubingServer;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-import speedcubing.Core.Core;
+import speedcubing.lib.bukkit.packetwrapper.OutPlayerListHeaderFooter;
+import speedcubing.lib.utils.Console;
+import speedcubing.server.events.UDPEvent;
+import speedcubing.server.libs.GlobalString;
+import speedcubing.server.libs.User;
+import speedcubing.server.speedcubingServer;
+import speedcubing.spigot.Event.ServerEventHandler;
+import speedcubing.spigot.Event.events.PlayInChatEvent;
 
 import java.util.UUID;
 
@@ -22,7 +21,7 @@ public class ServerEvent {
         if (rs[0].equals("o") && rs[1].equals("1")) {
             speedcubingServer.AllPlayers = Integer.parseInt(rs[2]);
             for (Player p : Bukkit.getOnlinePlayers()) {
-                int lang = User.getUser(p.getUniqueId()).lang;
+                int lang = Member.getMember(p.getUniqueId()).lang;
                 ((CraftPlayer) p).getHandle().playerConnection.sendPacket(OutPlayerListHeaderFooter.a(GlobalString.LobbyTabList[0][lang], GlobalString.LobbyTabList[1][lang].replace("%int%", rs[2])));
             }
         }
@@ -40,7 +39,7 @@ public class ServerEvent {
                 if (x < 0 || x > 5000)
                     player.sendMessage(GlobalString.integerOutOfRange[User.getUser(uuid).lang].replace("%min%", "0.000").replace("%max%", "5.000"));
                 else {
-                    Core.integerCache.get(uuid)[player.getWorld().getName().equals("world") ? 1 : 3] = x;
+                    Member.getMember(uuid).integerCache[player.getWorld().getName().equals("world") ? 1 : 3] = x;
                     Main.VeloSettings.remove(uuid);
                     speedcubingServer.node(false, uuid);
                 }
