@@ -1,8 +1,9 @@
 package speedcubing.BukkitEventListener;
 
-import speedcubing.lib.bukkit.PlayerUtils;
-import speedcubing.server.libs.User;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,6 +16,8 @@ import speedcubing.Core.NormalClutch;
 import speedcubing.List.ItemStackList;
 import speedcubing.List.StringList;
 import speedcubing.Main;
+import speedcubing.lib.bukkit.PlayerUtils;
+import speedcubing.server.libs.User;
 
 import java.util.UUID;
 
@@ -31,9 +34,8 @@ public class PlayerMove implements Listener {
                     int coord = Core.PlayerCoord.get(uuid);
                     Location to = e.getTo();
                     if (to.getY() <= 96 || Math.abs(to.getZ() - coord - 0.5) > 5.5) {
-                        int lang = User.getLang(uuid);
                         Scoreboard scoreboard = player.getScoreboard();
-                        String[] sidebar = StringList.SideBarNormal[lang];
+                        String[] sidebar = StringList.SideBarNormal[User.getUser(uuid).lang];
                         scoreboard.getTeam(sidebar[4]).setSuffix("0");
                         scoreboard.getTeam(sidebar[1]).setSuffix("0");
                         NormalClutch.Length.put(uuid, 0);
@@ -52,9 +54,8 @@ public class PlayerMove implements Listener {
                     int coord = Core.PlayerCoord.get(uuid);
                     Location to = e.getTo();
                     if (to.getY() <= 96 || Math.abs(to.getX() + to.getZ() - 2 * coord - 1) > 9.5) {
-                        int lang = User.getLang(uuid);
                         Scoreboard scoreboard = player.getScoreboard();
-                        String[] sidebar = StringList.SideBarInclined[lang];
+                        String[] sidebar = StringList.SideBarInclined[User.getUser(uuid).lang];
                         scoreboard.getTeam(sidebar[7]).setSuffix("0");
                         scoreboard.getTeam(sidebar[6]).setSuffix("0");
                         scoreboard.getTeam(sidebar[5]).setSuffix("0");

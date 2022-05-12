@@ -29,7 +29,7 @@ public class PlayerInteract implements Listener {
         switch (player.getItemInHand().getType()) {
             case INK_SACK: {
                 UUID uuid = player.getUniqueId();
-                int lang = User.getLang(uuid);
+                int lang = User.getUser(uuid).lang;
                 Inventory inventory = Bukkit.createInventory(ItemStackList.Settings, 27, StringList.settingstitle[lang]);
                 String[] cooldown = StringList.LoreCoolDown[lang];
                 String[] hit = StringList.HitDelaylore[lang];

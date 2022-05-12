@@ -1,6 +1,6 @@
 package speedcubing.BukkitEventListener;
 
-import speedcubing.server.StringList.GlobalString;
+import speedcubing.server.libs.GlobalString;
 import speedcubing.server.libs.User;
 import speedcubing.server.speedcubingServer;
 import org.bukkit.Bukkit;
@@ -41,7 +41,7 @@ public class InventoryClick implements Listener {
                     e.setCancelled(true);
                     if (RawSlot == 10) {
                         UUID uuid = player.getUniqueId();
-                        int lang = User.getLang(uuid);
+                        int lang = User.getUser(uuid).lang;
                         boolean normal = player.getWorld().getName().equals("world");
                         Inventory inv = Bukkit.createInventory(normal ? NormalClutch.KB : InclinedClutch.KB, NormalClutch.hitcount, StringList.kbgui[lang]);
                         int length = normal ? NormalClutch.hitcount : InclinedClutch.hitcount;
@@ -66,11 +66,11 @@ public class InventoryClick implements Listener {
                                             ItemMeta meta = stack.getItemMeta();
                                             Core.Delay.put(uuid, x - 2);
                                             Core.CurrentDelay.put(uuid, Core.Delay.get(uuid));
-                                            String[] str = StringList.LoreCoolDown[User.getLang(uuid)];
+                                            String[] str = StringList.LoreCoolDown[User.getUser(uuid).lang];
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%double%", Double.toString((x - 2) / 20D)), str[3]));
                                             stack.setItemMeta(meta);
                                         } else {
-                                            player.sendMessage(GlobalString.min[User.getLang(uuid)].replace("%int%", "1.0"));
+                                            player.sendMessage(GlobalString.min[User.getUser(uuid).lang].replace("%int%", "1.0"));
                                             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
                                         }
                                     }
@@ -84,11 +84,11 @@ public class InventoryClick implements Listener {
                                             ItemMeta meta = stack.getItemMeta();
                                             Core.Delay.put(uuid, x + 2);
                                             Core.CurrentDelay.put(uuid, Core.Delay.get(uuid));
-                                            String[] str = StringList.LoreCoolDown[User.getLang(uuid)];
+                                            String[] str = StringList.LoreCoolDown[User.getUser(uuid).lang];
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%double%", Double.toString((x + 2) / 20D)), str[3]));
                                             stack.setItemMeta(meta);
                                         } else {
-                                            player.sendMessage(GlobalString.max[User.getLang(uuid)].replace("%int%", "20.0"));
+                                            player.sendMessage(GlobalString.max[User.getUser(uuid).lang].replace("%int%", "20.0"));
                                             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
                                         }
                                     }
@@ -104,13 +104,13 @@ public class InventoryClick implements Listener {
                                         if (x != 20) {
                                             ItemStack stack = inventory.getItem(RawSlot);
                                             ItemMeta meta = stack.getItemMeta();
-                                            String[] str = StringList.LoreCoolDown[User.getLang(uuid)];
+                                            String[] str = StringList.LoreCoolDown[User.getUser(uuid).lang];
                                             Core.Delay.put(uuid, x - 2);
                                             Core.CurrentDelay.put(uuid, Core.Delay.get(uuid));
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%double%", Double.toString((x - 2) / 20D)), str[3]));
                                             stack.setItemMeta(meta);
                                         } else {
-                                            player.sendMessage(GlobalString.min[User.getLang(uuid)].replace("%int%", "1.0"));
+                                            player.sendMessage(GlobalString.min[User.getUser(uuid).lang].replace("%int%", "1.0"));
                                             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
                                         }
                                     }
@@ -122,13 +122,13 @@ public class InventoryClick implements Listener {
                                         if (x != 400) {
                                             ItemStack stack = inventory.getItem(RawSlot);
                                             ItemMeta meta = stack.getItemMeta();
-                                            String[] str = StringList.LoreCoolDown[User.getLang(uuid)];
+                                            String[] str = StringList.LoreCoolDown[User.getUser(uuid).lang];
                                             Core.Delay.put(uuid, x + 2);
                                             Core.CurrentDelay.put(uuid, Core.Delay.get(uuid));
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%double%", Double.toString((x + 2) / 20D)), str[3]));
                                             stack.setItemMeta(meta);
                                         } else {
-                                            player.sendMessage(GlobalString.max[User.getLang(uuid)].replace("%int%", "20.0"));
+                                            player.sendMessage(GlobalString.max[User.getUser(uuid).lang].replace("%int%", "20.0"));
                                             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
                                         }
                                     }
@@ -151,11 +151,11 @@ public class InventoryClick implements Listener {
                                             Core.integerCache.get(uuid)[2] = x - 1;
                                             ItemStack stack = inventory.getItem(RawSlot);
                                             ItemMeta meta = stack.getItemMeta();
-                                            String[] str = StringList.HitDelaylore[User.getLang(uuid)];
+                                            String[] str = StringList.HitDelaylore[User.getUser(uuid).lang];
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%int%", Integer.toString(x - 1)), str[3], str[4], str[5]));
                                             stack.setItemMeta(meta);
                                         } else {
-                                            player.sendMessage(GlobalString.min[User.getLang(uuid)].replace("%int%", "1"));
+                                            player.sendMessage(GlobalString.min[User.getUser(uuid).lang].replace("%int%", "1"));
                                             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
                                         }
                                     }
@@ -168,11 +168,11 @@ public class InventoryClick implements Listener {
                                             Core.integerCache.get(uuid)[2] = x + 1;
                                             ItemStack stack = inventory.getItem(RawSlot);
                                             ItemMeta meta = stack.getItemMeta();
-                                            String[] str = StringList.HitDelaylore[User.getLang(uuid)];
+                                            String[] str = StringList.HitDelaylore[User.getUser(uuid).lang];
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%int%", Integer.toString(x + 1)), str[3], str[4], str[5]));
                                             stack.setItemMeta(meta);
                                         } else {
-                                            player.sendMessage(GlobalString.max[User.getLang(uuid)].replace("%int%", "20"));
+                                            player.sendMessage(GlobalString.max[User.getUser(uuid).lang].replace("%int%", "20"));
                                             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
                                         }
                                     }
@@ -189,11 +189,11 @@ public class InventoryClick implements Listener {
                                             Core.integerCache.get(uuid)[4] = x - 1;
                                             ItemStack stack = inventory.getItem(RawSlot);
                                             ItemMeta meta = stack.getItemMeta();
-                                            String[] str = StringList.HitDelaylore[User.getLang(uuid)];
+                                            String[] str = StringList.HitDelaylore[User.getUser(uuid).lang];
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%int%", Integer.toString(x - 1)), str[3], str[4], str[5]));
                                             stack.setItemMeta(meta);
                                         } else {
-                                            player.sendMessage(GlobalString.min[User.getLang(uuid)].replace("%int%", "1"));
+                                            player.sendMessage(GlobalString.min[User.getUser(uuid).lang].replace("%int%", "1"));
                                             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
                                         }
                                     }
@@ -206,11 +206,11 @@ public class InventoryClick implements Listener {
                                             Core.integerCache.get(uuid)[4] = x + 1;
                                             ItemStack stack = inventory.getItem(RawSlot);
                                             ItemMeta meta = stack.getItemMeta();
-                                            String[] str = StringList.HitDelaylore[User.getLang(uuid)];
+                                            String[] str = StringList.HitDelaylore[User.getUser(uuid).lang];
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%int%", Integer.toString(x + 1)), str[3], str[4], str[5]));
                                             stack.setItemMeta(meta);
                                         } else {
-                                            player.sendMessage(GlobalString.max[User.getLang(uuid)].replace("%int%", "20"));
+                                            player.sendMessage(GlobalString.max[User.getUser(uuid).lang].replace("%int%", "20"));
                                             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
                                         }
                                     }
@@ -221,7 +221,7 @@ public class InventoryClick implements Listener {
                     } else if (RawSlot == 15) {
                         UUID uuid = player.getUniqueId();
                         player.closeInventory();
-                        player.sendMessage(GlobalString.inputInteger[User.getLang(uuid)].replace("%min%", "0.000").replace("%max%", "5.000"));
+                        player.sendMessage(GlobalString.inputInteger[User.getUser(uuid).lang].replace("%min%", "0.000").replace("%max%", "5.000"));
                         Main.VeloSettings.add(uuid);
                         speedcubingServer.node(true,uuid);
                     } else if (RawSlot == 16) {
@@ -240,7 +240,7 @@ public class InventoryClick implements Listener {
                     UUID uuid = player.getUniqueId();
                     Inventory clickedInventory = e.getClickedInventory();
                     Integer[] settings = NormalClutch.KbCache.get(uuid);
-                    ItemStack[] hits = ItemStackList.settings[User.getLang(uuid)];
+                    ItemStack[] hits = ItemStackList.settings[User.getUser(uuid).lang];
                     if (RawSlot >= 0 && RawSlot < NormalClutch.hitcount) {
                         if (RawSlot != 0 && settings[RawSlot - 1] == 0) {
                             for (int i = RawSlot; i >= 0; i--) {
@@ -285,7 +285,7 @@ public class InventoryClick implements Listener {
                     UUID uuid = player.getUniqueId();
                     Inventory clickedInventory = e.getClickedInventory();
                     Integer[] settings = InclinedClutch.KbCache.get(uuid);
-                    ItemStack[] hits = ItemStackList.settings[User.getLang(uuid)];
+                    ItemStack[] hits = ItemStackList.settings[User.getUser(uuid).lang];
                     if (RawSlot >= 0 && RawSlot < InclinedClutch.hitcount) {
                         if (RawSlot != 0 && settings[RawSlot - 1] == 0) {
                             for (int i = RawSlot; i >= 0; i--) {

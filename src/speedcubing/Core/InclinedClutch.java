@@ -1,6 +1,6 @@
 package speedcubing.Core;
 
-import speedcubing.server.StringList.GlobalString;
+import speedcubing.server.libs.GlobalString;
 import speedcubing.server.libs.User;
 import net.minecraft.server.v1_8_R3.ChatComponentText;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
@@ -48,7 +48,7 @@ public class InclinedClutch {
 
     public static void Join(Player player) {
         if (used == size) {
-            player.sendMessage(GlobalString.NoEnoughServers[User.getLang(player.getUniqueId())]);
+            player.sendMessage(GlobalString.NoEnoughServers[User.getUser(player.getUniqueId()).lang]);
             return;
         }
         int room = -1;
@@ -61,8 +61,7 @@ public class InclinedClutch {
         rooms[room] = false;
         used += 1;
         UUID uuid = player.getUniqueId();
-        int lang = User.getLang(uuid);
-
+        int lang = User.getUser(uuid).lang;
         Bukkit.getScheduler().cancelTask(Core.CountDownTask.get(uuid));
         Main.VeloSettings.remove(uuid);
         NormalClutch.Length.remove(uuid);

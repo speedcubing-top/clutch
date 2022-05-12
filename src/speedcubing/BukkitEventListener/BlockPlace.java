@@ -32,7 +32,7 @@ public class BlockPlace implements Listener {
                     else {
                         Core.Blocks.get(uuid).add(new BlockPosition(x, block.getY(), block.getZ()));
                         Core.Blockplaced.put(uuid, Core.Blockplaced.get(uuid) + 1);
-                        int lang = User.getLang(uuid);
+                        int lang = User.getUser(uuid).lang;
                         if (Core.Blockplaced.get(uuid) > 32) {
                             Core.Blockplaced.put(uuid, 0);
                             player.getInventory().setItem(0, ItemStackList.Blocks);
@@ -55,7 +55,7 @@ public class BlockPlace implements Listener {
                     else {
                         Core.Blocks.get(uuid).add(new BlockPosition(x, block.getY(), z));
                         Core.Blockplaced.put(uuid, Core.Blockplaced.get(uuid) + 1);
-                        int lang = User.getLang(uuid);
+                        int lang = User.getUser(uuid).lang;
                         if (Core.Blockplaced.get(uuid) > 32) {
                             Core.Blockplaced.put(uuid, 0);
                             player.getInventory().setItem(0, ItemStackList.Blocks);

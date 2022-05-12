@@ -3,7 +3,7 @@ package speedcubing.Core;
 import speedcubing.lib.bukkit.PlayerUtils;
 import speedcubing.lib.bukkit.SideBarAPI;
 import speedcubing.server.PluginMessage;
-import speedcubing.server.StringList.GlobalString;
+import speedcubing.server.libs.GlobalString;
 import speedcubing.server.libs.User;
 import speedcubing.server.speedcubingServer;
 import net.minecraft.server.v1_8_R3.ChatComponentText;
@@ -46,7 +46,7 @@ public class NormalClutch {
 
     public static void Join(Player player, boolean firstjoin) {
         if (used == size) {
-            player.sendMessage(GlobalString.NoEnoughServers[User.getLang(player.getUniqueId())]);
+            player.sendMessage(GlobalString.NoEnoughServers[User.getUser(player.getUniqueId()).lang]);
             if (firstjoin)
                 new Timer().schedule(new TimerTask() {
                     @Override
@@ -66,8 +66,7 @@ public class NormalClutch {
         rooms[room] = false;
         used += 1;
         UUID uuid = player.getUniqueId();
-        int lang = User.getLang(uuid);
-
+        int lang = User.getUser(uuid).lang;
         if (firstjoin) {
             Core.Blocks.put(uuid, new HashSet<>());
             player.setGameMode(GameMode.SURVIVAL);
@@ -144,7 +143,7 @@ public class NormalClutch {
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective objective = scoreboard.registerNewObjective("sidebar", "dummy");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-        String[] sidebar = StringList.SideBarNormal[User.getLang(uuid)];
+        String[] sidebar = StringList.SideBarNormal[User.getUser(uuid).lang];
         objective.setDisplayName(sidebar[8]);
         SideBarAPI.sidebarTeams(scoreboard, new String[][]{
                 {sidebar[7]},
