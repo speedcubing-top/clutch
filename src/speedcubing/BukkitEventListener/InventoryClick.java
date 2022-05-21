@@ -225,9 +225,10 @@ public class InventoryClick implements Listener {
                     } else if (RawSlot == 15) {
                         UUID uuid = player.getUniqueId();
                         player.closeInventory();
-                        player.sendMessage(GlobalString.inputInteger[User.getUser(uuid).lang].replace("%min%", "0.000").replace("%max%", "5.000"));
+                        Member member = Member.getMember(uuid);
+                        player.sendMessage(GlobalString.inputInteger[member.lang].replace("%min%", "0.000").replace("%max%", "5.000"));
                         Main.VeloSettings.add(uuid);
-                        speedcubingServer.node(true, uuid);
+                        speedcubingServer.node(true, uuid, member.tcpPort);
                     } else if (RawSlot == 16) {
                         UUID uuid = player.getUniqueId();
                         if (PlayerInteract.display.contains(uuid)) {

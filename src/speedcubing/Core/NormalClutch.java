@@ -47,7 +47,7 @@ public class NormalClutch {
 
     public static void Join(Member member, Player player, boolean firstjoin) {
         if (used == size) {
-            player.sendMessage(GlobalString.NoEnoughServers[User.getUser(player.getUniqueId()).lang]);
+            player.sendMessage(GlobalString.NoEnoughServers[Member.getMember(player.getUniqueId()).lang]);
             if (firstjoin)
                 new Timer().schedule(new TimerTask() {
                     @Override
@@ -118,7 +118,7 @@ public class NormalClutch {
                             hitdelay -= 1;
                         } else {
                             int currentdelay = member.CurrentDelay;
-                            member.CurrentDelay = currentdelay -1;
+                            member.CurrentDelay = currentdelay - 1;
                             if (currentdelay % 2 == 0)
                                 PlayerUtils.sendActionBar(((CraftPlayer) player).getHandle().playerConnection, "§e" + currentdelay / 20D);
                         }

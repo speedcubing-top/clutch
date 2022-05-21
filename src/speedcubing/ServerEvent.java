@@ -38,18 +38,19 @@ public class ServerEvent {
             try {
                 int x = (int) (Double.parseDouble(message) * 1000);
                 if (x < 0 || x > 5000)
-                    player.sendMessage(GlobalString.integerOutOfRange[User.getUser(uuid).lang].replace("%min%", "0.000").replace("%max%", "5.000"));
+                    player.sendMessage(GlobalString.integerOutOfRange[Member.getMember(uuid).lang].replace("%min%", "0.000").replace("%max%", "5.000"));
                 else {
-                    Member.getMember(uuid).integerCache[player.getWorld().getName().equals("world") ? 1 : 3] = x;
+                    Member member = Member.getMember(uuid);
+                    member.integerCache[player.getWorld().getName().equals("world") ? 1 : 3] = x;
                     Main.VeloSettings.remove(uuid);
-                    speedcubingServer.node(false, uuid);
+                    speedcubingServer.node(false, uuid, member.tcpPort);
                 }
             } catch (Exception exception) {
-                player.sendMessage(GlobalString.invalidInteger[User.getUser(uuid).lang]);
+                player.sendMessage(GlobalString.invalidInteger[Member.getMember(uuid).lang]);
             }
         } else if (message.charAt(0) != '/') {
             e.setCancelled(true);
-            String[] formats = speedcubingServer.getFormat(User.getUser(uuid).rank);
+            String[] formats = speedcubingServer.getFormat(Member.getMember(uuid).rank);
             String text = formats[0] + player.getName();
             String[] str = GlobalString.MessageFormat[0];
             String[] out = new String[]{
@@ -58,7 +59,7 @@ public class ServerEvent {
                     str[2].replace("%text%", text).replace("%text2%", formats[2] + message),
                     str[3].replace("%text%", text).replace("%text2%", formats[2] + message)
             };
-            Bukkit.getOnlinePlayers().forEach(a -> a.sendMessage(out[User.getUser(a.getUniqueId()).lang]));
+            Bukkit.getOnlinePlayers().forEach(a -> a.sendMessage(out[Member.getMember(a.getUniqueId()).lang]));
             Console.sendColoredConsole("§7[§aChatLog§7] [§b" + player.getWorld().getName() + "§7] " + out[1]);
         }
     }

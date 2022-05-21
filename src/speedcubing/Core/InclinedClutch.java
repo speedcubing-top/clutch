@@ -44,7 +44,7 @@ public class InclinedClutch {
 
     public static void Join(Player player) {
         if (used == size) {
-            player.sendMessage(GlobalString.NoEnoughServers[User.getUser(player.getUniqueId()).lang]);
+            player.sendMessage(GlobalString.NoEnoughServers[Member.getMember(player.getUniqueId()).lang]);
             return;
         }
         int room = -1;
