@@ -9,13 +9,14 @@ import speedcubing.server.libs.User;
 
 import java.util.*;
 
-public class Member extends User {
+public class Member {
     public static Map<UUID, Member> users = new HashMap<>();
 
     public static Member getMember(UUID uuid) {
         return users.get(uuid);
     }
 
+    public User user;
     public int Blockplaced;
     public Set<BlockPosition> Blocks = new HashSet<>();
     public int PlayerCoord;
@@ -30,7 +31,7 @@ public class Member extends User {
     public int[] KbCache2 = new int[InclinedClutch.hitcount];
 
     public Member(UUID uuid) {
-        super.init(this, uuid);
+        user = User.getUser(uuid);
         users.put(uuid, this);
     }
 

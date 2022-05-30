@@ -33,7 +33,7 @@ public class PlayerMove implements Listener {
                     Location to = e.getTo();
                     if (to.getY() <= 96 || Math.abs(to.getZ() - member.PlayerCoord - 0.5) > 5.5) {
                         Scoreboard scoreboard = player.getScoreboard();
-                        String[] sidebar = StringList.SideBarNormal[member.lang];
+                        String[] sidebar = StringList.SideBarNormal[member.user.lang];
                         scoreboard.getTeam(sidebar[4]).setSuffix("0");
                         scoreboard.getTeam(sidebar[1]).setSuffix("0");
                         member.Length = 0;
@@ -52,7 +52,7 @@ public class PlayerMove implements Listener {
                     Location to = e.getTo();
                     if (to.getY() <= 96 || Math.abs(to.getX() + to.getZ() - 2 * member.PlayerCoord - 1) > 9.5) {
                         Scoreboard scoreboard = player.getScoreboard();
-                        String[] sidebar = StringList.SideBarInclined[member.lang];
+                        String[] sidebar = StringList.SideBarInclined[member.user.lang];
                         scoreboard.getTeam(sidebar[7]).setSuffix("0");
                         scoreboard.getTeam(sidebar[6]).setSuffix("0");
                         scoreboard.getTeam(sidebar[5]).setSuffix("0");

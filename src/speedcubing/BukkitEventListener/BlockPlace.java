@@ -36,7 +36,7 @@ public class BlockPlace implements Listener {
                         }
                         if (member.Length < x) {
                             member.Length = x;
-                            player.getScoreboard().getTeam(StringList.SideBarNormal[member.lang][4]).setSuffix(Integer.toString(member.Length));
+                            player.getScoreboard().getTeam(StringList.SideBarNormal[member.user.lang][4]).setSuffix(Integer.toString(member.Length));
                         }
                     }
                 }
@@ -60,7 +60,7 @@ public class BlockPlace implements Listener {
                         int realx = x - member.PlayerCoord;
                         int realz = member.PlayerCoord - z;
                         int[] i = member.Length2;
-                        String[] sidebar = StringList.SideBarInclined[member.lang];
+                        String[] sidebar = StringList.SideBarInclined[member.user.lang];
                         if (i[0] < x) {
                             i[0] = x;
                             scoreboard.getTeam(sidebar[7]).setSuffix(Integer.toString(realx));

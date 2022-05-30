@@ -47,7 +47,7 @@ public class NormalClutch {
 
     public static void Join(Member member, Player player, boolean firstjoin) {
         if (used == size) {
-            player.sendMessage(GlobalString.NoEnoughServers[Member.getMember(player.getUniqueId()).lang]);
+            player.sendMessage(GlobalString.NoEnoughServers[Member.getMember(player.getUniqueId()).user.lang]);
             if (firstjoin)
                 new Timer().schedule(new TimerTask() {
                     @Override
@@ -104,7 +104,7 @@ public class NormalClutch {
                                     player.setVelocity(new Vector(configcache.ReduceKB[sub], configcache.ReduceKB[sub + 1] * (member.integerCache[1] / 1000D), 0));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
-                                    player.getScoreboard().getTeam(StringList.SideBarNormal[member.lang][1]).setSuffix(Integer.toString(hitindex + 1));
+                                    player.getScoreboard().getTeam(StringList.SideBarNormal[member.user.lang][1]).setSuffix(Integer.toString(hitindex + 1));
                                     if (PlayerInteract.display.contains(uuid)) {
                                         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
                                         connection.sendPacket(new PacketPlayOutTitle(0, 60, 5));
@@ -139,7 +139,7 @@ public class NormalClutch {
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective objective = scoreboard.registerNewObjective("sidebar", "dummy");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-        String[] sidebar = StringList.SideBarNormal[member.lang];
+        String[] sidebar = StringList.SideBarNormal[member.user.lang];
         objective.setDisplayName(sidebar[8]);
         SideBarAPI.sidebarTeams(scoreboard, new String[][]{
                 {sidebar[7]},
@@ -170,8 +170,8 @@ public class NormalClutch {
             }
             Inventory inventory = player.getInventory();
             inventory.setItem(0, ItemStackList.Blocks);
-            inventory.setItem(8, ItemStackList.itemstacks[member.lang]);
-            inventory.setItem(7, ItemStackList.join[member.lang][1]);
+            inventory.setItem(8, ItemStackList.itemstacks[member.user.lang]);
+            inventory.setItem(7, ItemStackList.join[member.user.lang][1]);
         }).start();
     }
 
