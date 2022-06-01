@@ -24,6 +24,7 @@ import speedcubing.Main;
 import speedcubing.Member;
 import speedcubing.lib.bukkit.PlayerUtils;
 import speedcubing.lib.bukkit.SideBarAPI;
+import speedcubing.lib.bukkit.WorldUtils;
 import speedcubing.server.PluginMessage;
 import speedcubing.server.libs.GlobalString;
 import speedcubing.server.libs.User;
@@ -32,40 +33,19 @@ import speedcubing.server.speedcubingServer;
 import java.util.*;
 
 public class NormalClutch {
-
-    public static final int size = 11;
-    public static int used = 0;
     public static final int hitcount = 36;
     public static final InventoryHolder KB = () -> null;
-    public static final boolean[] rooms = new boolean[size];
-
-    public void Load() {
-        for (int i = 0; i < size; i++) {
-            rooms[i] = true;
-        }
-    }
+    public static final Set<Integer> rooms = new HashSet<>();
 
     public static void Join(Member member, Player player, boolean firstjoin) {
-        if (used == size) {
-            player.sendMessage(GlobalString.NoEnoughServers[Member.getMember(player.getUniqueId()).user.lang]);
-            if (firstjoin)
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        PluginMessage.switchServer(player, "lobby");
-                    }
-                }, 500);
-            return;
-        }
         int room = -1;
-        for (int h = 0; h < size; h++) {
-            if (rooms[h]) {
+        for (int h = 1; h < Integer.MAX_VALUE; h++) {
+            if (!rooms.contains(h)) {
+                rooms.add(h);
                 room = h;
                 break;
             }
         }
-        rooms[room] = false;
-        used += 1;
         UUID uuid = player.getUniqueId();
         if (firstjoin) {
             player.setGameMode(GameMode.SURVIVAL);
@@ -74,18 +54,12 @@ public class NormalClutch {
             Bukkit.getScheduler().cancelTask(member.CountDownTask);
             Main.VeloSettings.remove(uuid);
             member.Length2 = null;
-            InclinedClutch.used -= 1;
-            InclinedClutch.rooms[InclinedClutch.coordToRoom(member.PlayerCoord)] = true;
-            member.clear(Bukkit.getWorld("inclined"));
+            member.clear(Bukkit.getWorld("inclined"), member.PlayerCoord, true);
         }
         int coord = 6 * (room * (room % 2 == 0 ? -1 : 1) + room % 2);
-        member.Blockplaced = 0;
-        member.PlayerCoord = coord;
-        member.CurrentDelay = 100;
-        member.Delay = 100;
-        player.setLevel(0);
         player.teleport(new Location(Bukkit.getWorld("world"), 0.5, 100, coord + 0.5, 90, 0));
-        player.getInventory().setHeldItemSlot(0);
+        WorldUtils.cloneArea(-2, 99, 1, 0, 98, -1, -2, 99, 1 + coord, player.getWorld());
+        member.reset3(player, coord);
         member.CountDownTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(Main.class), new Runnable() {
             int hitindex = 0;
             int hitdelay = 0;

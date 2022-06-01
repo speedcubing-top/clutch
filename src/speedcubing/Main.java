@@ -37,8 +37,6 @@ public class Main extends JavaPlugin {
         getServer().createWorld(new WorldCreator("inclined"));
         Bukkit.getWorld("inclined").setDifficulty(Difficulty.PEACEFUL);
         Bukkit.getWorld("inclined").setTime(6000);
-        new NormalClutch().Load();
-        new InclinedClutch().Load();
         new ItemStackList().Load();
         ServerEventManager.registerListeners(new ServerEvent());
     }

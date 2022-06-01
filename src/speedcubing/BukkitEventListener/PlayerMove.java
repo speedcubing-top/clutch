@@ -37,12 +37,7 @@ public class PlayerMove implements Listener {
                         scoreboard.getTeam(sidebar[4]).setSuffix("0");
                         scoreboard.getTeam(sidebar[1]).setSuffix("0");
                         member.Length = 0;
-                        member.reset();
-                        member.clear(world);
-                        player.setLevel(0);
-                        player.closeInventory();
-                        member.Blockplaced = 0;
-                        player.getInventory().setItem(0, ItemStackList.Blocks);
+                        member.reset2(player, world);
                         Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> PlayerUtils.teleport(((CraftPlayer) player).getHandle().playerConnection, 0.5, 100, member.PlayerCoord + 0.5, 90, 0));
                     }
                 }
@@ -58,12 +53,7 @@ public class PlayerMove implements Listener {
                         scoreboard.getTeam(sidebar[5]).setSuffix("0");
                         scoreboard.getTeam(sidebar[1]).setSuffix("0");
                         member.Length2 = new int[]{member.PlayerCoord, member.PlayerCoord};
-                        member.reset();
-                        member.clear(world);
-                        player.setLevel(0);
-                        player.closeInventory();
-                        member.Blockplaced = 0;
-                        player.getInventory().setItem(0, ItemStackList.Blocks);
+                        member.reset2(player, world);
                         Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> PlayerUtils.teleport(((CraftPlayer) player).getHandle().playerConnection, member.PlayerCoord + 0.5, 100, member.PlayerCoord + 0.5, 45, 0));
                     }
                     break;
