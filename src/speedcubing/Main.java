@@ -12,9 +12,7 @@ import speedcubing.Core.InclinedClutch;
 import speedcubing.Core.NormalClutch;
 import speedcubing.List.ItemStackList;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class Main extends JavaPlugin {
     public static Set<UUID> VeloSettings = new HashSet<>();
@@ -40,6 +38,11 @@ public class Main extends JavaPlugin {
         Bukkit.getWorld("inclined").setTime(6000);
         new ItemStackList().Load();
         ServerEventManager.registerListeners(new ServerEvent());
-        speedcubingServer.tcp.sendClean(25576 - Bukkit.getPort() % 2, "online|6|" + Bukkit.getOnlinePlayers().size());
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                speedcubingServer.tcp.sendClean(25576 - Bukkit.getPort() % 2, "online|6|" + Bukkit.getOnlinePlayers().size());
+            }
+        }, 0, 1000);
     }
 }
