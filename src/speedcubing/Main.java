@@ -1,5 +1,6 @@
 package speedcubing;
 
+import speedcubing.server.speedcubingServer;
 import speedcubing.spigot.Event.ServerEventManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
@@ -29,7 +30,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new BlockBreak(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDropItem(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerInteract(), this);
-        Bukkit.getPluginManager().registerEvents(new PlayerSpawnLocation(),this);
+        Bukkit.getPluginManager().registerEvents(new PlayerSpawnLocation(), this);
         Bukkit.getPluginCommand("reloadsubplugin").setExecutor(new configcache());
         Bukkit.getPluginCommand("reloadsubplugin").setTabCompleter(new configcache());
         Bukkit.getWorld("world").setDifficulty(Difficulty.PEACEFUL);
@@ -39,5 +40,6 @@ public class Main extends JavaPlugin {
         Bukkit.getWorld("inclined").setTime(6000);
         new ItemStackList().Load();
         ServerEventManager.registerListeners(new ServerEvent());
+        speedcubingServer.tcp.sendClean(25576 - Bukkit.getPort() % 2, "online|6|" + Bukkit.getOnlinePlayers().size());
     }
 }
