@@ -1,16 +1,14 @@
 package speedcubing;
 
-import speedcubing.server.speedcubingServer;
-import speedcubing.spigot.Event.ServerEventManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.WorldCreator;
 import org.bukkit.plugin.java.JavaPlugin;
 import speedcubing.All.configcache;
 import speedcubing.BukkitEventListener.*;
-import speedcubing.Core.InclinedClutch;
-import speedcubing.Core.NormalClutch;
 import speedcubing.List.ItemStackList;
+import speedcubing.lib.event.LibEventManager;
+import speedcubing.server.speedcubingServer;
 
 import java.util.*;
 
@@ -37,7 +35,7 @@ public class Main extends JavaPlugin {
         Bukkit.getWorld("inclined").setDifficulty(Difficulty.PEACEFUL);
         Bukkit.getWorld("inclined").setTime(6000);
         new ItemStackList().Load();
-        ServerEventManager.registerListeners(new ServerEvent());
+        LibEventManager.registerListeners(new ServerEvent());
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
