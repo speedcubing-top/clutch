@@ -7,7 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import speedcubing.All.configcache;
 import speedcubing.BukkitEventListener.*;
 import speedcubing.List.ItemStackList;
-import speedcubing.lib.event.LibEventManager;
+import speedcubing.lib.eventbus.LibEventManager;
 import speedcubing.server.speedcubingServer;
 
 import java.util.*;

@@ -3,7 +3,6 @@ package speedcubing.Core;
 import net.minecraft.server.v1_8_R3.ChatComponentText;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import net.minecraft.server.v1_8_R3.PlayerConnection;
-import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -25,12 +24,11 @@ import speedcubing.Member;
 import speedcubing.lib.bukkit.PlayerUtils;
 import speedcubing.lib.bukkit.SideBarAPI;
 import speedcubing.lib.bukkit.WorldUtils;
-import speedcubing.server.PluginMessage;
-import speedcubing.server.libs.GlobalString;
-import speedcubing.server.libs.User;
 import speedcubing.server.speedcubingServer;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 public class NormalClutch {
     public static final int hitcount = 36;

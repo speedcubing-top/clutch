@@ -2,9 +2,9 @@ package speedcubing;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import speedcubing.lib.event.LibEventHandler;
+import speedcubing.lib.eventbus.LibEventHandler;
 import speedcubing.lib.utils.Console;
-import speedcubing.server.events.packet.PlayInChatEvent;
+import speedcubing.lib.bukkit.event.PlayInChatEvent;
 import speedcubing.server.libs.GlobalString;
 import speedcubing.server.speedcubingServer;
 
@@ -17,7 +17,7 @@ public class ServerEvent {
         String message = e.packet.a();
         UUID uuid = player.getUniqueId();
         if (Main.VeloSettings.contains(uuid)) {
-            e.setCancelled(true);
+            e.isCancelled = true;
             try {
                 int x = (int) (Double.parseDouble(message) * 1000);
                 if (x < 0 || x > 5000)
@@ -32,7 +32,7 @@ public class ServerEvent {
                 player.sendMessage(GlobalString.invalidInteger[Member.getMember(uuid).user.lang]);
             }
         } else if (message.charAt(0) != '/') {
-            e.setCancelled(true);
+            e.isCancelled = true;
             String[] formats = speedcubingServer.getFormat(Member.getMember(uuid).user.rank);
             String text = formats[0] + player.getName();
             String[] str = GlobalString.MessageFormat[0];

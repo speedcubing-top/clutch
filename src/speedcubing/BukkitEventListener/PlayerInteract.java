@@ -12,8 +12,7 @@ import speedcubing.Core.NormalClutch;
 import speedcubing.List.ItemStackList;
 import speedcubing.List.StringList;
 import speedcubing.Member;
-import speedcubing.lib.bukkit.ItemBuilder;
-import speedcubing.server.libs.User;
+import speedcubing.lib.bukkit.inventory.ItemBuilder;
 
 import java.util.HashSet;
 import java.util.Set;
