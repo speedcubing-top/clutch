@@ -12,10 +12,10 @@ public class StringList {
     };
 
     public static String[][] SideBarInclined = {
-            {"§0", "§1§8»§e ", "§aHits:", "§3", " §aHorizontal", " §8» §b", " §aZ §8» §b", " §aX §8» §b", "§aDistance:", "§6", "§6" + config.SERVERIP, "§3Clutch"},
-            {"§0", "§1§8»§e ", "§aHits:", "§3", " §aHorizontal", " §8» §b", " §aZ §8» §b", " §aX §8» §b", "§aDistance:", "§6", "§6" + config.SERVERIP, "§3Clutch"},
-            {"§0", "§1§8»§e ", "§aHits:", "§3", " §aHorizontal", " §8» §b", " §aZ §8» §b", " §aX §8» §b", "§aDistance:", "§6", "§6" + config.SERVERIP, "§3Clutch"},
-            {"§0", "§1§8»§e ", "§aHits:", "§3", " §aHorizontal", " §8» §b", " §aZ §8» §b", " §aX §8» §b", "§aDistance:", "§6", "§6" + config.SERVERIP, "§3Clutch"}
+            {"§0", "§1§8»§e ", "§aHits:", "§3", " §aHorizontal §8» §b", " §aZ §8» §b", " §aX §8» §b", "§aDistance:", "§6", "§6" + config.SERVERIP, "§3Clutch"},
+            {"§0", "§1§8»§e ", "§aHits:", "§3", " §aHorizontal §8» §b", " §aZ §8» §b", " §aX §8» §b", "§aDistance:", "§6", "§6" + config.SERVERIP, "§3Clutch"},
+            {"§0", "§1§8»§e ", "§aHits:", "§3", " §aHorizontal §8» §b", " §aZ §8» §b", " §aX §8» §b", "§aDistance:", "§6", "§6" + config.SERVERIP, "§3Clutch"},
+            {"§0", "§1§8»§e ", "§aHits:", "§3", " §aHorizontal §8» §b", " §aZ §8» §b", " §aX §8» §b", "§aDistance:", "§6", "§6" + config.SERVERIP, "§3Clutch"}
     };
     public static String[][] SideBarNormal = {
             {"§0", "§1§8»§e ", "§aHits:", "§3", "§8»§b ", "§aDistance:", "§6", "§6" + config.SERVERIP, "§3Clutch"},

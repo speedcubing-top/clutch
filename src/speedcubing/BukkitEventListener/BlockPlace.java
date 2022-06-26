@@ -11,6 +11,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import speedcubing.List.ItemStackList;
 import speedcubing.List.StringList;
 import speedcubing.Member;
+import speedcubing.lib.bukkit.SideBar;
 
 import java.util.UUID;
 
@@ -36,7 +37,7 @@ public class BlockPlace implements Listener {
                         }
                         if (member.Length < x) {
                             member.Length = x;
-                            player.getScoreboard().getTeam(StringList.SideBarNormal[member.user.lang][4]).setSuffix(Integer.toString(member.Length));
+                            SideBar.getSidebar(player).setLine(StringList.SideBarNormal[member.user.lang][4] + member.Length, 4);
                         }
                     }
                 }
@@ -56,20 +57,20 @@ public class BlockPlace implements Listener {
                             member.Blockplaced = 0;
                             player.getInventory().setItem(0, ItemStackList.Blocks);
                         }
-                        Scoreboard scoreboard = player.getScoreboard();
                         int realx = x - member.PlayerCoord;
                         int realz = member.PlayerCoord - z;
                         int[] i = member.Length2;
                         String[] sidebar = StringList.SideBarInclined[member.user.lang];
+                        SideBar sideBar = SideBar.getSidebar(player);
                         if (i[0] < x) {
                             i[0] = x;
-                            scoreboard.getTeam(sidebar[7]).setSuffix(Integer.toString(realx));
+                            sideBar.setLine(sidebar[6] + realx, 4);
                         }
                         if (i[1] > z) {
                             i[1] = z;
-                            scoreboard.getTeam(sidebar[6]).setSuffix(Integer.toString(realz));
+                            sideBar.setLine(sidebar[5] + realz, 5);
                         }
-                        scoreboard.getTeam(sidebar[5]).setSuffix(String.valueOf(Math.round(Math.sqrt(realz * realz + realx * realx))));
+                        sideBar.setLine(sidebar[4] + Math.round(Math.sqrt(realz * realz + realx * realx)), 6);
                     }
                 }
                 break;

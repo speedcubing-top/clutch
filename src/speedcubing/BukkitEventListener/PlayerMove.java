@@ -16,6 +16,7 @@ import speedcubing.List.StringList;
 import speedcubing.Main;
 import speedcubing.Member;
 import speedcubing.lib.bukkit.PlayerUtils;
+import speedcubing.lib.bukkit.SideBar;
 
 import java.util.UUID;
 
@@ -32,10 +33,10 @@ public class PlayerMove implements Listener {
                     Member member = Member.getMember(uuid);
                     Location to = e.getTo();
                     if (to.getY() <= 96 || Math.abs(to.getZ() - member.PlayerCoord - 0.5) > 5.5) {
-                        Scoreboard scoreboard = player.getScoreboard();
                         String[] sidebar = StringList.SideBarNormal[member.user.lang];
-                        scoreboard.getTeam(sidebar[4]).setSuffix("0");
-                        scoreboard.getTeam(sidebar[1]).setSuffix("0");
+                        SideBar.getSidebar(player)
+                                .setLine(sidebar[4] + 0, 4)
+                                .setLine(sidebar[1] + 0, 7);
                         member.Length = 0;
                         member.reset2(player, world);
                         Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> PlayerUtils.teleport(((CraftPlayer) player).getHandle().playerConnection, 0.5, 100, member.PlayerCoord + 0.5, 90, 0));
@@ -46,12 +47,12 @@ public class PlayerMove implements Listener {
                     Member member = Member.getMember(player.getUniqueId());
                     Location to = e.getTo();
                     if (to.getY() <= 96 || Math.abs(to.getX() + to.getZ() - 2 * member.PlayerCoord - 1) > 9.5) {
-                        Scoreboard scoreboard = player.getScoreboard();
                         String[] sidebar = StringList.SideBarInclined[member.user.lang];
-                        scoreboard.getTeam(sidebar[7]).setSuffix("0");
-                        scoreboard.getTeam(sidebar[6]).setSuffix("0");
-                        scoreboard.getTeam(sidebar[5]).setSuffix("0");
-                        scoreboard.getTeam(sidebar[1]).setSuffix("0");
+                        SideBar.getSidebar(player)
+                                .setLine(sidebar[6] + 0, 4)
+                                .setLine(sidebar[5] + 0, 5)
+                                .setLine(sidebar[4] + 0, 6)
+                                .setLine(sidebar[1] + 0, 9);
                         member.Length2 = new int[]{member.PlayerCoord, member.PlayerCoord};
                         member.reset2(player, world);
                         Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> PlayerUtils.teleport(((CraftPlayer) player).getHandle().playerConnection, member.PlayerCoord + 0.5, 100, member.PlayerCoord + 0.5, 45, 0));

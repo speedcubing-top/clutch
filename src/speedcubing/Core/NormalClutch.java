@@ -11,9 +11,6 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
 import speedcubing.All.configcache;
 import speedcubing.BukkitEventListener.PlayerInteract;
@@ -22,7 +19,7 @@ import speedcubing.List.StringList;
 import speedcubing.Main;
 import speedcubing.Member;
 import speedcubing.lib.bukkit.PlayerUtils;
-import speedcubing.lib.bukkit.SideBarAPI;
+import speedcubing.lib.bukkit.SideBar;
 import speedcubing.lib.bukkit.WorldUtils;
 import speedcubing.server.speedcubingServer;
 
@@ -76,7 +73,7 @@ public class NormalClutch {
                                     player.setVelocity(new Vector(configcache.ReduceKB[sub], configcache.ReduceKB[sub + 1] * (member.integerCache[1] / 1000D), 0));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
-                                    player.getScoreboard().getTeam(StringList.SideBarNormal[member.user.lang][1]).setSuffix(Integer.toString(hitindex + 1));
+                                    SideBar.getSidebar(player).setLine(StringList.SideBarNormal[member.user.lang][1] + (hitindex + 1), 7);
                                     if (PlayerInteract.display.contains(uuid)) {
                                         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
                                         connection.sendPacket(new PacketPlayOutTitle(0, 60, 5));
@@ -108,24 +105,16 @@ public class NormalClutch {
                 }
             }
         }, 0, 1);
-        Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-        Objective objective = scoreboard.registerNewObjective("sidebar", "dummy");
-        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         String[] sidebar = StringList.SideBarNormal[member.user.lang];
-        objective.setDisplayName(sidebar[8]);
-        SideBarAPI.sidebarTeams(scoreboard, new String[][]{
-                {sidebar[7]},
-                {sidebar[6]},
-                {sidebar[5]},
-                {"", sidebar[4], "0"},
-                {sidebar[2]},
-                {sidebar[3]},
-                {sidebar[2]},
-                {"", sidebar[1], "0"},
-                {sidebar[0]},
-        }, new int[]{7, 6, 5, 4, 3, 2, 1, 0
-        });
-        player.setScoreboard(scoreboard);
+        new SideBar(player, sidebar[8])
+                .staticLine(sidebar[7], 7)
+                .staticLine(sidebar[6], 6)
+                .staticLine(sidebar[5], 5)
+                .changeableLine(sidebar[4] + 0, 4)
+                .staticLine(sidebar[3], 3)
+                .staticLine(sidebar[2], 2)
+                .changeableLine(sidebar[1] + 0, 1)
+                .staticLine(sidebar[0], 0).create();
         member.Length = 0;
         new Thread(() -> {
             if (firstjoin) {

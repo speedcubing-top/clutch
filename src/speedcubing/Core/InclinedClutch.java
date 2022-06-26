@@ -11,9 +11,6 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
 import speedcubing.All.configcache;
 import speedcubing.BukkitEventListener.PlayerInteract;
@@ -22,12 +19,12 @@ import speedcubing.List.StringList;
 import speedcubing.Main;
 import speedcubing.Member;
 import speedcubing.lib.bukkit.PlayerUtils;
-import speedcubing.lib.bukkit.SideBarAPI;
+import speedcubing.lib.bukkit.SideBar;
 import speedcubing.lib.bukkit.WorldUtils;
-import speedcubing.server.libs.GlobalString;
-import speedcubing.server.libs.User;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 public class InclinedClutch {
     public static final int hitcount = 36;
@@ -74,7 +71,7 @@ public class InclinedClutch {
                                     player.setVelocity(new Vector(velo, configcache.ReduceKB[sub + 11] * (member.integerCache[3] / 1000D), -velo));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
-                                    player.getScoreboard().getTeam(StringList.SideBarInclined[member.user.lang][1]).setSuffix(Integer.toString(hitindex + 1));
+                                    SideBar.getSidebar(player).setLine(StringList.SideBarInclined[member.user.lang][1] + (hitindex + 1), 9);
                                     if (PlayerInteract.display.contains(uuid)) {
                                         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
                                         connection.sendPacket(new PacketPlayOutTitle(0, 60, 5));
@@ -106,25 +103,18 @@ public class InclinedClutch {
                 }
             }
         }, 0, 1);
-        Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-        Objective objective = scoreboard.registerNewObjective("sidebar", "dummy");
-        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         String[] sidebar = StringList.SideBarInclined[member.user.lang];
-        objective.setDisplayName(sidebar[11]);
-        SideBarAPI.sidebarTeams(scoreboard, new String[][]{
-                {sidebar[10]},
-                {sidebar[9]},
-                {sidebar[8]},
-                {"", sidebar[7], "0"},
-                {"", sidebar[6], "0"},
-                {sidebar[4], sidebar[5], "0"},
-                {sidebar[3]},
-                {sidebar[2]},
-                {"", sidebar[1], "0"},
-                {sidebar[0]},
-        }, new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1, 0
-        });
-        player.setScoreboard(scoreboard);
+        new SideBar(player, sidebar[10])
+                .staticLine(sidebar[9], 9)
+                .staticLine(sidebar[8], 8)
+                .staticLine(sidebar[7], 7)
+                .changeableLine(sidebar[6] + 0, 6)
+                .changeableLine(sidebar[5] + 0, 5)
+                .changeableLine(sidebar[4] + 0, 4)
+                .staticLine(sidebar[3], 3)
+                .staticLine(sidebar[2], 2)
+                .changeableLine(sidebar[1] + 0, 1)
+                .staticLine(sidebar[0], 0).create();
         member.Length2 = new int[]{coord, coord};
         Inventory inventory = player.getInventory();
         inventory.setItem(0, ItemStackList.Blocks);
