@@ -71,7 +71,7 @@ public class InclinedClutch {
                                     player.setVelocity(new Vector(velo, configcache.ReduceKB[sub + 11] * (member.integerCache[3] / 1000D), -velo));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
-                                    SideBar.getSidebar(player).setLine(StringList.SideBarInclined[member.user.lang][1] + (hitindex + 1), 9);
+                                    SideBar.getSidebar(player).setLine(StringList.SideBarInclined[member.user.lang][9] + (hitindex + 1), 9);
                                     if (PlayerInteract.display.contains(uuid)) {
                                         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
                                         connection.sendPacket(new PacketPlayOutTitle(0, 60, 5));
@@ -104,17 +104,17 @@ public class InclinedClutch {
             }
         }, 0, 1);
         String[] sidebar = StringList.SideBarInclined[member.user.lang];
-        new SideBar(player, sidebar[10])
-                .staticLine(sidebar[9], 9)
-                .staticLine(sidebar[8], 8)
-                .staticLine(sidebar[7], 7)
-                .changeableLine(sidebar[6] + 0, 6)
+        new SideBar(player, sidebar[0])
+                .staticLine(sidebar[1], 9)
+                .staticLine(sidebar[2], 8)
+                .staticLine(sidebar[3], 7)
+                .changeableLine(sidebar[4] + 0, 6)
                 .changeableLine(sidebar[5] + 0, 5)
-                .changeableLine(sidebar[4] + 0, 4)
-                .staticLine(sidebar[3], 3)
-                .staticLine(sidebar[2], 2)
-                .changeableLine(sidebar[1] + 0, 1)
-                .staticLine(sidebar[0], 0).create();
+                .changeableLine(sidebar[6] + 0, 4)
+                .staticLine(sidebar[7], 3)
+                .staticLine(sidebar[8], 2)
+                .changeableLine(sidebar[9] + 0, 1)
+                .staticLine(sidebar[10], 0).create();
         member.Length2 = new int[]{coord, coord};
         Inventory inventory = player.getInventory();
         inventory.setItem(0, ItemStackList.Blocks);

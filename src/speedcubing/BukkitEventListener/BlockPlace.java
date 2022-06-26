@@ -70,7 +70,7 @@ public class BlockPlace implements Listener {
                             i[1] = z;
                             sideBar.setLine(sidebar[5] + realz, 5);
                         }
-                        sideBar.setLine(sidebar[4] + Math.round(Math.sqrt(realz * realz + realx * realx)), 6);
+                        sideBar.setLine(sidebar[6] + Math.round(Math.sqrt(realz * realz + realx * realx)), 6);
                     }
                 }
                 break;

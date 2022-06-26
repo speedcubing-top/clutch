@@ -73,7 +73,7 @@ public class NormalClutch {
                                     player.setVelocity(new Vector(configcache.ReduceKB[sub], configcache.ReduceKB[sub + 1] * (member.integerCache[1] / 1000D), 0));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
-                                    SideBar.getSidebar(player).setLine(StringList.SideBarNormal[member.user.lang][1] + (hitindex + 1), 7);
+                                    SideBar.getSidebar(player).setLine(StringList.SideBarNormal[member.user.lang][7] + (hitindex + 1), 7);
                                     if (PlayerInteract.display.contains(uuid)) {
                                         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
                                         connection.sendPacket(new PacketPlayOutTitle(0, 60, 5));
@@ -106,15 +106,15 @@ public class NormalClutch {
             }
         }, 0, 1);
         String[] sidebar = StringList.SideBarNormal[member.user.lang];
-        new SideBar(player, sidebar[8])
-                .staticLine(sidebar[7], 7)
-                .staticLine(sidebar[6], 6)
-                .staticLine(sidebar[5], 5)
+        new SideBar(player, sidebar[0])
+                .staticLine(sidebar[1], 7)
+                .staticLine(sidebar[2], 6)
+                .staticLine(sidebar[3], 5)
                 .changeableLine(sidebar[4] + 0, 4)
-                .staticLine(sidebar[3], 3)
-                .staticLine(sidebar[2], 2)
-                .changeableLine(sidebar[1] + 0, 1)
-                .staticLine(sidebar[0], 0).create();
+                .staticLine(sidebar[5], 3)
+                .staticLine(sidebar[6], 2)
+                .changeableLine(sidebar[7] + 0, 1)
+                .staticLine(sidebar[8], 0).create();
         member.Length = 0;
         new Thread(() -> {
             if (firstjoin) {
