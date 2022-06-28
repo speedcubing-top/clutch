@@ -46,7 +46,7 @@ public class PlayerInteract implements Listener {
             case COMPASS: {
                 if (player.getWorld().getName().equals("world"))
                     InclinedClutch.Join(player);
-                else NormalClutch.Join(Member.getMember(player.getUniqueId()), player, false);
+                else NormalClutch.Join(player, false);
             }
             break;
         }

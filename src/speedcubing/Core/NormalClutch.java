@@ -32,7 +32,9 @@ public class NormalClutch {
     public static final InventoryHolder KB = () -> null;
     public static final Set<Integer> rooms = new HashSet<>();
 
-    public static void Join(Member member, Player player, boolean firstjoin) {
+    public static void Join(Player player, boolean firstjoin) {
+        UUID uuid = player.getUniqueId();
+        Member member = new Member(uuid);
         int room = -1;
         for (int h = 1; h < Integer.MAX_VALUE; h++) {
             if (!rooms.contains(h)) {
@@ -41,7 +43,6 @@ public class NormalClutch {
                 break;
             }
         }
-        UUID uuid = player.getUniqueId();
         if (firstjoin) {
             player.setGameMode(GameMode.SURVIVAL);
             player.setMaximumNoDamageTicks(1);
@@ -81,7 +82,7 @@ public class NormalClutch {
                                     }
                                     hitindex += 1;
                                     hitdelay = member.integerCache[2];
-                                    PlayerUtils.sendActionBar(((CraftPlayer) player).getHandle().playerConnection, "§aGo!");
+                                    PlayerUtils.sendActionBar(player, "§aGo!");
                                 }
                             }
                             hitdelay -= 1;
@@ -89,7 +90,7 @@ public class NormalClutch {
                             int currentdelay = member.CurrentDelay;
                             member.CurrentDelay = currentdelay - 1;
                             if (currentdelay % 2 == 0)
-                                PlayerUtils.sendActionBar(((CraftPlayer) player).getHandle().playerConnection, "§e" + currentdelay / 20D);
+                                PlayerUtils.sendActionBar(player, "§e" + currentdelay / 20D);
                         }
                     } else {
                         int dd = member.CurrentDelay;
@@ -100,7 +101,7 @@ public class NormalClutch {
                             hitdelay = 0;
                             hitindex = 0;
                         }
-                        PlayerUtils.sendActionBar(((CraftPlayer) player).getHandle().playerConnection, "§e" + (dd % 2 != 0 && dd > 0 ? dd - 1 : dd) / 20D);
+                        PlayerUtils.sendActionBar(player, "§e" + (dd % 2 != 0 && dd > 0 ? dd - 1 : dd) / 20D);
                     }
                 }
             }

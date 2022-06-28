@@ -79,7 +79,7 @@ public class InclinedClutch {
                                     }
                                     hitindex += 1;
                                     hitdelay = member.integerCache[4];
-                                    PlayerUtils.sendActionBar(((CraftPlayer) player).getHandle().playerConnection, "§aGo!");
+                                    PlayerUtils.sendActionBar(player, "§aGo!");
                                 }
                             }
                             hitdelay -= 1;
@@ -87,7 +87,7 @@ public class InclinedClutch {
                             int currentdelay = member.CurrentDelay;
                             member.CurrentDelay = currentdelay - 1;
                             if (currentdelay % 2 == 0)
-                                PlayerUtils.sendActionBar(((CraftPlayer) player).getHandle().playerConnection, "§e" + currentdelay / 20D);
+                                PlayerUtils.sendActionBar(player, "§e" + currentdelay / 20D);
                         }
                     } else {
                         int dd = member.CurrentDelay;
@@ -98,7 +98,7 @@ public class InclinedClutch {
                             hitdelay = 0;
                             hitindex = 0;
                         }
-                        PlayerUtils.sendActionBar(((CraftPlayer) player).getHandle().playerConnection, "§e" + (dd % 2 != 0 && dd > 0 ? dd - 1 : dd) / 20D);
+                        PlayerUtils.sendActionBar(player, "§e" + (dd % 2 != 0 && dd > 0 ? dd - 1 : dd) / 20D);
                     }
                 }
             }

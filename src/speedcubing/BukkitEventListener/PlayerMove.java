@@ -4,21 +4,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.scoreboard.Scoreboard;
-import speedcubing.Core.NormalClutch;
-import speedcubing.List.ItemStackList;
 import speedcubing.List.StringList;
 import speedcubing.Main;
 import speedcubing.Member;
-import speedcubing.lib.bukkit.PlayerUtils;
 import speedcubing.lib.bukkit.SideBar;
-
-import java.util.UUID;
 
 public class PlayerMove implements Listener {
 
@@ -29,8 +22,7 @@ public class PlayerMove implements Listener {
             World world = player.getWorld();
             switch (world.getName()) {
                 case "world": {
-                    UUID uuid = player.getUniqueId();
-                    Member member = Member.getMember(uuid);
+                    Member member = Member.getMember(player.getUniqueId());
                     Location to = e.getTo();
                     if (to.getY() <= 96 || Math.abs(to.getZ() - member.PlayerCoord - 0.5) > 5.5) {
                         String[] sidebar = StringList.SideBarNormal[member.user.lang];
@@ -39,7 +31,7 @@ public class PlayerMove implements Listener {
                                 .setLine(sidebar[7] + 0, 7);
                         member.Length = 0;
                         member.reset2(player, world);
-                        Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> PlayerUtils.teleport(((CraftPlayer) player).getHandle().playerConnection, 0.5, 100, member.PlayerCoord + 0.5, 90, 0));
+                        Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> player.teleport(new Location(player.getWorld(), 0.5, 100, member.PlayerCoord + 0.5, 90, 0)));
                     }
                 }
                 break;
@@ -55,7 +47,7 @@ public class PlayerMove implements Listener {
                                 .setLine(sidebar[9] + 0, 9);
                         member.Length2 = new int[]{member.PlayerCoord, member.PlayerCoord};
                         member.reset2(player, world);
-                        Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> PlayerUtils.teleport(((CraftPlayer) player).getHandle().playerConnection, member.PlayerCoord + 0.5, 100, member.PlayerCoord + 0.5, 45, 0));
+                        Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> player.teleport(new Location(player.getWorld(), member.PlayerCoord + 0.5, 100, member.PlayerCoord + 0.5, 45, 0)));
                     }
                     break;
             }
