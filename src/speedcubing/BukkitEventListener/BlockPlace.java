@@ -64,7 +64,7 @@ public class BlockPlace implements Listener {
                         SideBar sideBar = SideBar.getSidebar(player);
                         if (i[0] < x) {
                             i[0] = x;
-                            sideBar.setLine(sidebar[6] + realx, 4);
+                            sideBar.setLine(sidebar[4] + realx, 4);
                         }
                         if (i[1] > z) {
                             i[1] = z;
