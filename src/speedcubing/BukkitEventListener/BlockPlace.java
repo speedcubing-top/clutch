@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.scoreboard.Scoreboard;
 import speedcubing.List.ItemStackList;
 import speedcubing.List.StringList;
 import speedcubing.Member;
@@ -62,15 +61,18 @@ public class BlockPlace implements Listener {
                         int[] i = member.Length2;
                         String[] sidebar = StringList.SideBarInclined[member.user.lang];
                         SideBar sideBar = SideBar.getSidebar(player);
-                        if (i[0] < x) {
+                        boolean better = i[0] < x;
+                        boolean better2 = i[1] > z;
+                        if (better) {
                             i[0] = x;
                             sideBar.setLine(sidebar[4] + realx, 4);
                         }
-                        if (i[1] > z) {
+                        if (better2) {
                             i[1] = z;
                             sideBar.setLine(sidebar[5] + realz, 5);
                         }
-                        sideBar.setLine(sidebar[6] + Math.round(Math.sqrt(realz * realz + realx * realx)), 6);
+                        if (better || better2)
+                            sideBar.setLine(sidebar[6] + Math.round(Math.sqrt(realz * realz + realx * realx)), 6);
                     }
                 }
                 break;

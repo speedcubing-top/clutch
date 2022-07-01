@@ -47,7 +47,6 @@ public class InclinedClutch {
         Main.VeloSettings.remove(uuid);
         member.Length = -1;
         member.clear(Bukkit.getWorld("world"), member.PlayerCoord, true);
-
         int coord = 5 * (room * (room % 2 == 0 ? -1 : 1) + room % 2);
         player.teleport(new Location(Bukkit.getWorld("inclined"), coord + 0.5, 100, coord + 0.5, 45, 0));
         WorldUtils.cloneArea(1, 99, -1, -1, 98, 1, coord + 1, 99, coord - 1, player.getWorld());
@@ -120,7 +119,7 @@ public class InclinedClutch {
         inventory.setItem(0, ItemStackList.Blocks);
         inventory.setItem(8, ItemStackList.itemstacks[member.user.lang]);
         inventory.setItem(7, ItemStackList.join[member.user.lang][0]);
-    }
+     }
 
     public static int coordToRoom(int z) {
         return z == 0 ? 0 : Math.abs(z / 5) - (Math.abs(z / 10) + z / 10) / (z / 5);

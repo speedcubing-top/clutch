@@ -34,7 +34,6 @@ public class NormalClutch {
 
     public static void Join(Player player, boolean firstjoin) {
         UUID uuid = player.getUniqueId();
-        Member member = new Member(uuid);
         int room = -1;
         for (int h = 1; h < Integer.MAX_VALUE; h++) {
             if (!rooms.contains(h)) {
@@ -43,10 +42,13 @@ public class NormalClutch {
                 break;
             }
         }
+        Member member;
         if (firstjoin) {
             player.setGameMode(GameMode.SURVIVAL);
             player.setMaximumNoDamageTicks(1);
+            member = new Member(uuid);
         } else {
+            member = Member.getMember(uuid);
             Bukkit.getScheduler().cancelTask(member.CountDownTask);
             Main.VeloSettings.remove(uuid);
             member.Length2 = null;
@@ -134,7 +136,7 @@ public class NormalClutch {
             inventory.setItem(0, ItemStackList.Blocks);
             inventory.setItem(8, ItemStackList.itemstacks[member.user.lang]);
             inventory.setItem(7, ItemStackList.join[member.user.lang][1]);
-        }).start();
+       }).start();
     }
 
     public static int coordToRoom(int z) {
