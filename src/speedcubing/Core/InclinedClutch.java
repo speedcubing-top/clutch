@@ -13,7 +13,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.util.Vector;
 import speedcubing.All.configcache;
-import speedcubing.BukkitEventListener.PlayerInteract;
 import speedcubing.List.ItemStackList;
 import speedcubing.List.StringList;
 import speedcubing.Main;
@@ -24,7 +23,6 @@ import speedcubing.lib.bukkit.WorldUtils;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 public class InclinedClutch {
     public static final int hitcount = 36;
@@ -40,11 +38,9 @@ public class InclinedClutch {
                 break;
             }
         }
-        UUID uuid = player.getUniqueId();
-        Member member = Member.getMember(uuid);
-
+        Member member = Member.getMember(player);
         Bukkit.getScheduler().cancelTask(member.CountDownTask);
-        Main.VeloSettings.remove(uuid);
+        member.VeloSettings = false;
         member.Length = -1;
         member.clear(Bukkit.getWorld("world"), member.PlayerCoord, true);
         int coord = 5 * (room * (room % 2 == 0 ? -1 : 1) + room % 2);
@@ -70,8 +66,8 @@ public class InclinedClutch {
                                     player.setVelocity(new Vector(velo, configcache.ReduceKB[sub + 11] * (member.integerCache[3] / 1000D), -velo));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
-                                    SideBar.getSidebar(player).setLine(StringList.SideBarInclined[member.user.lang][9] + (hitindex + 1), 9);
-                                    if (PlayerInteract.display.contains(uuid)) {
+                                    SideBar.getSidebar(player).setLine(StringList.SideBarInclined[member.lang][9] + (hitindex + 1), 9);
+                                    if (member.display) {
                                         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
                                         connection.sendPacket(new PacketPlayOutTitle(0, 60, 5));
                                         connection.sendPacket(new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, new ChatComponentText("§e" + (hitindex + 1))));
@@ -102,7 +98,7 @@ public class InclinedClutch {
                 }
             }
         }, 0, 1);
-        String[] sidebar = StringList.SideBarInclined[member.user.lang];
+        String[] sidebar = StringList.SideBarInclined[member.lang];
         new SideBar(player, sidebar[0])
                 .staticLine(sidebar[1], 9)
                 .staticLine(sidebar[2], 8)
@@ -117,9 +113,9 @@ public class InclinedClutch {
         member.Length2 = new int[]{coord, coord};
         Inventory inventory = player.getInventory();
         inventory.setItem(0, ItemStackList.Blocks);
-        inventory.setItem(8, ItemStackList.itemstacks[member.user.lang]);
-        inventory.setItem(7, ItemStackList.join[member.user.lang][0]);
-     }
+        inventory.setItem(8, ItemStackList.itemstacks[member.lang]);
+        inventory.setItem(7, ItemStackList.join[member.lang][0]);
+    }
 
     public static int coordToRoom(int z) {
         return z == 0 ? 0 : Math.abs(z / 5) - (Math.abs(z / 10) + z / 10) / (z / 5);

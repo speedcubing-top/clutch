@@ -12,8 +12,6 @@ import speedcubing.List.StringList;
 import speedcubing.Member;
 import speedcubing.lib.bukkit.SideBar;
 
-import java.util.UUID;
-
 public class BlockPlace implements Listener {
     @EventHandler
     public void BlockPlaceEvent(BlockPlaceEvent e) {
@@ -23,8 +21,7 @@ public class BlockPlace implements Listener {
                 case "world": {
                     Block block = e.getBlock();
                     int x = block.getX();
-                    UUID uuid = player.getUniqueId();
-                    Member member = Member.getMember(uuid);
+                    Member member = Member.getMember(player);
                     if (x < -2 || Math.abs(block.getZ() - member.PlayerCoord) > 6)
                         e.setCancelled(true);
                     else {
@@ -36,7 +33,7 @@ public class BlockPlace implements Listener {
                         }
                         if (member.Length < x) {
                             member.Length = x;
-                            SideBar.getSidebar(player).setLine(StringList.SideBarNormal[member.user.lang][4] + member.Length, 4);
+                            SideBar.getSidebar(player).setLine(StringList.SideBarNormal[member.lang][4] + member.Length, 4);
                         }
                     }
                 }
@@ -45,8 +42,7 @@ public class BlockPlace implements Listener {
                     Block block = e.getBlock();
                     int z = block.getZ();
                     int x = block.getX();
-                    UUID uuid = player.getUniqueId();
-                    Member member = Member.getMember(uuid);
+                    Member member = Member.getMember(player);
                     if (x - z < 0 || Math.abs(x + z - 2 * member.PlayerCoord) > 10)
                         e.setCancelled(true);
                     else {
@@ -59,7 +55,7 @@ public class BlockPlace implements Listener {
                         int realx = x - member.PlayerCoord;
                         int realz = member.PlayerCoord - z;
                         int[] i = member.Length2;
-                        String[] sidebar = StringList.SideBarInclined[member.user.lang];
+                        String[] sidebar = StringList.SideBarInclined[member.lang];
                         SideBar sideBar = SideBar.getSidebar(player);
                         boolean better = i[0] < x;
                         boolean better2 = i[1] > z;

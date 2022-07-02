@@ -1,9 +1,9 @@
 package speedcubing;
 
 import net.minecraft.server.v1_8_R3.BlockPosition;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import speedcubing.Core.InclinedClutch;
 import speedcubing.Core.NormalClutch;
@@ -11,16 +11,26 @@ import speedcubing.List.ItemStackList;
 import speedcubing.lib.bukkit.WorldUtils;
 import speedcubing.server.libs.User;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-public class Member {
-    public static Map<UUID, Member> users = new HashMap<>();
+public class Member extends User {
+    public static Map<Integer, Member> users = new HashMap<>();
 
-    public static Member getMember(UUID uuid) {
-        return users.get(uuid);
+    public static Member getMember(CommandSender sender) {
+        return getMember((Player) sender);
     }
 
-    public User user;
+    public static Member getMember(Player player) {
+        return getMember(User.getUser(player).id);
+    }
+
+    public static Member getMember(int id) {
+        return users.get(id);
+    }
+
     public int Blockplaced;
     public Set<BlockPosition> Blocks = new HashSet<>();
     public int PlayerCoord;
@@ -33,9 +43,12 @@ public class Member {
     public int[] Length2 = new int[2];
     public int[] KbCache2 = new int[InclinedClutch.hitcount];
 
-    public Member(UUID uuid) {
-        user = User.getUser(uuid);
-        users.put(uuid, this);
+    public boolean VeloSettings;
+    public boolean display;
+
+    public Member(Player player) {
+        super(player.getUniqueId());
+        users.put(id, this);
     }
 
     public void clear(World world, int coord, boolean quit) {

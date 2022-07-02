@@ -13,7 +13,6 @@ import speedcubing.server.speedcubingServer;
 import java.util.*;
 
 public class Main extends JavaPlugin {
-    public static Set<UUID> VeloSettings = new HashSet<>();
 
     public void onEnable() {
         new configcache().reload();

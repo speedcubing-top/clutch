@@ -13,7 +13,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.util.Vector;
 import speedcubing.All.configcache;
-import speedcubing.BukkitEventListener.PlayerInteract;
 import speedcubing.List.ItemStackList;
 import speedcubing.List.StringList;
 import speedcubing.Main;
@@ -25,7 +24,6 @@ import speedcubing.server.speedcubingServer;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 public class NormalClutch {
     public static final int hitcount = 36;
@@ -33,7 +31,6 @@ public class NormalClutch {
     public static final Set<Integer> rooms = new HashSet<>();
 
     public static void Join(Player player, boolean firstjoin) {
-        UUID uuid = player.getUniqueId();
         int room = -1;
         for (int h = 1; h < Integer.MAX_VALUE; h++) {
             if (!rooms.contains(h)) {
@@ -46,11 +43,11 @@ public class NormalClutch {
         if (firstjoin) {
             player.setGameMode(GameMode.SURVIVAL);
             player.setMaximumNoDamageTicks(1);
-            member = new Member(uuid);
+            member = new Member(player);
         } else {
-            member = Member.getMember(uuid);
+            member = Member.getMember(player);
             Bukkit.getScheduler().cancelTask(member.CountDownTask);
-            Main.VeloSettings.remove(uuid);
+            member.VeloSettings = false;
             member.Length2 = null;
             member.clear(Bukkit.getWorld("inclined"), member.PlayerCoord, true);
         }
@@ -76,8 +73,8 @@ public class NormalClutch {
                                     player.setVelocity(new Vector(configcache.ReduceKB[sub], configcache.ReduceKB[sub + 1] * (member.integerCache[1] / 1000D), 0));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
-                                    SideBar.getSidebar(player).setLine(StringList.SideBarNormal[member.user.lang][7] + (hitindex + 1), 7);
-                                    if (PlayerInteract.display.contains(uuid)) {
+                                    SideBar.getSidebar(player).setLine(StringList.SideBarNormal[member.lang][7] + (hitindex + 1), 7);
+                                    if (member.display) {
                                         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
                                         connection.sendPacket(new PacketPlayOutTitle(0, 60, 5));
                                         connection.sendPacket(new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, new ChatComponentText("§e" + (hitindex + 1))));
@@ -108,7 +105,7 @@ public class NormalClutch {
                 }
             }
         }, 0, 1);
-        String[] sidebar = StringList.SideBarNormal[member.user.lang];
+        String[] sidebar = StringList.SideBarNormal[member.lang];
         new SideBar(player, sidebar[0])
                 .staticLine(sidebar[1], 7)
                 .staticLine(sidebar[2], 6)
@@ -121,8 +118,8 @@ public class NormalClutch {
         member.Length = 0;
         new Thread(() -> {
             if (firstjoin) {
-                member.integerCache = speedcubingServer.connection.selectInts("playersdata", "clutch_blockskin,clutch_normal_ver,clutch_normal_hitdelay,clutch_inclined_ver,clutch_inclined_hitdelay", "uuid='" + uuid + "'");
-                String[] hits = speedcubingServer.connection.selectStrings("playersdata", "clutch_normal_hits,clutch_inclined_hits", "uuid='" + uuid + "'");
+                member.integerCache = speedcubingServer.connection.selectInts("playersdata", "clutch_blockskin,clutch_normal_ver,clutch_normal_hitdelay,clutch_inclined_ver,clutch_inclined_hitdelay", "id=" + member.id);
+                String[] hits = speedcubingServer.connection.selectStrings("playersdata", "clutch_normal_hits,clutch_inclined_hits", "id=" + member.id);
                 int size = hits[0].length();
                 for (int i = 0; i < hitcount; i++) {
                     member.KbCache[i] = i < size ? hits[0].charAt(i) - 48 : 0;
@@ -134,9 +131,9 @@ public class NormalClutch {
             }
             Inventory inventory = player.getInventory();
             inventory.setItem(0, ItemStackList.Blocks);
-            inventory.setItem(8, ItemStackList.itemstacks[member.user.lang]);
-            inventory.setItem(7, ItemStackList.join[member.user.lang][1]);
-       }).start();
+            inventory.setItem(8, ItemStackList.itemstacks[member.lang]);
+            inventory.setItem(7, ItemStackList.join[member.lang][1]);
+        }).start();
     }
 
     public static int coordToRoom(int z) {

@@ -22,10 +22,10 @@ public class PlayerMove implements Listener {
             World world = player.getWorld();
             switch (world.getName()) {
                 case "world": {
-                    Member member = Member.getMember(player.getUniqueId());
+                    Member member = Member.getMember(player);
                     Location to = e.getTo();
                     if (to.getY() <= 96 || Math.abs(to.getZ() - member.PlayerCoord - 0.5) > 5.5) {
-                        String[] sidebar = StringList.SideBarNormal[member.user.lang];
+                        String[] sidebar = StringList.SideBarNormal[member.lang];
                         SideBar.getSidebar(player)
                                 .setLine(sidebar[4] + 0, 4)
                                 .setLine(sidebar[7] + 0, 7);
@@ -36,10 +36,10 @@ public class PlayerMove implements Listener {
                 }
                 break;
                 case "inclined":
-                    Member member = Member.getMember(player.getUniqueId());
+                    Member member = Member.getMember(player);
                     Location to = e.getTo();
                     if (to.getY() <= 96 || Math.abs(to.getX() + to.getZ() - 2 * member.PlayerCoord - 1) > 9.5) {
-                        String[] sidebar = StringList.SideBarInclined[member.user.lang];
+                        String[] sidebar = StringList.SideBarInclined[member.lang];
                         SideBar.getSidebar(player)
                                 .setLine(sidebar[4] + 0, 4)
                                 .setLine(sidebar[5] + 0, 5)

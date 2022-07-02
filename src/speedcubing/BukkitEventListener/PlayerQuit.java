@@ -1,27 +1,20 @@
 package speedcubing.BukkitEventListener;
 
 import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
-import speedcubing.Main;
 import speedcubing.Member;
 import speedcubing.server.speedcubingServer;
-
-import java.util.UUID;
 
 public class PlayerQuit implements Listener {
     @EventHandler
     public void PlayerQuitEvent(PlayerQuitEvent e) {
         Player player = e.getPlayer();
-        UUID uuid = player.getUniqueId();
-        World world = player.getWorld();
-        Member member = Member.getMember(uuid);
-        member.clear(world, member.PlayerCoord, true);
+        Member member = Member.getMember(player);
+        member.clear(player.getWorld(), member.PlayerCoord, true);
         Bukkit.getScheduler().cancelTask(member.CountDownTask);
-        Main.VeloSettings.remove(uuid);
         new Thread(() -> {
             StringBuilder str = new StringBuilder();
             for (int ints : member.KbCache) {
@@ -44,8 +37,8 @@ public class PlayerQuit implements Listener {
                             ",clutch_inclined_hitdelay=" + ints[4] +
                             ",clutch_normal_hits='" + str + "'" +
                             ",clutch_inclined_hits='" + str2 + "'"
-                    , "uuid='" + uuid + "'");
-            Member.users.remove(uuid);
+                    , "id=" + member.id);
+            Member.users.remove(member.id);
         }).start();
     }
 }
