@@ -20,6 +20,7 @@ import speedcubing.Member;
 import speedcubing.lib.bukkit.PlayerUtils;
 import speedcubing.lib.bukkit.SideBar;
 import speedcubing.lib.bukkit.WorldUtils;
+import speedcubing.lib.utils.SQL.SQLUtils;
 import speedcubing.server.speedcubingServer;
 
 import java.util.HashSet;
@@ -118,8 +119,8 @@ public class NormalClutch {
         member.Length = 0;
         new Thread(() -> {
             if (firstjoin) {
-                member.integerCache = speedcubingServer.connection.selectInts("playersdata", "clutch_blockskin,clutch_normal_ver,clutch_normal_hitdelay,clutch_inclined_ver,clutch_inclined_hitdelay", "id=" + member.id);
-                String[] hits = speedcubingServer.connection.selectStrings("playersdata", "clutch_normal_hits,clutch_inclined_hits", "id=" + member.id);
+                member.integerCache = SQLUtils.getIntArray(speedcubingServer.connection.select("playersdata", "clutch_blockskin,clutch_normal_ver,clutch_normal_hitdelay,clutch_inclined_ver,clutch_inclined_hitdelay", "id=" + member.id));
+                String[] hits = SQLUtils.getStringArray(speedcubingServer.connection.select("playersdata", "clutch_normal_hits,clutch_inclined_hits", "id=" + member.id));
                 int size = hits[0].length();
                 for (int i = 0; i < hitcount; i++) {
                     member.KbCache[i] = i < size ? hits[0].charAt(i) - 48 : 0;
