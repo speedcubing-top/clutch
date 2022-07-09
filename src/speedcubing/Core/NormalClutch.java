@@ -3,6 +3,7 @@ package speedcubing.Core;
 import net.minecraft.server.v1_8_R3.ChatComponentText;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import net.minecraft.server.v1_8_R3.PlayerConnection;
+import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -119,7 +120,7 @@ public class NormalClutch {
         member.Length = 0;
         new Thread(() -> {
             if (firstjoin) {
-                member.integerCache = SQLUtils.getIntArray(speedcubingServer.connection.select("playersdata", "clutch_blockskin,clutch_normal_ver,clutch_normal_hitdelay,clutch_inclined_ver,clutch_inclined_hitdelay", "id=" + member.id));
+                member.integerCache = ArrayUtils.toPrimitive(SQLUtils.getIntArray(speedcubingServer.connection.select("playersdata", "clutch_blockskin,clutch_normal_ver,clutch_normal_hitdelay,clutch_inclined_ver,clutch_inclined_hitdelay", "id=" + member.id)));
                 String[] hits = SQLUtils.getStringArray(speedcubingServer.connection.select("playersdata", "clutch_normal_hits,clutch_inclined_hits", "id=" + member.id));
                 int size = hits[0].length();
                 for (int i = 0; i < hitcount; i++) {
