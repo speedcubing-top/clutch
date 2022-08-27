@@ -25,7 +25,7 @@ public class PlayerMove implements Listener {
                     Member member = Member.getMember(player);
                     Location to = e.getTo();
                     if (to.getY() <= 96 || Math.abs(to.getZ() - member.PlayerCoord - 0.5) > 5.5) {
-                        String[] sidebar = StringList.SideBarNormal[member.lang];
+                        String[] sidebar = StringList.SideBarNormal[member.user.lang];
                         SideBar.getSidebar(player)
                                 .setLine(sidebar[4] + 0, 4)
                                 .setLine(sidebar[7] + 0, 7);
@@ -39,7 +39,7 @@ public class PlayerMove implements Listener {
                     Member member = Member.getMember(player);
                     Location to = e.getTo();
                     if (to.getY() <= 96 || Math.abs(to.getX() + to.getZ() - 2 * member.PlayerCoord - 1) > 9.5) {
-                        String[] sidebar = StringList.SideBarInclined[member.lang];
+                        String[] sidebar = StringList.SideBarInclined[member.user.lang];
                         SideBar.getSidebar(player)
                                 .setLine(sidebar[4] + 0, 4)
                                 .setLine(sidebar[5] + 0, 5)

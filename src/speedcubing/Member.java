@@ -16,20 +16,18 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class Member extends User {
+public class Member {
     public static Map<Integer, Member> users = new HashMap<>();
 
     public static Member getMember(CommandSender sender) {
-        return getMember((Player) sender);
-    }
-
-    public static Member getMember(Player player) {
-        return getMember(User.getUser(player).id);
+        return getMember(User.getUser(sender).id);
     }
 
     public static Member getMember(int id) {
         return users.get(id);
     }
+
+    public final User user;
 
     public int Blockplaced;
     public Set<BlockPosition> Blocks = new HashSet<>();
@@ -47,8 +45,8 @@ public class Member extends User {
     public boolean display;
 
     public Member(Player player) {
-        super(player.getUniqueId());
-        users.put(id, this);
+        this.user = User.getUser(player);
+        users.put(user.id, this);
     }
 
     public void clear(World world, int coord, boolean quit) {

@@ -75,7 +75,7 @@ public class NormalClutch {
                                     player.setVelocity(new Vector(configcache.ReduceKB[sub], configcache.ReduceKB[sub + 1] * (member.integerCache[1] / 1000D), 0));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
-                                    SideBar.getSidebar(player).setLine(StringList.SideBarNormal[member.lang][7] + (hitindex + 1), 7);
+                                    SideBar.getSidebar(player).setLine(StringList.SideBarNormal[member.user.lang][7] + (hitindex + 1), 7);
                                     if (member.display) {
                                         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
                                         connection.sendPacket(new PacketPlayOutTitle(0, 60, 5));
@@ -107,7 +107,7 @@ public class NormalClutch {
                 }
             }
         }, 0, 1);
-        String[] sidebar = StringList.SideBarNormal[member.lang];
+        String[] sidebar = StringList.SideBarNormal[member.user.lang];
         new SideBar(player, sidebar[0])
                 .staticLine(sidebar[1], 7)
                 .staticLine(sidebar[2], 6)
@@ -120,8 +120,8 @@ public class NormalClutch {
         member.Length = 0;
         new Thread(() -> {
             if (firstjoin) {
-                member.integerCache = ArrayUtils.toPrimitive(SQLUtils.getIntArray(speedcubingServer.connection.select("playersdata", "clutch_blockskin,clutch_normal_ver,clutch_normal_hitdelay,clutch_inclined_ver,clutch_inclined_hitdelay", "id=" + member.id)));
-                String[] hits = SQLUtils.getStringArray(speedcubingServer.connection.select("playersdata", "clutch_normal_hits,clutch_inclined_hits", "id=" + member.id));
+                member.integerCache = ArrayUtils.toPrimitive(SQLUtils.getIntArray(speedcubingServer.connection.select("playersdata", "clutch_blockskin,clutch_normal_ver,clutch_normal_hitdelay,clutch_inclined_ver,clutch_inclined_hitdelay", "id=" + member.user.id)));
+                String[] hits = SQLUtils.getStringArray(speedcubingServer.connection.select("playersdata", "clutch_normal_hits,clutch_inclined_hits", "id=" + member.user.id));
                 int size = hits[0].length();
                 for (int i = 0; i < hitcount; i++) {
                     member.KbCache[i] = i < size ? hits[0].charAt(i) - 48 : 0;
@@ -133,8 +133,8 @@ public class NormalClutch {
             }
             Inventory inventory = player.getInventory();
             inventory.setItem(0, ItemStackList.Blocks);
-            inventory.setItem(8, ItemStackList.itemstacks[member.lang]);
-            inventory.setItem(7, ItemStackList.join[member.lang][1]);
+            inventory.setItem(8, ItemStackList.itemstacks[member.user.lang]);
+            inventory.setItem(7, ItemStackList.join[member.user.lang][1]);
         }).start();
     }
 

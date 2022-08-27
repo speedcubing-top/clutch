@@ -33,7 +33,7 @@ public class BlockPlace implements Listener {
                         }
                         if (member.Length < x) {
                             member.Length = x;
-                            SideBar.getSidebar(player).setLine(StringList.SideBarNormal[member.lang][4] + member.Length, 4);
+                            SideBar.getSidebar(player).setLine(StringList.SideBarNormal[member.user.lang][4] + member.Length, 4);
                         }
                     }
                 }
@@ -55,7 +55,7 @@ public class BlockPlace implements Listener {
                         int realx = x - member.PlayerCoord;
                         int realz = member.PlayerCoord - z;
                         int[] i = member.Length2;
-                        String[] sidebar = StringList.SideBarInclined[member.lang];
+                        String[] sidebar = StringList.SideBarInclined[member.user.lang];
                         SideBar sideBar = SideBar.getSidebar(player);
                         boolean better = i[0] < x;
                         boolean better2 = i[1] > z;

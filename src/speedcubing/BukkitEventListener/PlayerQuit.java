@@ -37,8 +37,8 @@ public class PlayerQuit implements Listener {
                             ",clutch_inclined_hitdelay=" + ints[4] +
                             ",clutch_normal_hits='" + str + "'" +
                             ",clutch_inclined_hits='" + str2 + "'"
-                    , "id=" + member.id);
-            Member.users.remove(member.id);
+                    , "id=" + member.user.id);
+            Member.users.remove(member.user.id);
         }).start();
     }
 }

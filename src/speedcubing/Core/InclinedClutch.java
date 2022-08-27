@@ -66,7 +66,7 @@ public class InclinedClutch {
                                     player.setVelocity(new Vector(velo, configcache.ReduceKB[sub + 11] * (member.integerCache[3] / 1000D), -velo));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
-                                    SideBar.getSidebar(player).setLine(StringList.SideBarInclined[member.lang][9] + (hitindex + 1), 9);
+                                    SideBar.getSidebar(player).setLine(StringList.SideBarInclined[member.user.lang][9] + (hitindex + 1), 9);
                                     if (member.display) {
                                         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
                                         connection.sendPacket(new PacketPlayOutTitle(0, 60, 5));
@@ -98,7 +98,7 @@ public class InclinedClutch {
                 }
             }
         }, 0, 1);
-        String[] sidebar = StringList.SideBarInclined[member.lang];
+        String[] sidebar = StringList.SideBarInclined[member.user.lang];
         new SideBar(player, sidebar[0])
                 .staticLine(sidebar[1], 9)
                 .staticLine(sidebar[2], 8)
@@ -113,8 +113,8 @@ public class InclinedClutch {
         member.Length2 = new int[]{coord, coord};
         Inventory inventory = player.getInventory();
         inventory.setItem(0, ItemStackList.Blocks);
-        inventory.setItem(8, ItemStackList.itemstacks[member.lang]);
-        inventory.setItem(7, ItemStackList.join[member.lang][0]);
+        inventory.setItem(8, ItemStackList.itemstacks[member.user.lang]);
+        inventory.setItem(7, ItemStackList.join[member.user.lang][0]);
     }
 
     public static int coordToRoom(int z) {

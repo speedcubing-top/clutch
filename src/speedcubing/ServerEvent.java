@@ -22,18 +22,18 @@ public class ServerEvent {
                 try {
                     int x = (int) (Double.parseDouble(message) * 1000);
                     if (x < 0 || x > 5000)
-                        player.sendMessage(GlobalString.integerOutOfRange[member.lang].replace("%min%", "0.000").replace("%max%", "5.000"));
+                        player.sendMessage(GlobalString.integerOutOfRange[member.user.lang].replace("%min%", "0.000").replace("%max%", "5.000"));
                     else {
                         member.integerCache[player.getWorld().getName().equals("world") ? 1 : 3] = x;
                         member.VeloSettings = false;
-                        speedcubingServer.node(false, member.id, member.tcpPort);
+                        speedcubingServer.node(false, member.user.id, member.user.tcpPort);
                     }
                 } catch (Exception exception) {
-                    player.sendMessage(GlobalString.invalidInteger[member.lang]);
+                    player.sendMessage(GlobalString.invalidInteger[member.user.lang]);
                 }
             } else if (message.charAt(0) != '/') {
                 e.isCancelled = true;
-                String[] formats = speedcubingServer.getFormat(member.rank);
+                String[] formats = speedcubingServer.getFormat(member.user.rank);
                 String text = formats[0] + player.getName();
                 String[] str = GlobalString.MessageFormat[0];
                 String[] out = new String[]{
@@ -42,7 +42,7 @@ public class ServerEvent {
                         str[2].replace("%text%", text).replace("%text2%", formats[2] + message),
                         str[3].replace("%text%", text).replace("%text2%", formats[2] + message)
                 };
-                Bukkit.getOnlinePlayers().forEach(a -> a.sendMessage(out[Member.getMember(a).lang]));
+                Bukkit.getOnlinePlayers().forEach(a -> a.sendMessage(out[Member.getMember(a).user.lang]));
                 Console.sendColoredConsole("§7[§aChatLog§7] [§b" + player.getWorld().getName() + "§7] " + out[1]);
             }
         }
@@ -51,6 +51,6 @@ public class ServerEvent {
     @LibEventHandler
     public void ToggleFlyEvent(ToggleFlyEvent e) {
         e.isCancelled = true;
-        e.player.sendMessage(GlobalString.OnlyInHub[Member.getMember(e.player).lang]);
+        e.player.sendMessage(GlobalString.OnlyInHub[Member.getMember(e.player).user.lang]);
     }
 }
