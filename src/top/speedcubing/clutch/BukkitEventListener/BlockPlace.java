@@ -1,5 +1,7 @@
-package speedcubing.BukkitEventListener;
+package top.speedcubing.clutch.BukkitEventListener;
 
+import top.speedcubing.clutch.List.ItemStackList;
+import top.speedcubing.clutch.List.StringList;
 import net.minecraft.server.v1_8_R3.BlockPosition;
 import org.bukkit.GameMode;
 import org.bukkit.block.Block;
@@ -7,10 +9,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import speedcubing.List.ItemStackList;
-import speedcubing.List.StringList;
-import speedcubing.Member;
-import speedcubing.lib.bukkit.SideBar;
+import top.speedcubing.clutch.Member;
+import top.speedcubing.lib.bukkit.SideBar;
 
 public class BlockPlace implements Listener {
     @EventHandler

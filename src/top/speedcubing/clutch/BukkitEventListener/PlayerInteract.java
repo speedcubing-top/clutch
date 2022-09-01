@@ -1,4 +1,4 @@
-package speedcubing.BukkitEventListener;
+package top.speedcubing.clutch.BukkitEventListener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -7,12 +7,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
-import speedcubing.Core.InclinedClutch;
-import speedcubing.Core.NormalClutch;
-import speedcubing.List.ItemStackList;
-import speedcubing.List.StringList;
-import speedcubing.Member;
-import speedcubing.lib.bukkit.inventory.ItemBuilder;
+import top.speedcubing.clutch.Core.InclinedClutch;
+import top.speedcubing.clutch.Core.NormalClutch;
+import top.speedcubing.clutch.List.ItemStackList;
+import top.speedcubing.clutch.List.StringList;
+import top.speedcubing.clutch.Member;
+import top.speedcubing.lib.bukkit.inventory.ItemBuilder;
 
 public class PlayerInteract implements Listener {
 

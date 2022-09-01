@@ -1,12 +1,12 @@
-package speedcubing.BukkitEventListener;
+package top.speedcubing.clutch.BukkitEventListener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
-import speedcubing.Member;
-import speedcubing.server.speedcubingServer;
+import top.speedcubing.clutch.Member;
+import top.speedcubing.server.speedcubingServer;
 
 public class PlayerQuit implements Listener {
     @EventHandler

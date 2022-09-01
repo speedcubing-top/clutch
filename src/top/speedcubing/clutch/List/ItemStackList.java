@@ -1,6 +1,6 @@
-package speedcubing.List;
+package top.speedcubing.clutch.List;
 
-import speedcubing.lib.bukkit.inventory.ItemBuilder;
+import top.speedcubing.lib.bukkit.inventory.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;

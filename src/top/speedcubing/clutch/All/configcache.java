@@ -1,9 +1,9 @@
-package speedcubing.All;
+package top.speedcubing.clutch.All;
 
 import org.bukkit.command.*;
-import speedcubing.Main;
-import speedcubing.Member;
-import speedcubing.server.libs.GlobalString;
+import top.speedcubing.clutch.Main;
+import top.speedcubing.clutch.Member;
+import top.speedcubing.server.libs.GlobalString;
 
 import java.util.ArrayList;
 import java.util.List;

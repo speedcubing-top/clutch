@@ -1,5 +1,10 @@
-package speedcubing.Core;
+package top.speedcubing.clutch.Core;
 
+import top.speedcubing.clutch.All.configcache;
+import top.speedcubing.clutch.List.ItemStackList;
+import top.speedcubing.clutch.List.StringList;
+import top.speedcubing.clutch.Main;
+import top.speedcubing.clutch.Member;
 import net.minecraft.server.v1_8_R3.ChatComponentText;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import net.minecraft.server.v1_8_R3.PlayerConnection;
@@ -12,14 +17,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.util.Vector;
-import speedcubing.All.configcache;
-import speedcubing.List.ItemStackList;
-import speedcubing.List.StringList;
-import speedcubing.Main;
-import speedcubing.Member;
-import speedcubing.lib.bukkit.PlayerUtils;
-import speedcubing.lib.bukkit.SideBar;
-import speedcubing.lib.bukkit.WorldUtils;
+import top.speedcubing.lib.bukkit.PlayerUtils;
+import top.speedcubing.lib.bukkit.SideBar;
+import top.speedcubing.lib.bukkit.WorldUtils;
 
 import java.util.HashSet;
 import java.util.Set;

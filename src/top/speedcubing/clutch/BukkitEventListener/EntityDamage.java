@@ -1,4 +1,4 @@
-package speedcubing.BukkitEventListener;
+package top.speedcubing.clutch.BukkitEventListener;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

@@ -1,15 +1,15 @@
-package speedcubing;
+package top.speedcubing.clutch;
 
+import top.speedcubing.clutch.List.ItemStackList;
 import net.minecraft.server.v1_8_R3.BlockPosition;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import speedcubing.Core.InclinedClutch;
-import speedcubing.Core.NormalClutch;
-import speedcubing.List.ItemStackList;
-import speedcubing.lib.bukkit.WorldUtils;
-import speedcubing.server.libs.User;
+import top.speedcubing.clutch.Core.InclinedClutch;
+import top.speedcubing.clutch.Core.NormalClutch;
+import top.speedcubing.lib.bukkit.WorldUtils;
+import top.speedcubing.server.libs.User;
 
 import java.util.HashMap;
 import java.util.HashSet;

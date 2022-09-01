@@ -1,5 +1,5 @@
 name: Clutch
-main: speedcubing.Main
+main: top.speedcubing.clutch.Main
 version: 1.0
 depend:
   - speedcubingServer

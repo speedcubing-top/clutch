@@ -1,16 +1,17 @@
-package speedcubing;
+package top.speedcubing.clutch;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.WorldCreator;
 import org.bukkit.plugin.java.JavaPlugin;
-import speedcubing.All.configcache;
-import speedcubing.BukkitEventListener.*;
-import speedcubing.List.ItemStackList;
-import speedcubing.lib.eventbus.LibEventManager;
-import speedcubing.server.speedcubingServer;
+import top.speedcubing.clutch.All.configcache;
+import top.speedcubing.clutch.BukkitEventListener.*;
+import top.speedcubing.clutch.List.ItemStackList;
+import top.speedcubing.lib.eventbus.LibEventManager;
+import top.speedcubing.server.speedcubingServer;
 
-import java.util.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Main extends JavaPlugin {
 

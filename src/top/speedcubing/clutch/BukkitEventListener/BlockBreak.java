@@ -1,13 +1,13 @@
-package speedcubing.BukkitEventListener;
+package top.speedcubing.clutch.BukkitEventListener;
 
 import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.block.BlockBreakEvent;
 
-public class PlayerDropItem implements Listener {
+public class BlockBreak implements Listener {
     @EventHandler
-    public void PlayerDropItemEvent(PlayerDropItemEvent e) {
+    public void BlockBreakEvent(BlockBreakEvent e) {
         if (e.getPlayer().getGameMode() != GameMode.CREATIVE)
             e.setCancelled(true);
     }

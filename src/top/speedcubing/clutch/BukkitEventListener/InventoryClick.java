@@ -1,5 +1,10 @@
-package speedcubing.BukkitEventListener;
+package top.speedcubing.clutch.BukkitEventListener;
 
+import top.speedcubing.clutch.Core.InclinedClutch;
+import top.speedcubing.clutch.Core.NormalClutch;
+import top.speedcubing.clutch.List.ItemStackList;
+import top.speedcubing.clutch.List.StringList;
+import top.speedcubing.clutch.Member;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -12,13 +17,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import speedcubing.Core.InclinedClutch;
-import speedcubing.Core.NormalClutch;
-import speedcubing.List.ItemStackList;
-import speedcubing.List.StringList;
-import speedcubing.Member;
-import speedcubing.server.libs.GlobalString;
-import speedcubing.server.speedcubingServer;
+import top.speedcubing.server.libs.GlobalString;
+import top.speedcubing.server.speedcubingServer;
 
 import java.util.Arrays;
 

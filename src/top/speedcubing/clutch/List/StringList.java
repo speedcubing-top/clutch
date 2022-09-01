@@ -1,6 +1,6 @@
-package speedcubing.List;
+package top.speedcubing.clutch.List;
 
-import speedcubing.server.config;
+import top.speedcubing.server.config;
 
 public class StringList {
 
