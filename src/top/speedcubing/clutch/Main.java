@@ -1,5 +1,6 @@
 package top.speedcubing.clutch;
 
+import net.minecraft.server.v1_8_R3.MinecraftServer;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.WorldCreator;
@@ -16,6 +17,7 @@ import java.util.TimerTask;
 public class Main extends JavaPlugin {
 
     public void onEnable() {
+        MinecraftServer.getServer().getPropertyManager().setProperty("server-name", "clutch");
         new configcache().reload();
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerQuit(), this);
