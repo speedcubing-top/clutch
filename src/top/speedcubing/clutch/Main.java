@@ -9,10 +9,6 @@ import top.speedcubing.clutch.All.configcache;
 import top.speedcubing.clutch.BukkitEventListener.*;
 import top.speedcubing.clutch.List.ItemStackList;
 import top.speedcubing.lib.eventbus.LibEventManager;
-import top.speedcubing.server.speedcubingServer;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Main extends JavaPlugin {
 
@@ -38,11 +34,5 @@ public class Main extends JavaPlugin {
         Bukkit.getWorld("inclined").setTime(6000);
         new ItemStackList().Load();
         LibEventManager.registerListeners(new ServerEvent());
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                speedcubingServer.tcp.sendClean(25576 - Bukkit.getPort() % 2, "online|6|" + Bukkit.getOnlinePlayers().size());
-            }
-        }, 0, 1000);
     }
 }
