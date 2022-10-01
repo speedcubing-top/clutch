@@ -8,10 +8,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import top.speedcubing.clutch.BukkitEventListener.*;
 import top.speedcubing.clutch.List.ItemStackList;
 import top.speedcubing.lib.eventbus.LibEventManager;
+import top.speedcubing.server.config;
 
 public class Clutch extends JavaPlugin {
 
     public static double[] kb;
+
     public void onEnable() {
         MinecraftServer.getServer().getPropertyManager().setProperty("server-name", "clutch");
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
@@ -31,5 +33,6 @@ public class Clutch extends JavaPlugin {
         Bukkit.getWorld("inclined").setTime(6000);
         new ItemStackList().Load();
         LibEventManager.registerListeners(new ServerEvent());
+        config.event.call();
     }
 }
