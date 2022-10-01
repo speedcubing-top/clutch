@@ -5,7 +5,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.WorldCreator;
 import org.bukkit.plugin.java.JavaPlugin;
-import top.speedcubing.clutch.All.config;
 import top.speedcubing.clutch.BukkitEventListener.*;
 import top.speedcubing.clutch.List.ItemStackList;
 import top.speedcubing.lib.eventbus.LibEventManager;
@@ -14,7 +13,7 @@ public class Main extends JavaPlugin {
 
     public void onEnable() {
         MinecraftServer.getServer().getPropertyManager().setProperty("server-name", "clutch");
-        new config().reload();
+        new configuration().reload();
         Bukkit.getPluginManager().registerEvents(new PlayerJoin(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerQuit(), this);
         Bukkit.getPluginManager().registerEvents(new BlockPlace(), this);
@@ -25,8 +24,8 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerDropItem(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerInteract(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerSpawnLocation(), this);
-        Bukkit.getPluginCommand("reloadplugin").setExecutor(new config());
-        Bukkit.getPluginCommand("reloadplugin").setTabCompleter(new config());
+        Bukkit.getPluginCommand("reloadplugin").setExecutor(new configuration());
+        Bukkit.getPluginCommand("reloadplugin").setTabCompleter(new configuration());
         Bukkit.getWorld("world").setDifficulty(Difficulty.PEACEFUL);
         Bukkit.getWorld("world").setTime(6000);
         getServer().createWorld(new WorldCreator("inclined"));
