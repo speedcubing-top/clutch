@@ -1,14 +1,12 @@
 package top.speedcubing.clutch;
 
-import org.bukkit.command.*;
-import top.speedcubing.clutch.Main;
-import top.speedcubing.clutch.Member;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import top.speedcubing.server.libs.GlobalString;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class configuration implements CommandExecutor, TabCompleter {
+public class configuration implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         commandSender.sendMessage(GlobalString.UnknownCommand[commandSender instanceof ConsoleCommandSender ? 1 : Member.getMember(commandSender).user.lang]);
         reload();
@@ -42,8 +40,4 @@ public class configuration implements CommandExecutor, TabCompleter {
     }
 
     public static double[] ReduceKB;
-
-    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
-        return new ArrayList<>();
-    }
 }
