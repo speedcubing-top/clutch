@@ -1,9 +1,6 @@
 name: Clutch
-main: top.speedcubing.clutch.Main
+main: top.speedcubing.clutch.Clutch
 version: 1.0
 depend:
   - speedcubingServer
   - speedcubingLib
-commands:
-  reloadconfig:
-    usage: /reloadconfig

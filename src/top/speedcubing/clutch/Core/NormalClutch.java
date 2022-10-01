@@ -1,10 +1,5 @@
 package top.speedcubing.clutch.Core;
 
-import top.speedcubing.clutch.configuration;
-import top.speedcubing.clutch.List.ItemStackList;
-import top.speedcubing.clutch.List.StringList;
-import top.speedcubing.clutch.Main;
-import top.speedcubing.clutch.Member;
 import net.minecraft.server.v1_8_R3.ChatComponentText;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import net.minecraft.server.v1_8_R3.PlayerConnection;
@@ -18,6 +13,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.util.Vector;
+import top.speedcubing.clutch.Clutch;
+import top.speedcubing.clutch.List.ItemStackList;
+import top.speedcubing.clutch.List.StringList;
+import top.speedcubing.clutch.Member;
 import top.speedcubing.lib.bukkit.PlayerUtils;
 import top.speedcubing.lib.bukkit.SideBar;
 import top.speedcubing.lib.bukkit.WorldUtils;
@@ -57,7 +56,7 @@ public class NormalClutch {
         player.teleport(new Location(Bukkit.getWorld("world"), 0.5, 100, coord + 0.5, 90, 0));
         WorldUtils.cloneArea(-2, 99, 1, 0, 98, -1, -2, 99, 1 + coord, player.getWorld());
         member.reset3(player, coord);
-        member.CountDownTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(Main.class), new Runnable() {
+        member.CountDownTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(Clutch.getPlugin(Clutch.class), new Runnable() {
             int hitindex = 0;
             int hitdelay = 0;
 
@@ -72,7 +71,7 @@ public class NormalClutch {
                                     hitindex = 0;
                                 } else {
                                     int sub = 2 * (member.KbCache[hitindex] - 1);
-                                    player.setVelocity(new Vector(configuration.ReduceKB[sub], configuration.ReduceKB[sub + 1] * (member.integerCache[1] / 1000D), 0));
+                                    player.setVelocity(new Vector(Clutch.kb[sub], Clutch.kb[sub + 1] * (member.integerCache[1] / 1000D), 0));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
                                     SideBar.getSidebar(player).setLine(StringList.SideBarNormal[member.user.lang][7] + (hitindex + 1), 7);

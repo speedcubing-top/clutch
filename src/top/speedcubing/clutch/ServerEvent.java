@@ -1,11 +1,14 @@
 package top.speedcubing.clutch;
 
+import com.google.gson.JsonObject;
 import net.minecraft.server.v1_8_R3.PacketPlayInChat;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import top.speedcubing.lib.bukkit.event.PlayInEvent;
 import top.speedcubing.lib.eventbus.LibEventHandler;
 import top.speedcubing.lib.utils.Console;
+import top.speedcubing.server.config;
+import top.speedcubing.server.events.ConfigReloadEvent;
 import top.speedcubing.server.events.player.ToggleFlyEvent;
 import top.speedcubing.server.libs.GlobalString;
 import top.speedcubing.server.speedcubingServer;
@@ -52,5 +55,32 @@ public class ServerEvent {
     public void ToggleFlyEvent(ToggleFlyEvent e) {
         e.isCancelled = true;
         e.player.sendMessage(GlobalString.OnlyInHub[Member.getMember(e.player).user.lang]);
+    }
+
+    @LibEventHandler
+    public void ConfigReloadEvent(ConfigReloadEvent e) {
+        JsonObject object = config.config.getAsJsonObject("clutchkb");
+        Clutch.kb = new double[]{
+                object.get("low").getAsJsonArray().get(0).getAsDouble(),
+                object.get("low").getAsJsonArray().get(1).getAsDouble(),
+                object.get("mid").getAsJsonArray().get(0).getAsDouble(),
+                object.get("mid").getAsJsonArray().get(1).getAsDouble(),
+                object.get("diff").getAsJsonArray().get(0).getAsDouble(),
+                object.get("diff").getAsJsonArray().get(1).getAsDouble(),
+                object.get("high").getAsJsonArray().get(0).getAsDouble(),
+                object.get("high").getAsJsonArray().get(1).getAsDouble(),
+                object.get("extreme").getAsJsonArray().get(0).getAsDouble(),
+                object.get("extreme").getAsJsonArray().get(1).getAsDouble(),
+                object.get("low").getAsJsonArray().get(2).getAsDouble(),
+                object.get("low").getAsJsonArray().get(3).getAsDouble(),
+                object.get("mid").getAsJsonArray().get(2).getAsDouble(),
+                object.get("mid").getAsJsonArray().get(3).getAsDouble(),
+                object.get("diff").getAsJsonArray().get(2).getAsDouble(),
+                object.get("diff").getAsJsonArray().get(3).getAsDouble(),
+                object.get("high").getAsJsonArray().get(2).getAsDouble(),
+                object.get("high").getAsJsonArray().get(3).getAsDouble(),
+                object.get("extreme").getAsJsonArray().get(2).getAsDouble(),
+                object.get("extreme").getAsJsonArray().get(3).getAsDouble()
+        };
     }
 }

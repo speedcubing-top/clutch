@@ -1,10 +1,5 @@
 package top.speedcubing.clutch.Core;
 
-import top.speedcubing.clutch.configuration;
-import top.speedcubing.clutch.List.ItemStackList;
-import top.speedcubing.clutch.List.StringList;
-import top.speedcubing.clutch.Main;
-import top.speedcubing.clutch.Member;
 import net.minecraft.server.v1_8_R3.ChatComponentText;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import net.minecraft.server.v1_8_R3.PlayerConnection;
@@ -17,6 +12,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.util.Vector;
+import top.speedcubing.clutch.Clutch;
+import top.speedcubing.clutch.List.ItemStackList;
+import top.speedcubing.clutch.List.StringList;
+import top.speedcubing.clutch.Member;
 import top.speedcubing.lib.bukkit.PlayerUtils;
 import top.speedcubing.lib.bukkit.SideBar;
 import top.speedcubing.lib.bukkit.WorldUtils;
@@ -47,7 +46,7 @@ public class InclinedClutch {
         player.teleport(new Location(Bukkit.getWorld("inclined"), coord + 0.5, 100, coord + 0.5, 45, 0));
         WorldUtils.cloneArea(1, 99, -1, -1, 98, 1, coord + 1, 99, coord - 1, player.getWorld());
         member.reset3(player, coord);
-        member.CountDownTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(Main.class), new Runnable() {
+        member.CountDownTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(Clutch.getPlugin(Clutch.class), new Runnable() {
             int hitindex = 0;
             int hitdelay = 0;
 
@@ -62,8 +61,8 @@ public class InclinedClutch {
                                     hitindex = 0;
                                 } else {
                                     int sub = 2 * (member.KbCache2[hitindex] - 1);
-                                    double velo = configuration.ReduceKB[sub + 10];
-                                    player.setVelocity(new Vector(velo, configuration.ReduceKB[sub + 11] * (member.integerCache[3] / 1000D), -velo));
+                                    double velo = Clutch.kb[sub + 10];
+                                    player.setVelocity(new Vector(velo, Clutch.kb[sub + 11] * (member.integerCache[3] / 1000D), -velo));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
                                     SideBar.getSidebar(player).setLine(StringList.SideBarInclined[member.user.lang][9] + (hitindex + 1), 9);

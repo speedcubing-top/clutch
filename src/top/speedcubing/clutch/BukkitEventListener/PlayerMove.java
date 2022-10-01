@@ -8,8 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import top.speedcubing.clutch.Clutch;
 import top.speedcubing.clutch.List.StringList;
-import top.speedcubing.clutch.Main;
 import top.speedcubing.clutch.Member;
 import top.speedcubing.lib.bukkit.SideBar;
 
@@ -31,7 +31,7 @@ public class PlayerMove implements Listener {
                                 .setLine(sidebar[7] + 0, 7);
                         member.Length = 0;
                         member.reset2(player, world);
-                        Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> player.teleport(new Location(player.getWorld(), 0.5, 100, member.PlayerCoord + 0.5, 90, 0)));
+                        Bukkit.getScheduler().runTask(Clutch.getPlugin(Clutch.class), () -> player.teleport(new Location(player.getWorld(), 0.5, 100, member.PlayerCoord + 0.5, 90, 0)));
                     }
                 }
                 break;
@@ -47,7 +47,7 @@ public class PlayerMove implements Listener {
                                 .setLine(sidebar[9] + 0, 9);
                         member.Length2 = new int[]{member.PlayerCoord, member.PlayerCoord};
                         member.reset2(player, world);
-                        Bukkit.getScheduler().runTask(Main.getPlugin(Main.class), () -> player.teleport(new Location(player.getWorld(), member.PlayerCoord + 0.5, 100, member.PlayerCoord + 0.5, 45, 0)));
+                        Bukkit.getScheduler().runTask(Clutch.getPlugin(Clutch.class), () -> player.teleport(new Location(player.getWorld(), member.PlayerCoord + 0.5, 100, member.PlayerCoord + 0.5, 45, 0)));
                     }
                     break;
             }
