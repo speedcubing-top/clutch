@@ -1,6 +1,6 @@
 package top.speedcubing.clutch.Core;
 
-import top.speedcubing.clutch.All.configcache;
+import top.speedcubing.clutch.All.config;
 import top.speedcubing.clutch.List.ItemStackList;
 import top.speedcubing.clutch.List.StringList;
 import top.speedcubing.clutch.Main;
@@ -62,8 +62,8 @@ public class InclinedClutch {
                                     hitindex = 0;
                                 } else {
                                     int sub = 2 * (member.KbCache2[hitindex] - 1);
-                                    double velo = configcache.ReduceKB[sub + 10];
-                                    player.setVelocity(new Vector(velo, configcache.ReduceKB[sub + 11] * (member.integerCache[3] / 1000D), -velo));
+                                    double velo = config.ReduceKB[sub + 10];
+                                    player.setVelocity(new Vector(velo, config.ReduceKB[sub + 11] * (member.integerCache[3] / 1000D), -velo));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
                                     SideBar.getSidebar(player).setLine(StringList.SideBarInclined[member.user.lang][9] + (hitindex + 1), 9);

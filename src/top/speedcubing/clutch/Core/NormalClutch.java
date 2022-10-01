@@ -1,6 +1,6 @@
 package top.speedcubing.clutch.Core;
 
-import top.speedcubing.clutch.All.configcache;
+import top.speedcubing.clutch.All.config;
 import top.speedcubing.clutch.List.ItemStackList;
 import top.speedcubing.clutch.List.StringList;
 import top.speedcubing.clutch.Main;
@@ -72,7 +72,7 @@ public class NormalClutch {
                                     hitindex = 0;
                                 } else {
                                     int sub = 2 * (member.KbCache[hitindex] - 1);
-                                    player.setVelocity(new Vector(configcache.ReduceKB[sub], configcache.ReduceKB[sub + 1] * (member.integerCache[1] / 1000D), 0));
+                                    player.setVelocity(new Vector(config.ReduceKB[sub], config.ReduceKB[sub + 1] * (member.integerCache[1] / 1000D), 0));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
                                     SideBar.getSidebar(player).setLine(StringList.SideBarNormal[member.user.lang][7] + (hitindex + 1), 7);

@@ -8,7 +8,7 @@ import top.speedcubing.server.libs.GlobalString;
 import java.util.ArrayList;
 import java.util.List;
 
-public class configcache  implements CommandExecutor, TabCompleter {
+public class config implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         commandSender.sendMessage(GlobalString.UnknownCommand[commandSender instanceof ConsoleCommandSender ? 1 : Member.getMember(commandSender).user.lang]);
         reload();
