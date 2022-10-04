@@ -33,7 +33,7 @@ public class BlockPlace implements Listener {
                         }
                         if (member.Length < x) {
                             member.Length = x;
-                            SideBar.getSidebar(player).setLine(StringList.SideBarNormal[member.user.lang][4] + member.Length, 4);
+                            SideBar.getSidebar(player).setLineByScore(StringList.SideBarNormal[member.user.lang][4] + member.Length, 4);
                         }
                     }
                 }
@@ -61,14 +61,14 @@ public class BlockPlace implements Listener {
                         boolean better2 = i[1] > z;
                         if (better) {
                             i[0] = x;
-                            sideBar.setLine(sidebar[4] + realx, 4);
+                            sideBar.setLineByScore(sidebar[4] + realx, 6);
                         }
                         if (better2) {
                             i[1] = z;
-                            sideBar.setLine(sidebar[5] + realz, 5);
+                            sideBar.setLineByScore(sidebar[5] + realz, 5);
                         }
                         if (better || better2)
-                            sideBar.setLine(sidebar[6] + Math.round(Math.sqrt(realz * realz + realx * realx)), 6);
+                            sideBar.setLineByScore(sidebar[6] + Math.round(Math.sqrt(realz * realz + realx * realx)), 4);
                     }
                 }
                 break;

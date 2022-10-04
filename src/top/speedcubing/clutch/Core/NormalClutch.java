@@ -74,7 +74,7 @@ public class NormalClutch {
                                     player.setVelocity(new Vector(Clutch.kb[sub], Clutch.kb[sub + 1] * (member.integerCache[1] / 1000D), 0));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
-                                    SideBar.getSidebar(player).setLine(StringList.SideBarNormal[member.user.lang][7] + (hitindex + 1), 7);
+                                    SideBar.getSidebar(player).setLineByScore(StringList.SideBarNormal[member.user.lang][7] + (hitindex + 1), 1);
                                     if (member.display) {
                                         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
                                         connection.sendPacket(new PacketPlayOutTitle(0, 60, 5));

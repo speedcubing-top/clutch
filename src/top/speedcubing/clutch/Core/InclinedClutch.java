@@ -65,7 +65,7 @@ public class InclinedClutch {
                                     player.setVelocity(new Vector(velo, Clutch.kb[sub + 11] * (member.integerCache[3] / 1000D), -velo));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
-                                    SideBar.getSidebar(player).setLine(StringList.SideBarInclined[member.user.lang][9] + (hitindex + 1), 9);
+                                    SideBar.getSidebar(player).setLineByScore(StringList.SideBarInclined[member.user.lang][9] + (hitindex + 1), 1);
                                     if (member.display) {
                                         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
                                         connection.sendPacket(new PacketPlayOutTitle(0, 60, 5));

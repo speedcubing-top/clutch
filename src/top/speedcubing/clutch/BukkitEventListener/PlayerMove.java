@@ -27,8 +27,8 @@ public class PlayerMove implements Listener {
                     if (to.getY() <= 96 || Math.abs(to.getZ() - member.PlayerCoord - 0.5) > 5.5) {
                         String[] sidebar = StringList.SideBarNormal[member.user.lang];
                         SideBar.getSidebar(player)
-                                .setLine(sidebar[4] + 0, 4)
-                                .setLine(sidebar[7] + 0, 7);
+                                .setLineByScore(sidebar[4] + 0, 4)
+                                .setLineByScore(sidebar[7] + 0, 1);
                         member.Length = 0;
                         member.reset2(player, world);
                         Bukkit.getScheduler().runTask(Clutch.getPlugin(Clutch.class), () -> player.teleport(new Location(player.getWorld(), 0.5, 100, member.PlayerCoord + 0.5, 90, 0)));
@@ -41,10 +41,10 @@ public class PlayerMove implements Listener {
                     if (to.getY() <= 96 || Math.abs(to.getX() + to.getZ() - 2 * member.PlayerCoord - 1) > 9.5) {
                         String[] sidebar = StringList.SideBarInclined[member.user.lang];
                         SideBar.getSidebar(player)
-                                .setLine(sidebar[4] + 0, 4)
-                                .setLine(sidebar[5] + 0, 5)
-                                .setLine(sidebar[6] + 0, 6)
-                                .setLine(sidebar[9] + 0, 9);
+                                .setLineByScore(sidebar[4] + 0, 6)
+                                .setLineByScore(sidebar[5] + 0, 5)
+                                .setLineByScore(sidebar[6] + 0, 4)
+                                .setLineByScore(sidebar[9] + 0, 1);
                         member.Length2 = new int[]{member.PlayerCoord, member.PlayerCoord};
                         member.reset2(player, world);
                         Bukkit.getScheduler().runTask(Clutch.getPlugin(Clutch.class), () -> player.teleport(new Location(player.getWorld(), member.PlayerCoord + 0.5, 100, member.PlayerCoord + 0.5, 45, 0)));
