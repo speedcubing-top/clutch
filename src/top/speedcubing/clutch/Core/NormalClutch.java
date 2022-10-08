@@ -20,7 +20,6 @@ import top.speedcubing.clutch.Member;
 import top.speedcubing.lib.bukkit.PlayerUtils;
 import top.speedcubing.lib.bukkit.SideBar;
 import top.speedcubing.lib.bukkit.WorldUtils;
-import top.speedcubing.lib.utils.SQL.SQLUtils;
 import top.speedcubing.server.speedcubingServer;
 
 import java.util.HashSet;
@@ -119,8 +118,8 @@ public class NormalClutch {
         member.Length = 0;
         new Thread(() -> {
             if (firstjoin) {
-                member.integerCache = ArrayUtils.toPrimitive(SQLUtils.getIntArray(speedcubingServer.connection.select("playersdata", "clutch_blockskin,clutch_normal_ver,clutch_normal_hitdelay,clutch_inclined_ver,clutch_inclined_hitdelay", "id=" + member.user.id)));
-                String[] hits = SQLUtils.getStringArray(speedcubingServer.connection.select("playersdata", "clutch_normal_hits,clutch_inclined_hits", "id=" + member.user.id));
+                member.integerCache = ArrayUtils.toPrimitive(speedcubingServer.connection.select("clutch_blockskin,clutch_normal_ver,clutch_normal_hitdelay,clutch_inclined_ver,clutch_inclined_hitdelay").from("playersdata").where("id=" + member.user.id).getIntArray());
+                String[] hits = speedcubingServer.connection.select("clutch_normal_hits,clutch_inclined_hits").from("playersdata").where("id=" + member.user.id).getStringArray();
                 int size = hits[0].length();
                 for (int i = 0; i < hitcount; i++) {
                     member.KbCache[i] = i < size ? hits[0].charAt(i) - 48 : 0;
