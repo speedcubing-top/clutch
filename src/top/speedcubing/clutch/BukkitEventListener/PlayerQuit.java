@@ -6,7 +6,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 import top.speedcubing.clutch.Member;
-import top.speedcubing.server.speedcubingServer;
 
 public class PlayerQuit implements Listener {
     @EventHandler
@@ -29,7 +28,7 @@ public class PlayerQuit implements Listener {
                 str2.append(ints);
             }
             int[] ints = member.integerCache;
-            speedcubingServer.connection.update("playersdata",
+            member.user.dbUpdate(
                     "clutch_blockskin=" + ints[0] +
                             ",clutch_normal_ver=" + ints[1] +
                             ",clutch_normal_hitdelay=" + ints[2] +
@@ -37,7 +36,7 @@ public class PlayerQuit implements Listener {
                             ",clutch_inclined_hitdelay=" + ints[4] +
                             ",clutch_normal_hits='" + str + "'" +
                             ",clutch_inclined_hits='" + str2 + "'"
-                    , "id=" + member.user.id);
+            );
             Member.users.remove(member.user.id);
         }).start();
     }
