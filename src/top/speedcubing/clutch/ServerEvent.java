@@ -32,7 +32,7 @@ public class ServerEvent {
                         speedcubingServer.node(false, member.user.id, member.user.tcpPort);
                     }
                 } catch (Exception exception) {
-                    player.sendMessage(GlobalString.invalidInteger[member.user.lang]);
+                    member.user.sendLangMessage(GlobalString.invalidNumber);
                 }
             } else if (message.charAt(0) != '/') {
                 e.isCancelled = true;
@@ -54,7 +54,7 @@ public class ServerEvent {
     @LibEventHandler
     public void ToggleFlyEvent(ToggleFlyEvent e) {
         e.isCancelled = true;
-        e.player.sendMessage(GlobalString.OnlyInHub[Member.getMember(e.player).user.lang]);
+        Member.getMember(e.player).user.sendLangMessage(GlobalString.OnlyInHub);
     }
 
     @LibEventHandler

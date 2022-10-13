@@ -1,10 +1,5 @@
 package top.speedcubing.clutch.BukkitEventListener;
 
-import top.speedcubing.clutch.Core.InclinedClutch;
-import top.speedcubing.clutch.Core.NormalClutch;
-import top.speedcubing.clutch.List.ItemStackList;
-import top.speedcubing.clutch.List.StringList;
-import top.speedcubing.clutch.Member;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -17,6 +12,11 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import top.speedcubing.clutch.Core.InclinedClutch;
+import top.speedcubing.clutch.Core.NormalClutch;
+import top.speedcubing.clutch.List.ItemStackList;
+import top.speedcubing.clutch.List.StringList;
+import top.speedcubing.clutch.Member;
 import top.speedcubing.server.libs.GlobalString;
 import top.speedcubing.server.speedcubingServer;
 
@@ -66,7 +66,7 @@ public class InventoryClick implements Listener {
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%double%", Double.toString((x - 2) / 20D)), str[3]));
                                             stack.setItemMeta(meta);
                                         } else {
-                                            player.sendMessage(GlobalString.min[member.user.lang].replace("%int%", "1.0"));
+                                            member.user.langMessageSender(GlobalString.min).replace("%int%", "1.0").send();
                                             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
                                         }
                                     }
@@ -84,7 +84,7 @@ public class InventoryClick implements Listener {
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%double%", Double.toString((x + 2) / 20D)), str[3]));
                                             stack.setItemMeta(meta);
                                         } else {
-                                            player.sendMessage(GlobalString.max[member.user.lang].replace("%int%", "20.0"));
+                                            member.user.langMessageSender(GlobalString.max).replace("%int%", "20.0").send();
                                             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
                                         }
                                     }
@@ -106,7 +106,7 @@ public class InventoryClick implements Listener {
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%double%", Double.toString((x - 2) / 20D)), str[3]));
                                             stack.setItemMeta(meta);
                                         } else {
-                                            player.sendMessage(GlobalString.min[member.user.lang].replace("%int%", "1.0"));
+                                            member.user.langMessageSender(GlobalString.min).replace("%int%", "1.0").send();
                                             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
                                         }
                                     }
@@ -124,7 +124,7 @@ public class InventoryClick implements Listener {
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%double%", Double.toString((x + 2) / 20D)), str[3]));
                                             stack.setItemMeta(meta);
                                         } else {
-                                            player.sendMessage(GlobalString.max[member.user.lang].replace("%int%", "20.0"));
+                                            member.user.langMessageSender(GlobalString.max).replace("%int%", "20.0").send();
                                             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
                                         }
                                     }
@@ -132,8 +132,6 @@ public class InventoryClick implements Listener {
                                 }
                                 break;
                         }
-                    } else if (RawSlot == 13) {
-                        player.sendMessage("Currently Unavailable to use.");
                     } else if (RawSlot == 14) {
                         InventoryAction action = e.getAction();
                         switch (player.getWorld().getName()) {
@@ -151,7 +149,7 @@ public class InventoryClick implements Listener {
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%int%", Integer.toString(x - 1)), str[3], str[4], str[5]));
                                             stack.setItemMeta(meta);
                                         } else {
-                                            player.sendMessage(GlobalString.min[member.user.lang].replace("%int%", "1"));
+                                            member.user.langMessageSender(GlobalString.min).replace("%int%", "1.0").send();
                                             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
                                         }
                                     }
@@ -168,7 +166,7 @@ public class InventoryClick implements Listener {
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%int%", Integer.toString(x + 1)), str[3], str[4], str[5]));
                                             stack.setItemMeta(meta);
                                         } else {
-                                            player.sendMessage(GlobalString.max[member.user.lang].replace("%int%", "20"));
+                                            member.user.langMessageSender(GlobalString.max).replace("%int%", "20.0").send();
                                             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
                                         }
                                     }
@@ -189,7 +187,7 @@ public class InventoryClick implements Listener {
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%int%", Integer.toString(x - 1)), str[3], str[4], str[5]));
                                             stack.setItemMeta(meta);
                                         } else {
-                                            player.sendMessage(GlobalString.min[member.user.lang].replace("%int%", "1"));
+                                            member.user.langMessageSender(GlobalString.min).replace("%int%", "1.0").send();
                                             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
                                         }
                                     }
@@ -206,7 +204,7 @@ public class InventoryClick implements Listener {
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%int%", Integer.toString(x + 1)), str[3], str[4], str[5]));
                                             stack.setItemMeta(meta);
                                         } else {
-                                            player.sendMessage(GlobalString.max[member.user.lang].replace("%int%", "20"));
+                                            member.user.langMessageSender(GlobalString.max).replace("%int%", "20.0").send();
                                             player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
                                         }
                                     }
@@ -217,7 +215,7 @@ public class InventoryClick implements Listener {
                     } else if (RawSlot == 15) {
                         player.closeInventory();
                         Member member = Member.getMember(player);
-                        player.sendMessage(GlobalString.inputInteger[member.user.lang].replace("%min%", "0.000").replace("%max%", "5.000"));
+                        member.user.langMessageSender(GlobalString.inputInteger).replace("%min%", "0.000").replace("%max%", "5.000").send();
                         member.VeloSettings = true;
                         speedcubingServer.node(true, member.user.id, member.user.tcpPort);
                     } else if (RawSlot == 16) {
@@ -317,8 +315,7 @@ public class InventoryClick implements Listener {
                         }
                         player.playSound(player.getLocation(), Sound.CLICK, 1F, 1F);
                     }
-                } else
-                    player.sendMessage("Currently Unavailable to use.");
+                }
             }
         }
     }
