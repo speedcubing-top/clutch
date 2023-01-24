@@ -96,12 +96,12 @@ public class InventoryClick implements Listener {
                                     case PICKUP_ALL: {
                                         player.playSound(player.getLocation(), Sound.CLICK, 1F, 1F);
                                         Member member = Member.getMember(player);
-                                        int x = member.integerCache[2];
+                                        int x = member.Delay;
                                         if (x != 20) {
                                             ItemStack stack = inventory.getItem(RawSlot);
                                             ItemMeta meta = stack.getItemMeta();
                                             String[] str = StringList.LoreCoolDown[member.user.lang];
-                                            member.integerCache[2] -= 2;
+                                            member.Delay -= 2;
                                             member.reset();
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%double%", Double.toString((x - 2) / 20D)), str[3]));
                                             stack.setItemMeta(meta);
@@ -114,12 +114,12 @@ public class InventoryClick implements Listener {
                                     case PICKUP_HALF: {
                                         player.playSound(player.getLocation(), Sound.CLICK, 1F, 1F);
                                         Member member = Member.getMember(player);
-                                        int x = member.integerCache[2];
+                                        int x = member.Delay;
                                         if (x != 400) {
                                             ItemStack stack = inventory.getItem(RawSlot);
                                             ItemMeta meta = stack.getItemMeta();
                                             String[] str = StringList.LoreCoolDown[member.user.lang];
-                                            member.integerCache[2] += 2;
+                                            member.Delay += 2;
                                             member.reset();
                                             meta.setLore(Arrays.asList(str[1], str[2].replace("%double%", Double.toString((x + 2) / 20D)), str[3]));
                                             stack.setItemMeta(meta);
