@@ -54,8 +54,8 @@ public class InventoryClick implements Listener {
                             case "world":
                                 switch (action) {
                                     case PICKUP_ALL: {
-                                        player.playSound(player.getLocation(), Sound.CLICK, 1F, 1F);
                                         Member member = Member.getMember(player);
+                                        member.user.sound(Sound.CLICK);
                                         int x = member.Delay;
                                         if (x != 20) {
                                             ItemStack stack = inventory.getItem(RawSlot);
@@ -67,13 +67,13 @@ public class InventoryClick implements Listener {
                                             stack.setItemMeta(meta);
                                         } else {
                                             member.user.langMessageSender(GlobalString.min).replace("%int%", "1.0").send();
-                                            player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
+                                            member.user.sound(Sound.NOTE_PLING);
                                         }
                                     }
                                     break;
                                     case PICKUP_HALF: {
-                                        player.playSound(player.getLocation(), Sound.CLICK, 1F, 1F);
                                         Member member = Member.getMember(player);
+                                        member.user.sound(Sound.CLICK);
                                         int x = member.Delay;
                                         if (x != 400) {
                                             ItemStack stack = inventory.getItem(RawSlot);
@@ -85,7 +85,7 @@ public class InventoryClick implements Listener {
                                             stack.setItemMeta(meta);
                                         } else {
                                             member.user.langMessageSender(GlobalString.max).replace("%int%", "20.0").send();
-                                            player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
+                                            member.user.sound(Sound.NOTE_PLING);
                                         }
                                     }
                                     break;
@@ -94,8 +94,8 @@ public class InventoryClick implements Listener {
                             case "inclined":
                                 switch (action) {
                                     case PICKUP_ALL: {
-                                        player.playSound(player.getLocation(), Sound.CLICK, 1F, 1F);
                                         Member member = Member.getMember(player);
+                                        member.user.sound(Sound.CLICK);
                                         int x = member.Delay;
                                         if (x != 20) {
                                             ItemStack stack = inventory.getItem(RawSlot);
@@ -107,13 +107,13 @@ public class InventoryClick implements Listener {
                                             stack.setItemMeta(meta);
                                         } else {
                                             member.user.langMessageSender(GlobalString.min).replace("%int%", "1.0").send();
-                                            player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
+                                            member.user.sound(Sound.NOTE_PLING);
                                         }
                                     }
                                     break;
                                     case PICKUP_HALF: {
-                                        player.playSound(player.getLocation(), Sound.CLICK, 1F, 1F);
                                         Member member = Member.getMember(player);
+                                        member.user.sound(Sound.CLICK);
                                         int x = member.Delay;
                                         if (x != 400) {
                                             ItemStack stack = inventory.getItem(RawSlot);
@@ -125,7 +125,7 @@ public class InventoryClick implements Listener {
                                             stack.setItemMeta(meta);
                                         } else {
                                             member.user.langMessageSender(GlobalString.max).replace("%int%", "20.0").send();
-                                            player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
+                                            member.user.sound(Sound.NOTE_PLING);
                                         }
                                     }
                                     break;
@@ -138,8 +138,8 @@ public class InventoryClick implements Listener {
                             case "world":
                                 switch (action) {
                                     case PICKUP_ALL: {
-                                        player.playSound(player.getLocation(), Sound.CLICK, 1F, 1F);
                                         Member member = Member.getMember(player);
+                                        member.user.sound(Sound.CLICK);
                                         int x = member.integerCache[2];
                                         if (x != 1) {
                                             member.integerCache[2] -= 1;
@@ -150,13 +150,13 @@ public class InventoryClick implements Listener {
                                             stack.setItemMeta(meta);
                                         } else {
                                             member.user.langMessageSender(GlobalString.min).replace("%int%", "1.0").send();
-                                            player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
+                                            member.user.sound(Sound.NOTE_PLING);
                                         }
                                     }
                                     break;
                                     case PICKUP_HALF: {
-                                        player.playSound(player.getLocation(), Sound.CLICK, 1F, 1F);
                                         Member member = Member.getMember(player);
+                                        member.user.sound(Sound.CLICK);
                                         int x = member.integerCache[2];
                                         if (x != 20) {
                                             member.integerCache[2] += 1;
@@ -167,7 +167,7 @@ public class InventoryClick implements Listener {
                                             stack.setItemMeta(meta);
                                         } else {
                                             member.user.langMessageSender(GlobalString.max).replace("%int%", "20.0").send();
-                                            player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
+                                            member.user.sound(Sound.NOTE_PLING);
                                         }
                                     }
                                     break;
@@ -176,8 +176,8 @@ public class InventoryClick implements Listener {
                             case "inclined":
                                 switch (action) {
                                     case PICKUP_ALL: {
-                                        player.playSound(player.getLocation(), Sound.CLICK, 1F, 1F);
                                         Member member = Member.getMember(player);
+                                        member.user.sound(Sound.CLICK);
                                         int x = member.integerCache[4];
                                         if (x != 1) {
                                             member.integerCache[4] -= 1;
@@ -188,13 +188,13 @@ public class InventoryClick implements Listener {
                                             stack.setItemMeta(meta);
                                         } else {
                                             member.user.langMessageSender(GlobalString.min).replace("%int%", "1.0").send();
-                                            player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
+                                            member.user.sound(Sound.NOTE_PLING);
                                         }
                                     }
                                     break;
                                     case PICKUP_HALF: {
-                                        player.playSound(player.getLocation(), Sound.CLICK, 1F, 1F);
                                         Member member = Member.getMember(player);
+                                        member.user.sound(Sound.CLICK);
                                         int x = member.integerCache[4];
                                         if (x != 20) {
                                             member.integerCache[4] += 1;
@@ -205,7 +205,7 @@ public class InventoryClick implements Listener {
                                             stack.setItemMeta(meta);
                                         } else {
                                             member.user.langMessageSender(GlobalString.max).replace("%int%", "20.0").send();
-                                            player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
+                                            member.user.sound(Sound.NOTE_PLING);
                                         }
                                     }
                                     break;
@@ -224,7 +224,7 @@ public class InventoryClick implements Listener {
                         ItemStack stack = inventory.getItem(RawSlot);
                         ItemMeta meta = stack.getItemMeta();
                         meta.setLore(Arrays.asList(" ", member.display ? "click to turn off" : "click to turn on"));
-                        player.playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
+                        member.user.sound(Sound.NOTE_PLING);
                         stack.setItemMeta(meta);
                     }
                 } else if (holder == NormalClutch.KB) {
@@ -269,7 +269,7 @@ public class InventoryClick implements Listener {
                             }
                             inventory.getItem(RawSlot).setAmount(RawSlot + 1);
                         }
-                        player.playSound(player.getLocation(), Sound.CLICK, 1F, 1F);
+                        member.user.sound(Sound.CLICK);
                     }
                 } else if (holder == InclinedClutch.KB) {
                     e.setCancelled(true);
@@ -313,7 +313,7 @@ public class InventoryClick implements Listener {
                             }
                             inventory.getItem(RawSlot).setAmount(RawSlot + 1);
                         }
-                        player.playSound(player.getLocation(), Sound.CLICK, 1F, 1F);
+                        member.user.sound(Sound.CLICK);
                     }
                 }
             }
