@@ -1,6 +1,7 @@
 package top.speedcubing.clutch.List;
 
-import top.speedcubing.server.config;
+import top.speedcubing.server.lang.LangMessage;
+import top.speedcubing.server.utils.config;
 
 public class StringList {
 
@@ -24,13 +25,13 @@ public class StringList {
             {"§3Clutch", "§6" + config.SERVERIP, "§6", "§aDistance:", "§8»§b ", "§3", "§aHits:", "§1§8»§e ", "§0"}
     };
 
-    public static final String[] settingstitle = {"§cSettings", "§cSettings", "§cSettings", "§cSettings"};
+    public static final LangMessage settingstitle = new LangMessage("§cSettings", "§cSettings", "§cSettings", "§cSettings");
 
-    public static final String[] blockedit = {"§bBlock Skin", "§bBlock Skin", "§bBlock Skin", "§bBlock Skin"};
+    public static final LangMessage blockedit = new LangMessage("§bBlock Skin", "§bBlock Skin", "§bBlock Skin", "§bBlock Skin");
 
-    public static final String[] kb = {"§bHits", "§bHits", "§bHits", "§bHits"};
+    public static final LangMessage kb = new LangMessage("§bHits", "§bHits", "§bHits", "§bHits");
 
-    public static final String[] kbgui = {"§bHits", "§bHits", "§bHits", "§bHits"};
+    public static final LangMessage kbgui = new LangMessage("§bHits", "§bHits", "§bHits", "§bHits");
 
     public static String[][] currentVelo = {
             {"§bVertical Kb Multiplier", "", "§dCurrent:§e %kb%", "", "§cdefault: 1.000"},

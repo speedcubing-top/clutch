@@ -5,12 +5,12 @@ import net.minecraft.server.v1_8_R3.PacketPlayInChat;
 import org.bukkit.entity.Player;
 import top.speedcubing.lib.bukkit.event.PlayInEvent;
 import top.speedcubing.lib.eventbus.LibEventHandler;
-import top.speedcubing.server.config;
 import top.speedcubing.server.events.ConfigReloadEvent;
 import top.speedcubing.server.events.player.ToggleFlyEvent;
-import top.speedcubing.server.libs.GlobalString;
+import top.speedcubing.server.lang.GlobalString;
 import top.speedcubing.server.share.Chat;
 import top.speedcubing.server.speedcubingServer;
+import top.speedcubing.server.utils.config;
 
 public class ServerEvent {
     @LibEventHandler
@@ -24,7 +24,7 @@ public class ServerEvent {
                 try {
                     int x = (int) (Double.parseDouble(message) * 1000);
                     if (x < 0 || x > 5000)
-                        player.sendMessage(GlobalString.integerOutOfRange[member.user.lang].replace("%min%", "0.000").replace("%max%", "5.000"));
+                        member.user.sendLangMessage(GlobalString.integerOutOfRange, "0.000", "5.000");
                     else {
                         member.integerCache[player.getWorld().getName().equals("world") ? 1 : 3] = x;
                         member.VeloSettings = false;

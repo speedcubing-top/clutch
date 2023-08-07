@@ -1,14 +1,12 @@
 package top.speedcubing.clutch;
 
 import net.minecraft.server.v1_8_R3.MinecraftServer;
-import org.bukkit.Bukkit;
-import org.bukkit.Difficulty;
-import org.bukkit.WorldCreator;
+import org.bukkit.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import top.speedcubing.clutch.BukkitEventListener.*;
 import top.speedcubing.clutch.List.ItemStackList;
 import top.speedcubing.lib.eventbus.LibEventManager;
-import top.speedcubing.server.config;
+import top.speedcubing.server.utils.config;
 
 public class Clutch extends JavaPlugin {
 
