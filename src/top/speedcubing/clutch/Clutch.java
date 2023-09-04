@@ -5,7 +5,7 @@ import org.bukkit.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import top.speedcubing.clutch.BukkitEventListener.*;
 import top.speedcubing.clutch.List.ItemStackList;
-import top.speedcubing.lib.eventbus.LibEventManager;
+import top.speedcubing.lib.eventbus.CubingEventManager;
 import top.speedcubing.server.utils.config;
 
 public class Clutch extends JavaPlugin {
@@ -30,7 +30,7 @@ public class Clutch extends JavaPlugin {
         Bukkit.getWorld("inclined").setDifficulty(Difficulty.PEACEFUL);
         Bukkit.getWorld("inclined").setTime(6000);
         new ItemStackList().Load();
-        LibEventManager.registerListeners(new ServerEvent());
+        CubingEventManager.registerListeners(new ServerEvent());
         config.event.call();
     }
 }

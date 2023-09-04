@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.server.v1_8_R3.PacketPlayInChat;
 import org.bukkit.entity.Player;
 import top.speedcubing.lib.bukkit.event.PlayInEvent;
-import top.speedcubing.lib.eventbus.LibEventHandler;
+import top.speedcubing.lib.eventbus.CubingEventHandler;
 import top.speedcubing.server.events.ConfigReloadEvent;
 import top.speedcubing.server.events.player.ToggleFlyEvent;
 import top.speedcubing.server.lang.GlobalString;
@@ -13,7 +13,7 @@ import top.speedcubing.server.speedcubingServer;
 import top.speedcubing.server.utils.config;
 
 public class ServerEvent {
-    @LibEventHandler
+    @CubingEventHandler
     public void PlayInEvent(PlayInEvent e) {
         if (e.packet instanceof PacketPlayInChat) {
             Player player = e.player;
@@ -41,13 +41,13 @@ public class ServerEvent {
         }
     }
 
-    @LibEventHandler
+    @CubingEventHandler
     public void ToggleFlyEvent(ToggleFlyEvent e) {
         e.isCancelled = true;
         Member.getMember(e.player).user.sendLangMessage(GlobalString.OnlyInHub);
     }
 
-    @LibEventHandler
+    @CubingEventHandler
     public void ConfigReloadEvent(ConfigReloadEvent e) {
         JsonObject object = config.config.getAsJsonObject("clutchkb");
         Clutch.kb = new double[]{
