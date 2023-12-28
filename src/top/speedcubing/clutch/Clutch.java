@@ -24,11 +24,16 @@ public class Clutch extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerDropItem(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerInteract(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerSpawnLocation(), this);
+
         Bukkit.getWorld("world").setDifficulty(Difficulty.PEACEFUL);
         Bukkit.getWorld("world").setTime(6000);
+        Bukkit.getWorld("world").setAutoSave(false);
+
         getServer().createWorld(new WorldCreator("inclined"));
         Bukkit.getWorld("inclined").setDifficulty(Difficulty.PEACEFUL);
         Bukkit.getWorld("inclined").setTime(6000);
+        Bukkit.getWorld("inclined").setAutoSave(false);
+
         new ItemStackList().Load();
         CubingEventManager.registerListeners(new ServerEvent());
         config.event.call();
