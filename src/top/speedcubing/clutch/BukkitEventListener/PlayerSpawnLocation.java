@@ -5,10 +5,11 @@ import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
+import top.speedcubing.clutch.Core.NormalClutch;
 
 public class PlayerSpawnLocation implements Listener {
     @EventHandler
     public void PlayerSpawnLocationEvent(PlayerSpawnLocationEvent e) {
-        e.setSpawnLocation(new Location(Bukkit.getWorld("normal"), 0.5, 1000, 0.5, 0, 0));
+        e.setSpawnLocation(new Location(Bukkit.getWorld(NormalClutch.map), 0.5, 1000, 0.5, 0, 0));
     }
 }
