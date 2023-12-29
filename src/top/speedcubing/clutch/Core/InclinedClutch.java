@@ -28,6 +28,7 @@ public class InclinedClutch {
     public static final InventoryHolder KB = () -> null;
     public static final Set<Integer> rooms = new HashSet<>();
 
+    public static final String map = "map_clutch_inclined";
     public static void Join(Player player) {
         int room = -1;
         for (int h = 1; h < Integer.MAX_VALUE; h++) {
@@ -41,9 +42,9 @@ public class InclinedClutch {
         Bukkit.getScheduler().cancelTask(member.CountDownTask);
         member.VeloSettings = false;
         member.Length = -1;
-        member.clear(Bukkit.getWorld("world"), member.PlayerCoord, true);
+        member.clear(Bukkit.getWorld(NormalClutch.map), member.PlayerCoord, true);
         int coord = 5 * (room * (room % 2 == 0 ? -1 : 1) + room % 2);
-        player.teleport(new Location(Bukkit.getWorld("inclined"), coord + 0.5, 100, coord + 0.5, 45, 0));
+        player.teleport(new Location(Bukkit.getWorld(map), coord + 0.5, 100, coord + 0.5, 45, 0));
         WorldUtils.cloneArea(1, 99, -1, -1, 98, 1, coord + 1, 99, coord - 1, player.getWorld());
         member.reset3(player, coord);
         member.CountDownTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(Clutch.getPlugin(Clutch.class), new Runnable() {

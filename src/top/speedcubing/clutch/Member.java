@@ -47,11 +47,11 @@ public class Member {
     public void clear(World world, int coord, boolean quit) {
         if (quit)
             switch (world.getName()) {
-                case "world":
+                case NormalClutch.map:
                     NormalClutch.rooms.remove(NormalClutch.coordToRoom(coord));
                     WorldUtils.fillAir(0, 98, -1 + coord, -2, 99, 1 + coord, world);
                     break;
-                case "inclined":
+                case InclinedClutch.map:
                     InclinedClutch.rooms.remove(InclinedClutch.coordToRoom(coord));
                     WorldUtils.fillAir(coord - 1, 99, coord + 1, coord + 1, 98, coord - 1, world);
                     break;

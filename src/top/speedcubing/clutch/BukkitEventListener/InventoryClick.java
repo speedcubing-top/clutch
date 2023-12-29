@@ -30,7 +30,7 @@ public class InventoryClick implements Listener {
                     e.setCancelled(true);
                     if (RawSlot == 10) {
                         Member member = Member.getMember(player);
-                        boolean normal = player.getWorld().getName().equals("world");
+                        boolean normal = player.getWorld().getName().equals(NormalClutch.map);
                         Inventory inv = Bukkit.createInventory(normal ? NormalClutch.KB : InclinedClutch.KB, NormalClutch.hitcount, StringList.kbgui.get(member.user.lang));
                         int length = normal ? NormalClutch.hitcount : InclinedClutch.hitcount;
                         int[] settings = normal ? member.KbCache : member.KbCache2;
@@ -43,7 +43,7 @@ public class InventoryClick implements Listener {
                     } else if (RawSlot == 12) {
                         InventoryAction action = e.getAction();
                         switch (player.getWorld().getName()) {
-                            case "world":
+                            case NormalClutch.map:
                                 switch (action) {
                                     case PICKUP_ALL: {
                                         Member member = Member.getMember(player);
@@ -127,7 +127,7 @@ public class InventoryClick implements Listener {
                     } else if (RawSlot == 14) {
                         InventoryAction action = e.getAction();
                         switch (player.getWorld().getName()) {
-                            case "world":
+                            case NormalClutch.map:
                                 switch (action) {
                                     case PICKUP_ALL: {
                                         Member member = Member.getMember(player);
@@ -165,7 +165,7 @@ public class InventoryClick implements Listener {
                                     break;
                                 }
                                 break;
-                            case "inclined":
+                            case InclinedClutch.map:
                                 switch (action) {
                                     case PICKUP_ALL: {
                                         Member member = Member.getMember(player);

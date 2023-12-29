@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import top.speedcubing.clutch.Clutch;
+import top.speedcubing.clutch.Core.*;
 import top.speedcubing.clutch.List.StringList;
 import top.speedcubing.clutch.Member;
 import top.speedcubing.lib.bukkit.SideBar;
@@ -21,7 +22,7 @@ public class PlayerMove implements Listener {
         if (player.getGameMode() != GameMode.CREATIVE) {
             World world = player.getWorld();
             switch (world.getName()) {
-                case "world": {
+                case NormalClutch.map: {
                     Member member = Member.getMember(player);
                     Location to = e.getTo();
                     if (to.getY() <= 96 || Math.abs(to.getZ() - member.PlayerCoord - 0.5) > 5.5) {
@@ -35,7 +36,7 @@ public class PlayerMove implements Listener {
                     }
                 }
                 break;
-                case "inclined":
+                case InclinedClutch.map:
                     Member member = Member.getMember(player);
                     Location to = e.getTo();
                     if (to.getY() <= 96 || Math.abs(to.getX() + to.getZ() - 2 * member.PlayerCoord - 1) > 9.5) {

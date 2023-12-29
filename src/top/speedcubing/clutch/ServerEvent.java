@@ -26,7 +26,7 @@ public class ServerEvent {
                     if (x < 0 || x > 5000)
                         member.user.sendLangMessage(GlobalString.integerOutOfRange, "0.000", "5.000");
                     else {
-                        member.integerCache[player.getWorld().getName().equals("world") ? 1 : 3] = x;
+                        member.integerCache[player.getWorld().getName().equals("normal") ? 1 : 3] = x;
                         member.VeloSettings = false;
                         speedcubingServer.node(false, member.user.id, member.user.tcpPort);
                     }

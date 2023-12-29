@@ -1,5 +1,6 @@
 package top.speedcubing.clutch.BukkitEventListener;
 
+import top.speedcubing.clutch.Core.*;
 import top.speedcubing.clutch.List.ItemStackList;
 import top.speedcubing.clutch.List.StringList;
 import net.minecraft.server.v1_8_R3.BlockPosition;
@@ -18,7 +19,7 @@ public class BlockPlace implements Listener {
         Player player = e.getPlayer();
         if (player.getGameMode() != GameMode.CREATIVE) {
             switch (player.getWorld().getName()) {
-                case "world": {
+                case NormalClutch.map: {
                     Block block = e.getBlock();
                     int x = block.getX();
                     Member member = Member.getMember(player);
@@ -38,7 +39,7 @@ public class BlockPlace implements Listener {
                     }
                 }
                 break;
-                case "inclined": {
+                case InclinedClutch.map: {
                     Block block = e.getBlock();
                     int z = block.getZ();
                     int x = block.getX();

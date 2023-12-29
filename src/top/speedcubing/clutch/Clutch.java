@@ -4,9 +4,10 @@ import net.minecraft.server.v1_8_R3.MinecraftServer;
 import org.bukkit.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import top.speedcubing.clutch.BukkitEventListener.*;
+import top.speedcubing.clutch.Core.*;
 import top.speedcubing.clutch.List.ItemStackList;
 import top.speedcubing.lib.eventbus.CubingEventManager;
-import top.speedcubing.server.utils.config;
+import top.speedcubing.server.utils.*;
 
 public class Clutch extends JavaPlugin {
 
@@ -25,17 +26,16 @@ public class Clutch extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerInteract(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerSpawnLocation(), this);
 
-        Bukkit.getWorld("world").setDifficulty(Difficulty.PEACEFUL);
-        Bukkit.getWorld("world").setTime(6000);
-        Bukkit.getWorld("world").setAutoSave(false);
-
-        getServer().createWorld(new WorldCreator("inclined"));
-        Bukkit.getWorld("inclined").setDifficulty(Difficulty.PEACEFUL);
-        Bukkit.getWorld("inclined").setTime(6000);
-        Bukkit.getWorld("inclined").setAutoSave(false);
-
         new ItemStackList().Load();
         CubingEventManager.registerListeners(new ServerEvent());
         config.event.call();
+
+        try {
+            MapManager.install("clutch_normal_gamz", NormalClutch.map, Difficulty.PEACEFUL, 6000, false);
+            MapManager.install("clutch_inclined_cubing", InclinedClutch.map, Difficulty.PEACEFUL, 6000, false);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Bukkit.getServer().shutdown();
+        }
     }
 }

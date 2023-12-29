@@ -29,6 +29,7 @@ public class NormalClutch {
     public static final InventoryHolder KB = () -> null;
     public static final Set<Integer> rooms = new HashSet<>();
 
+    public static final String map = "map_clutch_normal";
     public static void Join(Player player, boolean firstjoin) {
         int room = -1;
         for (int h = 1; h < Integer.MAX_VALUE; h++) {
@@ -48,10 +49,10 @@ public class NormalClutch {
             Bukkit.getScheduler().cancelTask(member.CountDownTask);
             member.VeloSettings = false;
             member.Length2 = null;
-            member.clear(Bukkit.getWorld("inclined"), member.PlayerCoord, true);
+            member.clear(Bukkit.getWorld(InclinedClutch.map), member.PlayerCoord, true);
         }
         int coord = 6 * (room * (room % 2 == 0 ? -1 : 1) + room % 2);
-        player.teleport(new Location(Bukkit.getWorld("world"), 0.5, 100, coord + 0.5, 90, 0));
+        player.teleport(new Location(Bukkit.getWorld(map), 0.5, 100, coord + 0.5, 90, 0));
         WorldUtils.cloneArea(-2, 99, 1, 0, 98, -1, -2, 99, 1 + coord, player.getWorld());
         member.reset3(player, coord);
         member.CountDownTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(Clutch.getPlugin(Clutch.class), new Runnable() {
