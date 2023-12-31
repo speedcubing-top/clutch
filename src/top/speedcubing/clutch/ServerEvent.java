@@ -3,6 +3,7 @@ package top.speedcubing.clutch;
 import com.google.gson.JsonObject;
 import net.minecraft.server.v1_8_R3.PacketPlayInChat;
 import org.bukkit.entity.Player;
+import top.speedcubing.clutch.Core.NormalClutch;
 import top.speedcubing.lib.bukkit.event.PlayInEvent;
 import top.speedcubing.lib.eventbus.CubingEventHandler;
 import top.speedcubing.server.events.ConfigReloadEvent;
@@ -26,7 +27,7 @@ public class ServerEvent {
                     if (x < 0 || x > 5000)
                         member.user.sendLangMessage(GlobalString.integerOutOfRange, "0.000", "5.000");
                     else {
-                        member.integerCache[player.getWorld().getName().equals("normal") ? 1 : 3] = x;
+                        member.integerCache[player.getWorld().getName().equals(NormalClutch.map) ? 1 : 3] = x;
                         member.VeloSettings = false;
                         speedcubingServer.node(false, member.user.id, member.user.tcpPort);
                     }

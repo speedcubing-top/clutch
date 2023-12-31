@@ -83,7 +83,7 @@ public class InventoryClick implements Listener {
                                     break;
                                 }
                                 break;
-                            case "inclined":
+                            case InclinedClutch.map:
                                 switch (action) {
                                     case PICKUP_ALL: {
                                         Member member = Member.getMember(player);

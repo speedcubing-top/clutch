@@ -22,7 +22,7 @@ public class PlayerInteract implements Listener {
                 String[] cooldown = StringList.LoreCoolDown[member.user.lang];
                 String[] hit = StringList.HitDelaylore[member.user.lang];
                 String[] velo = StringList.currentVelo[member.user.lang];
-                boolean normal = player.getWorld().getName().equals("normal");
+                boolean normal = player.getWorld().getName().equals(NormalClutch.map);
                 inventory.setItem(12, new ItemBuilder(Material.WATCH).name(cooldown[0]).lore(cooldown[1], cooldown[2].replace("%double%", Double.toString(member.Delay / 20D)), cooldown[3]).build());
                 inventory.setItem(13, new ItemBuilder(Material.SANDSTONE).name(StringList.blockedit.get(member.user.lang)).build());
                 inventory.setItem(10, new ItemBuilder(Material.STICK).name(StringList.kb.get(member.user.lang)).glow().build());
@@ -33,7 +33,7 @@ public class PlayerInteract implements Listener {
             }
             break;
             case COMPASS: {
-                if (player.getWorld().getName().equals("normal"))
+                if (player.getWorld().getName().equals(NormalClutch.map))
                     InclinedClutch.Join(player);
                 else NormalClutch.Join(player, false);
             }
