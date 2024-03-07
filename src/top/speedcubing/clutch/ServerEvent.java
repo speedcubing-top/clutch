@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.server.v1_8_R3.PacketPlayInChat;
 import org.bukkit.entity.Player;
 import top.speedcubing.clutch.Core.NormalClutch;
-import top.speedcubing.lib.bukkit.event.PlayInEvent;
+import top.speedcubing.lib.events.packet.PlayInEvent;
 import top.speedcubing.lib.eventbus.CubingEventHandler;
 import top.speedcubing.server.events.ConfigReloadEvent;
 import top.speedcubing.server.events.player.ToggleFlyEvent;
