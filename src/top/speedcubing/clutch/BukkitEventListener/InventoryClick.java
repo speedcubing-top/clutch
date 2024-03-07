@@ -1,18 +1,25 @@
 package top.speedcubing.clutch.BukkitEventListener;
 
-import org.bukkit.*;
+import java.util.Arrays;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.event.*;
-import org.bukkit.event.inventory.*;
-import org.bukkit.inventory.*;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryAction;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import top.speedcubing.clutch.Core.*;
-import top.speedcubing.clutch.List.*;
+import top.speedcubing.clutch.Core.InclinedClutch;
+import top.speedcubing.clutch.Core.NormalClutch;
+import top.speedcubing.clutch.List.ItemStackList;
+import top.speedcubing.clutch.List.StringList;
 import top.speedcubing.clutch.Member;
 import top.speedcubing.server.lang.GlobalString;
 import top.speedcubing.server.speedcubingServer;
-
-import java.util.Arrays;
 
 public class InventoryClick implements Listener {
     @EventHandler

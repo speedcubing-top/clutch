@@ -1,5 +1,7 @@
 package top.speedcubing.clutch.Core;
 
+import java.util.HashSet;
+import java.util.Set;
 import net.minecraft.server.v1_8_R3.ChatComponentText;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import net.minecraft.server.v1_8_R3.PlayerConnection;
@@ -19,9 +21,6 @@ import top.speedcubing.clutch.Member;
 import top.speedcubing.lib.bukkit.PlayerUtils;
 import top.speedcubing.lib.bukkit.SideBar;
 import top.speedcubing.lib.bukkit.WorldUtils;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class InclinedClutch {
     public static final int hitcount = 36;

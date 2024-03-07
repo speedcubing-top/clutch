@@ -1,15 +1,19 @@
 package top.speedcubing.clutch;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import net.minecraft.server.v1_8_R3.BlockPosition;
-import org.bukkit.*;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import top.speedcubing.clutch.Core.*;
+import top.speedcubing.clutch.Core.InclinedClutch;
+import top.speedcubing.clutch.Core.NormalClutch;
 import top.speedcubing.clutch.List.ItemStackList;
 import top.speedcubing.lib.bukkit.WorldUtils;
 import top.speedcubing.server.player.User;
-
-import java.util.*;
 
 public class Member {
     public static Map<Integer, Member> users = new HashMap<>();
