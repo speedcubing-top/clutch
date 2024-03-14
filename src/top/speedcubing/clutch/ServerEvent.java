@@ -29,7 +29,7 @@ public class ServerEvent {
                     else {
                         member.integerCache[player.getWorld().getName().equals(NormalClutch.map) ? 1 : 3] = x;
                         member.VeloSettings = false;
-                        speedcubingServer.node(false, member.user.id, member.user.tcpPort);
+                        member.user.setInput(false);
                     }
                 } catch (Exception exception) {
                     member.user.sendLangMessage(GlobalString.invalidNumber);

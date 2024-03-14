@@ -216,7 +216,7 @@ public class InventoryClick implements Listener {
                         Member member = Member.getMember(player);
                         member.user.sendLangMessage(GlobalString.inputInteger, "0.000", "5.000");
                         member.VeloSettings = true;
-                        speedcubingServer.node(true, member.user.id, member.user.tcpPort);
+                        member.user.setInput(true);
                     } else if (RawSlot == 16) {
                         Member member = Member.getMember(player);
                         member.display = !member.display;
