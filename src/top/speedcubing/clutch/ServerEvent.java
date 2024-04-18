@@ -7,6 +7,7 @@ import top.speedcubing.clutch.Core.NormalClutch;
 import top.speedcubing.lib.eventbus.CubingEventHandler;
 import top.speedcubing.lib.events.packet.PlayInEvent;
 import top.speedcubing.server.events.ConfigReloadEvent;
+import top.speedcubing.server.events.player.NickEvent;
 import top.speedcubing.server.events.player.ToggleFlyEvent;
 import top.speedcubing.server.lang.GlobalString;
 import top.speedcubing.server.share.Chat;
@@ -39,6 +40,12 @@ public class ServerEvent {
                 Chat.globalChat(player.getWorld().getPlayers(), player, GlobalString.MessageFormat, message, member.user.getPrefixName(false), member.user.getFormat(false).getChatColor());
             }
         }
+    }
+
+    @CubingEventHandler
+    public void NickEvent(NickEvent e) {
+        e.isCancelled = true;
+        Member.getMember(e.player).user.sendLangMessage(GlobalString.OnlyInHub);
     }
 
     @CubingEventHandler
