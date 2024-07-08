@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 import top.speedcubing.clutch.Member;
+import top.speedcubing.server.speedcubingServer;
 
 public class PlayerQuit implements Listener {
     @EventHandler
@@ -14,7 +15,7 @@ public class PlayerQuit implements Listener {
         Member member = Member.getMember(player);
         member.clear(player.getWorld(), member.PlayerCoord, true);
         Bukkit.getScheduler().cancelTask(member.CountDownTask);
-        new Thread(() -> {
+        speedcubingServer.scheduledPool.execute(() -> {
             StringBuilder str = new StringBuilder();
             for (int ints : member.KbCache) {
                 if (ints == 0)
@@ -38,6 +39,6 @@ public class PlayerQuit implements Listener {
                             ",clutch_inclined_hits='" + str2 + "'"
             );
             Member.users.remove(member.user.id);
-        }).start();
+        });
     }
 }

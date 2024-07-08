@@ -36,9 +36,9 @@ public class Member {
     public int CountDownTask;
     public int[] integerCache;
     public int Length;
-    public int[] KbCache = new int[NormalClutch.hitcount];
+    public int[] KbCache = new int[NormalClutch.actualHitCount];
     public int[] Length2 = new int[2];
-    public int[] KbCache2 = new int[InclinedClutch.hitcount];
+    public int[] KbCache2 = new int[NormalClutch.actualHitCount];
 
     public boolean VeloSettings;
     public boolean display;

@@ -22,9 +22,12 @@ import top.speedcubing.clutch.Member;
 import top.speedcubing.lib.bukkit.PlayerUtils;
 import top.speedcubing.lib.bukkit.SideBar;
 import top.speedcubing.lib.bukkit.WorldUtils;
+import top.speedcubing.server.speedcubingServer;
 
 public class NormalClutch {
     public static final int hitcount = 36;
+    public static final int hitPage = 2;
+    public static final int actualHitCount = hitcount * hitPage;
     public static final InventoryHolder KB = () -> null;
     public static final Set<Integer> rooms = new HashSet<>();
 
@@ -115,16 +118,16 @@ public class NormalClutch {
                 .changeableLine(sidebar[7] + 0, 1)
                 .staticLine(sidebar[8], 0).create();
         member.Length = 0;
-        new Thread(() -> {
+        speedcubingServer.scheduledPool.execute(() -> {
             if (firstjoin) {
                 member.integerCache = ArrayUtils.toPrimitive(member.user.dbSelect("clutch_blockskin,clutch_normal_ver,clutch_normal_hitdelay,clutch_inclined_ver,clutch_inclined_hitdelay").getIntArray());
                 String[] hits = member.user.dbSelect("clutch_normal_hits,clutch_inclined_hits").getStringArray();
                 int size = hits[0].length();
-                for (int i = 0; i < hitcount; i++) {
+                for (int i = 0; i < actualHitCount; i++) {
                     member.KbCache[i] = i < size ? hits[0].charAt(i) - 48 : 0;
                 }
                 int size2 = hits[1].length();
-                for (int i = 0; i < hitcount; i++) {
+                for (int i = 0; i < actualHitCount; i++) {
                     member.KbCache2[i] = i < size2 ? hits[1].charAt(i) - 48 : 0;
                 }
             }
@@ -132,7 +135,7 @@ public class NormalClutch {
             inventory.setItem(0, ItemStackList.Blocks);
             inventory.setItem(8, ItemStackList.itemstacks[member.user.lang]);
             inventory.setItem(7, ItemStackList.join[member.user.lang][1]);
-        }).start();
+        });
     }
 
     public static int coordToRoom(int z) {

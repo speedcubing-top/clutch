@@ -4,19 +4,47 @@ import com.google.gson.JsonObject;
 import net.minecraft.server.v1_8_R3.PacketPlayInChat;
 import org.bukkit.entity.Player;
 import top.speedcubing.clutch.Core.NormalClutch;
-import top.speedcubing.lib.eventbus.CubingEventHandler;
+import top.speedcubing.common.configuration.ServerConfig;
+import top.speedcubing.common.events.ConfigReloadEvent;
 import top.speedcubing.lib.bukkit.events.packet.PlayInEvent;
-import top.speedcubing.server.events.ConfigReloadEvent;
+import top.speedcubing.lib.eventbus.CubingEventHandler;
 import top.speedcubing.server.events.player.NickEvent;
 import top.speedcubing.server.events.player.SkinEvent;
 import top.speedcubing.server.events.player.ToggleFlyEvent;
 import top.speedcubing.server.lang.GlobalString;
 import top.speedcubing.server.share.Chat;
-import top.speedcubing.server.utils.config;
 
 public class ServerEvent {
+
     @CubingEventHandler
-    public void PlayInEvent(PlayInEvent e) {
+    public void configReloadEvent(ConfigReloadEvent e) {
+        JsonObject object = ServerConfig.config.getAsJsonObject("clutchkb");
+        Clutch.kb = new double[]{
+                object.get("low").getAsJsonArray().get(0).getAsDouble(),
+                object.get("low").getAsJsonArray().get(1).getAsDouble(),
+                object.get("mid").getAsJsonArray().get(0).getAsDouble(),
+                object.get("mid").getAsJsonArray().get(1).getAsDouble(),
+                object.get("diff").getAsJsonArray().get(0).getAsDouble(),
+                object.get("diff").getAsJsonArray().get(1).getAsDouble(),
+                object.get("high").getAsJsonArray().get(0).getAsDouble(),
+                object.get("high").getAsJsonArray().get(1).getAsDouble(),
+                object.get("extreme").getAsJsonArray().get(0).getAsDouble(),
+                object.get("extreme").getAsJsonArray().get(1).getAsDouble(),
+                object.get("low").getAsJsonArray().get(2).getAsDouble(),
+                object.get("low").getAsJsonArray().get(3).getAsDouble(),
+                object.get("mid").getAsJsonArray().get(2).getAsDouble(),
+                object.get("mid").getAsJsonArray().get(3).getAsDouble(),
+                object.get("diff").getAsJsonArray().get(2).getAsDouble(),
+                object.get("diff").getAsJsonArray().get(3).getAsDouble(),
+                object.get("high").getAsJsonArray().get(2).getAsDouble(),
+                object.get("high").getAsJsonArray().get(3).getAsDouble(),
+                object.get("extreme").getAsJsonArray().get(2).getAsDouble(),
+                object.get("extreme").getAsJsonArray().get(3).getAsDouble()
+        };
+    }
+
+    @CubingEventHandler
+    public void playInEvent(PlayInEvent e) {
         if (e.getPacket() instanceof PacketPlayInChat) {
             Player player = e.getPlayer();
             String message = ((PacketPlayInChat) e.getPacket()).a();
@@ -42,48 +70,23 @@ public class ServerEvent {
         }
     }
 
+
     @CubingEventHandler
-    public void ToggleFlyEvent(ToggleFlyEvent e) {
+    public void nickEvent(NickEvent e) {
         e.setCancelled(true);
         Member.getMember(e.getPlayer()).user.sendLangMessage(GlobalString.OnlyInHub);
     }
 
     @CubingEventHandler
-    public void NickEvent(NickEvent e) {
+    public void skinEvent(SkinEvent e) {
         e.setCancelled(true);
         Member.getMember(e.getPlayer()).user.sendLangMessage(GlobalString.OnlyInHub);
     }
 
     @CubingEventHandler
-    public void SkinEvent(SkinEvent e) {
+    public void toggleFlyEvent(ToggleFlyEvent e) {
         e.setCancelled(true);
         Member.getMember(e.getPlayer()).user.sendLangMessage(GlobalString.OnlyInHub);
     }
 
-    @CubingEventHandler
-    public void ConfigReloadEvent(ConfigReloadEvent e) {
-        JsonObject object = config.config.getAsJsonObject("clutchkb");
-        Clutch.kb = new double[]{
-                object.get("low").getAsJsonArray().get(0).getAsDouble(),
-                object.get("low").getAsJsonArray().get(1).getAsDouble(),
-                object.get("mid").getAsJsonArray().get(0).getAsDouble(),
-                object.get("mid").getAsJsonArray().get(1).getAsDouble(),
-                object.get("diff").getAsJsonArray().get(0).getAsDouble(),
-                object.get("diff").getAsJsonArray().get(1).getAsDouble(),
-                object.get("high").getAsJsonArray().get(0).getAsDouble(),
-                object.get("high").getAsJsonArray().get(1).getAsDouble(),
-                object.get("extreme").getAsJsonArray().get(0).getAsDouble(),
-                object.get("extreme").getAsJsonArray().get(1).getAsDouble(),
-                object.get("low").getAsJsonArray().get(2).getAsDouble(),
-                object.get("low").getAsJsonArray().get(3).getAsDouble(),
-                object.get("mid").getAsJsonArray().get(2).getAsDouble(),
-                object.get("mid").getAsJsonArray().get(3).getAsDouble(),
-                object.get("diff").getAsJsonArray().get(2).getAsDouble(),
-                object.get("diff").getAsJsonArray().get(3).getAsDouble(),
-                object.get("high").getAsJsonArray().get(2).getAsDouble(),
-                object.get("high").getAsJsonArray().get(3).getAsDouble(),
-                object.get("extreme").getAsJsonArray().get(2).getAsDouble(),
-                object.get("extreme").getAsJsonArray().get(3).getAsDouble()
-        };
-    }
 }

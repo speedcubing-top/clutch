@@ -3,6 +3,7 @@ package top.speedcubing.clutch.BukkitEventListener;
 import java.util.Arrays;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,8 +19,8 @@ import top.speedcubing.clutch.Core.NormalClutch;
 import top.speedcubing.clutch.List.ItemStackList;
 import top.speedcubing.clutch.List.StringList;
 import top.speedcubing.clutch.Member;
+import top.speedcubing.lib.bukkit.inventory.ItemBuilder;
 import top.speedcubing.server.lang.GlobalString;
-import top.speedcubing.server.speedcubingServer;
 
 public class InventoryClick implements Listener {
     @EventHandler
@@ -38,7 +39,7 @@ public class InventoryClick implements Listener {
                     if (RawSlot == 10) {
                         Member member = Member.getMember(player);
                         boolean normal = player.getWorld().getName().equals(NormalClutch.map);
-                        Inventory inv = Bukkit.createInventory(normal ? NormalClutch.KB : InclinedClutch.KB, NormalClutch.hitcount, StringList.kbgui.get(member.user.lang));
+                        Inventory inv = Bukkit.createInventory(normal ? NormalClutch.KB : InclinedClutch.KB, NormalClutch.hitcount + 9, StringList.kbgui.get(member.user.lang));
                         int length = normal ? NormalClutch.hitcount : InclinedClutch.hitcount;
                         int[] settings = normal ? member.KbCache : member.KbCache2;
                         ItemStack[] stacks = ItemStackList.settings[member.user.lang];
@@ -46,6 +47,7 @@ public class InventoryClick implements Listener {
                             inv.setItem(i, stacks[settings[i]]);
                             inv.getItem(i).setAmount(i + 1);
                         }
+                        inv.setItem(NormalClutch.hitcount + 8, new ItemBuilder(Material.ARROW).name("next page").build());
                         player.openInventory(inv);
                     } else if (RawSlot == 12) {
                         InventoryAction action = e.getAction();
@@ -231,6 +233,11 @@ public class InventoryClick implements Listener {
                     Inventory clickedInventory = e.getClickedInventory();
                     Member member = Member.getMember(player);
                     int[] settings = member.KbCache;
+
+                    if (RawSlot > 45) { //page setting
+
+                        return;
+                    }
                     ItemStack[] hits = ItemStackList.settings[member.user.lang];
                     if (RawSlot >= 0 && RawSlot < NormalClutch.hitcount) {
                         if (RawSlot != 0 && settings[RawSlot - 1] == 0) {
