@@ -1,9 +1,6 @@
 package top.speedcubing.clutch.BukkitEventListener;
 
-import java.util.Arrays;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,13 +10,10 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import top.speedcubing.clutch.Core.InclinedClutch;
 import top.speedcubing.clutch.Core.NormalClutch;
 import top.speedcubing.clutch.List.ItemStackList;
-import top.speedcubing.clutch.List.StringList;
 import top.speedcubing.clutch.Member;
-import top.speedcubing.lib.bukkit.inventory.ItemBuilder;
 
 public class InventoryClick implements Listener {
     @EventHandler
@@ -33,169 +27,7 @@ public class InventoryClick implements Listener {
                     e.setCancelled(true);
             } else {
                 InventoryHolder holder = inventory.getHolder();
-                if (holder == ItemStackList.Settings) {
-                    e.setCancelled(true);
-                    if (RawSlot == 10) {
-                        Member member = Member.getMember(player);
-                        boolean normal = player.getWorld().getName().equals(NormalClutch.map);
-                        Inventory inv = Bukkit.createInventory(normal ? NormalClutch.KB : InclinedClutch.KB, NormalClutch.hitcount + 9, "§bHits");
-                        int length = normal ? NormalClutch.hitcount : InclinedClutch.hitcount;
-                        int[] settings = normal ? member.KbCache : member.KbCache2;
-                        ItemStack[] stacks = ItemStackList.settings[member.user.lang];
-                        for (int i = 0; i < length; i++) {
-                            inv.setItem(i, stacks[settings[i]]);
-                            inv.getItem(i).setAmount(i + 1);
-                        }
-                        inv.setItem(NormalClutch.hitcount + 8, new ItemBuilder(Material.ARROW).name("next page").build());
-                        player.openInventory(inv);
-                    } else if (RawSlot == 12) {
-                        InventoryAction action = e.getAction();
-                        switch (player.getWorld().getName()) {
-                            case NormalClutch.map:
-                                switch (action) {
-                                    case PICKUP_ALL: {
-                                        Member member = Member.getMember(player);
-                                        member.user.sound(Sound.CLICK);
-                                        int x = member.Delay;
-                                        if (x != 20) {
-                                            member.Delay -= 2;
-                                            member.reset();
-                                            member.user.setLangLore(inventory, RawSlot, "%lang_clutch_lore_cooldown%", Double.toString((x + 2) / 20D));
-                                        } else {
-                                            member.user.sendMessage("%lang_input_min%", "1.0");
-                                            member.user.sound(Sound.NOTE_PLING);
-                                        }
-                                    }
-                                    break;
-                                    case PICKUP_HALF: {
-                                        Member member = Member.getMember(player);
-                                        member.user.sound(Sound.CLICK);
-                                        int x = member.Delay;
-                                        if (x != 400) {
-                                            member.Delay += 2;
-                                            member.reset();
-                                            member.user.setLangLore(inventory, RawSlot, "%lang_clutch_lore_cooldown%", Double.toString((x - 2) / 20D));
-                                        } else {
-                                            member.user.sendMessage("%lang_input_max%", "20.0");
-                                            member.user.sound(Sound.NOTE_PLING);
-                                        }
-                                    }
-                                    break;
-                                }
-                                break;
-                            case InclinedClutch.map:
-                                switch (action) {
-                                    case PICKUP_ALL: {
-                                        Member member = Member.getMember(player);
-                                        member.user.sound(Sound.CLICK);
-                                        int x = member.Delay;
-                                        if (x != 20) {
-                                            member.Delay -= 2;
-                                            member.reset();
-                                            member.user.setLangLore(inventory, RawSlot, "%lang_clutch_lore_cooldown%", Double.toString((x - 2) / 20D));
-                                        } else {
-                                            member.user.sendMessage("%lang_input_min%", "1.0");
-                                            member.user.sound(Sound.NOTE_PLING);
-                                        }
-                                    }
-                                    break;
-                                    case PICKUP_HALF: {
-                                        Member member = Member.getMember(player);
-                                        member.user.sound(Sound.CLICK);
-                                        int x = member.Delay;
-                                        if (x != 400) {
-                                            member.Delay += 2;
-                                            member.reset();
-                                            member.user.setLangLore(inventory, RawSlot, "%lang_clutch_lore_cooldown%", Double.toString((x + 2) / 20D));
-                                        } else {
-                                            member.user.sendMessage("%lang_input_max%", "20.0");
-                                            member.user.sound(Sound.NOTE_PLING);
-                                        }
-                                    }
-                                    break;
-                                }
-                                break;
-                        }
-                    } else if (RawSlot == 14) {
-                        InventoryAction action = e.getAction();
-                        switch (player.getWorld().getName()) {
-                            case NormalClutch.map:
-                                switch (action) {
-                                    case PICKUP_ALL: {
-                                        Member member = Member.getMember(player);
-                                        member.user.sound(Sound.CLICK);
-                                        int x = member.integerCache[2];
-                                        if (x != 1) {
-                                            member.integerCache[2] -= 1;
-                                            member.user.setLangLore(inventory, RawSlot, "%lang_clutch_lore_hitdelay%", Integer.toString(x - 1));
-                                        } else {
-                                            member.user.sendMessage("%lang_input_min%", "1.0");
-                                            member.user.sound(Sound.NOTE_PLING);
-                                        }
-                                    }
-                                    break;
-                                    case PICKUP_HALF: {
-                                        Member member = Member.getMember(player);
-                                        member.user.sound(Sound.CLICK);
-                                        int x = member.integerCache[2];
-                                        if (x != 20) {
-                                            member.integerCache[2] += 1;
-                                            member.user.setLangLore(inventory, RawSlot, "%lang_clutch_lore_hitdelay%", Integer.toString(x + 1));
-                                        } else {
-                                            member.user.sendMessage("%lang_input_max%", "20.0");
-                                            member.user.sound(Sound.NOTE_PLING);
-                                        }
-                                    }
-                                    break;
-                                }
-                                break;
-                            case InclinedClutch.map:
-                                switch (action) {
-                                    case PICKUP_ALL: {
-                                        Member member = Member.getMember(player);
-                                        member.user.sound(Sound.CLICK);
-                                        int x = member.integerCache[4];
-                                        if (x != 1) {
-                                            member.integerCache[4] -= 1;
-                                            member.user.setLangLore(inventory, RawSlot, "%lang_clutch_lore_hitdelay%", Integer.toString(x - 1));
-                                        } else {
-                                            member.user.sendMessage("%lang_input_min%", "1.0");
-                                            member.user.sound(Sound.NOTE_PLING);
-                                        }
-                                    }
-                                    break;
-                                    case PICKUP_HALF: {
-                                        Member member = Member.getMember(player);
-                                        member.user.sound(Sound.CLICK);
-                                        int x = member.integerCache[4];
-                                        if (x != 20) {
-                                            member.integerCache[4] += 1;
-                                            member.user.setLangLore(inventory, RawSlot, "%lang_clutch_lore_hitdelay%", Integer.toString(x + 1));
-                                        } else {
-                                            member.user.sendMessage("%lang_input_max%", "20.0");
-                                            member.user.sound(Sound.NOTE_PLING);
-                                        }
-                                    }
-                                    break;
-                                }
-                                break;
-                        }
-                    } else if (RawSlot == 15) {
-                        player.closeInventory();
-                        Member member = Member.getMember(player);
-                        member.user.sendMessage("%lang_input_input_num%", "0.000", "5.000");
-                        member.VeloSettings = true;
-                        member.user.setInput(true);
-                    } else if (RawSlot == 16) {
-                        Member member = Member.getMember(player);
-                        member.display = !member.display;
-                        ItemStack stack = inventory.getItem(RawSlot);
-                        ItemMeta meta = stack.getItemMeta();
-                        meta.setLore(Arrays.asList(" ", member.display ? "click to turn off" : "click to turn on"));
-                        member.user.sound(Sound.NOTE_PLING);
-                        stack.setItemMeta(meta);
-                    }
-                } else if (holder == NormalClutch.KB) {
+                if (holder == NormalClutch.KB) {
                     e.setCancelled(true);
                     Inventory clickedInventory = e.getClickedInventory();
                     Member member = Member.getMember(player);

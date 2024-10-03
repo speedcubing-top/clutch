@@ -6,7 +6,6 @@ import org.bukkit.inventory.ItemStack;
 import top.speedcubing.lib.bukkit.inventory.ItemBuilder;
 
 public class ItemStackList {
-    public static final InventoryHolder Settings = () -> null;
     public static final ItemStack[][] settings = new ItemStack[4][6];
     public static final ItemStack[][] join = new ItemStack[4][2];
     public static final ItemStack[] itemstacks = new ItemStack[4];
