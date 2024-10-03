@@ -20,7 +20,6 @@ import top.speedcubing.clutch.List.ItemStackList;
 import top.speedcubing.clutch.List.StringList;
 import top.speedcubing.clutch.Member;
 import top.speedcubing.lib.bukkit.inventory.ItemBuilder;
-import top.speedcubing.server.lang.GlobalString;
 
 public class InventoryClick implements Listener {
     @EventHandler
@@ -39,7 +38,7 @@ public class InventoryClick implements Listener {
                     if (RawSlot == 10) {
                         Member member = Member.getMember(player);
                         boolean normal = player.getWorld().getName().equals(NormalClutch.map);
-                        Inventory inv = Bukkit.createInventory(normal ? NormalClutch.KB : InclinedClutch.KB, NormalClutch.hitcount + 9, StringList.kbgui.get(member.user.lang));
+                        Inventory inv = Bukkit.createInventory(normal ? NormalClutch.KB : InclinedClutch.KB, NormalClutch.hitcount + 9, "§bHits");
                         int length = normal ? NormalClutch.hitcount : InclinedClutch.hitcount;
                         int[] settings = normal ? member.KbCache : member.KbCache2;
                         ItemStack[] stacks = ItemStackList.settings[member.user.lang];
@@ -59,15 +58,11 @@ public class InventoryClick implements Listener {
                                         member.user.sound(Sound.CLICK);
                                         int x = member.Delay;
                                         if (x != 20) {
-                                            ItemStack stack = inventory.getItem(RawSlot);
-                                            ItemMeta meta = stack.getItemMeta();
                                             member.Delay -= 2;
                                             member.reset();
-                                            String[] str = StringList.LoreCoolDown[member.user.lang];
-                                            meta.setLore(Arrays.asList(str[1], str[2].replace("%double%", Double.toString((x - 2) / 20D)), str[3]));
-                                            stack.setItemMeta(meta);
+                                            member.user.setLangLore(inventory, RawSlot, "%lang_clutch_lore_cooldown%", Double.toString((x + 2) / 20D));
                                         } else {
-                                            member.user.sendLangMessage(GlobalString.min, "1.0");
+                                            member.user.sendMessage("%lang_input_min%", "1.0");
                                             member.user.sound(Sound.NOTE_PLING);
                                         }
                                     }
@@ -77,15 +72,11 @@ public class InventoryClick implements Listener {
                                         member.user.sound(Sound.CLICK);
                                         int x = member.Delay;
                                         if (x != 400) {
-                                            ItemStack stack = inventory.getItem(RawSlot);
-                                            ItemMeta meta = stack.getItemMeta();
                                             member.Delay += 2;
                                             member.reset();
-                                            String[] str = StringList.LoreCoolDown[member.user.lang];
-                                            meta.setLore(Arrays.asList(str[1], str[2].replace("%double%", Double.toString((x + 2) / 20D)), str[3]));
-                                            stack.setItemMeta(meta);
+                                            member.user.setLangLore(inventory, RawSlot, "%lang_clutch_lore_cooldown%", Double.toString((x - 2) / 20D));
                                         } else {
-                                            member.user.sendLangMessage(GlobalString.max, "20.0");
+                                            member.user.sendMessage("%lang_input_max%", "20.0");
                                             member.user.sound(Sound.NOTE_PLING);
                                         }
                                     }
@@ -99,15 +90,11 @@ public class InventoryClick implements Listener {
                                         member.user.sound(Sound.CLICK);
                                         int x = member.Delay;
                                         if (x != 20) {
-                                            ItemStack stack = inventory.getItem(RawSlot);
-                                            ItemMeta meta = stack.getItemMeta();
-                                            String[] str = StringList.LoreCoolDown[member.user.lang];
                                             member.Delay -= 2;
                                             member.reset();
-                                            meta.setLore(Arrays.asList(str[1], str[2].replace("%double%", Double.toString((x - 2) / 20D)), str[3]));
-                                            stack.setItemMeta(meta);
+                                            member.user.setLangLore(inventory, RawSlot, "%lang_clutch_lore_cooldown%", Double.toString((x - 2) / 20D));
                                         } else {
-                                            member.user.sendLangMessage(GlobalString.min, "1.0");
+                                            member.user.sendMessage("%lang_input_min%", "1.0");
                                             member.user.sound(Sound.NOTE_PLING);
                                         }
                                     }
@@ -117,15 +104,11 @@ public class InventoryClick implements Listener {
                                         member.user.sound(Sound.CLICK);
                                         int x = member.Delay;
                                         if (x != 400) {
-                                            ItemStack stack = inventory.getItem(RawSlot);
-                                            ItemMeta meta = stack.getItemMeta();
-                                            String[] str = StringList.LoreCoolDown[member.user.lang];
                                             member.Delay += 2;
                                             member.reset();
-                                            meta.setLore(Arrays.asList(str[1], str[2].replace("%double%", Double.toString((x + 2) / 20D)), str[3]));
-                                            stack.setItemMeta(meta);
+                                            member.user.setLangLore(inventory, RawSlot, "%lang_clutch_lore_cooldown%", Double.toString((x + 2) / 20D));
                                         } else {
-                                            member.user.sendLangMessage(GlobalString.max, "20.0");
+                                            member.user.sendMessage("%lang_input_max%", "20.0");
                                             member.user.sound(Sound.NOTE_PLING);
                                         }
                                     }
@@ -144,13 +127,9 @@ public class InventoryClick implements Listener {
                                         int x = member.integerCache[2];
                                         if (x != 1) {
                                             member.integerCache[2] -= 1;
-                                            ItemStack stack = inventory.getItem(RawSlot);
-                                            ItemMeta meta = stack.getItemMeta();
-                                            String[] str = StringList.HitDelaylore[member.user.lang];
-                                            meta.setLore(Arrays.asList(str[1], str[2].replace("%int%", Integer.toString(x - 1)), str[3], str[4], str[5]));
-                                            stack.setItemMeta(meta);
+                                            member.user.setLangLore(inventory, RawSlot, "%lang_clutch_lore_hitdelay%", Integer.toString(x - 1));
                                         } else {
-                                            member.user.sendLangMessage(GlobalString.min, "1.0");
+                                            member.user.sendMessage("%lang_input_min%", "1.0");
                                             member.user.sound(Sound.NOTE_PLING);
                                         }
                                     }
@@ -161,13 +140,9 @@ public class InventoryClick implements Listener {
                                         int x = member.integerCache[2];
                                         if (x != 20) {
                                             member.integerCache[2] += 1;
-                                            ItemStack stack = inventory.getItem(RawSlot);
-                                            ItemMeta meta = stack.getItemMeta();
-                                            String[] str = StringList.HitDelaylore[member.user.lang];
-                                            meta.setLore(Arrays.asList(str[1], str[2].replace("%int%", Integer.toString(x + 1)), str[3], str[4], str[5]));
-                                            stack.setItemMeta(meta);
+                                            member.user.setLangLore(inventory, RawSlot, "%lang_clutch_lore_hitdelay%", Integer.toString(x + 1));
                                         } else {
-                                            member.user.sendLangMessage(GlobalString.max, "20.0");
+                                            member.user.sendMessage("%lang_input_max%", "20.0");
                                             member.user.sound(Sound.NOTE_PLING);
                                         }
                                     }
@@ -182,13 +157,9 @@ public class InventoryClick implements Listener {
                                         int x = member.integerCache[4];
                                         if (x != 1) {
                                             member.integerCache[4] -= 1;
-                                            ItemStack stack = inventory.getItem(RawSlot);
-                                            ItemMeta meta = stack.getItemMeta();
-                                            String[] str = StringList.HitDelaylore[member.user.lang];
-                                            meta.setLore(Arrays.asList(str[1], str[2].replace("%int%", Integer.toString(x - 1)), str[3], str[4], str[5]));
-                                            stack.setItemMeta(meta);
+                                            member.user.setLangLore(inventory, RawSlot, "%lang_clutch_lore_hitdelay%", Integer.toString(x - 1));
                                         } else {
-                                            member.user.sendLangMessage(GlobalString.min, "1.0");
+                                            member.user.sendMessage("%lang_input_min%", "1.0");
                                             member.user.sound(Sound.NOTE_PLING);
                                         }
                                     }
@@ -199,13 +170,9 @@ public class InventoryClick implements Listener {
                                         int x = member.integerCache[4];
                                         if (x != 20) {
                                             member.integerCache[4] += 1;
-                                            ItemStack stack = inventory.getItem(RawSlot);
-                                            ItemMeta meta = stack.getItemMeta();
-                                            String[] str = StringList.HitDelaylore[member.user.lang];
-                                            meta.setLore(Arrays.asList(str[1], str[2].replace("%int%", Integer.toString(x + 1)), str[3], str[4], str[5]));
-                                            stack.setItemMeta(meta);
+                                            member.user.setLangLore(inventory, RawSlot, "%lang_clutch_lore_hitdelay%", Integer.toString(x + 1));
                                         } else {
-                                            member.user.sendLangMessage(GlobalString.max, "20.0");
+                                            member.user.sendMessage("%lang_input_max%", "20.0");
                                             member.user.sound(Sound.NOTE_PLING);
                                         }
                                     }
@@ -216,7 +183,7 @@ public class InventoryClick implements Listener {
                     } else if (RawSlot == 15) {
                         player.closeInventory();
                         Member member = Member.getMember(player);
-                        member.user.sendLangMessage(GlobalString.inputInteger, "0.000", "5.000");
+                        member.user.sendMessage("%lang_input_input_num%", "0.000", "5.000");
                         member.VeloSettings = true;
                         member.user.setInput(true);
                     } else if (RawSlot == 16) {

@@ -6,12 +6,13 @@ import org.bukkit.entity.Player;
 import top.speedcubing.clutch.Core.NormalClutch;
 import top.speedcubing.common.configuration.ServerConfig;
 import top.speedcubing.common.events.ConfigReloadEvent;
+import top.speedcubing.common.rank.RankFormat;
 import top.speedcubing.lib.bukkit.events.packet.PlayInEvent;
 import top.speedcubing.lib.eventbus.CubingEventHandler;
 import top.speedcubing.server.events.player.NickEvent;
 import top.speedcubing.server.events.player.SkinEvent;
 import top.speedcubing.server.events.player.ToggleFlyEvent;
-import top.speedcubing.server.lang.GlobalString;
+import top.speedcubing.server.lang.Lang;
 import top.speedcubing.server.share.Chat;
 
 public class ServerEvent {
@@ -54,18 +55,19 @@ public class ServerEvent {
                 try {
                     int x = (int) (Double.parseDouble(message) * 1000);
                     if (x < 0 || x > 5000)
-                        member.user.sendLangMessage(GlobalString.integerOutOfRange, "0.000", "5.000");
+                        member.user.sendMessage("%lang_input_number_out%", "0.000", "5.000");
                     else {
                         member.integerCache[player.getWorld().getName().equals(NormalClutch.map) ? 1 : 3] = x;
                         member.VeloSettings = false;
                         member.user.setInput(false);
                     }
                 } catch (Exception exception) {
-                    member.user.sendLangMessage(GlobalString.invalidNumber);
+                    member.user.sendMessage("%lang_input_invalid_number%");
                 }
             } else if (message.charAt(0) != '/') {
                 e.setCancelled(true);
-                Chat.globalChat(player.getWorld().getPlayers(), player, GlobalString.MessageFormat, message, member.user.getPrefixName(false), member.user.getFormat(false).getChatColor());
+                RankFormat format = member.user.getFormat(false);
+                Chat.globalChat(player.getWorld().getPlayers(), player, Lang.of("%lang_message_format%"), message, format.getPrefix() + player.getName(), format.getChatColor());
             }
         }
     }
@@ -74,19 +76,19 @@ public class ServerEvent {
     @CubingEventHandler
     public void nickEvent(NickEvent e) {
         e.setCancelled(true);
-        Member.getMember(e.getPlayer()).user.sendLangMessage(GlobalString.OnlyInHub);
+        Member.getMember(e.getPlayer()).user.sendMessage("%lang_general_lobby_only%");
     }
 
     @CubingEventHandler
     public void skinEvent(SkinEvent e) {
         e.setCancelled(true);
-        Member.getMember(e.getPlayer()).user.sendLangMessage(GlobalString.OnlyInHub);
+        Member.getMember(e.getPlayer()).user.sendMessage("%lang_general_lobby_only%");
     }
 
     @CubingEventHandler
     public void toggleFlyEvent(ToggleFlyEvent e) {
         e.setCancelled(true);
-        Member.getMember(e.getPlayer()).user.sendLangMessage(GlobalString.OnlyInHub);
+        Member.getMember(e.getPlayer()).user.sendMessage("%lang_general_lobby_only%");
     }
 
 }
