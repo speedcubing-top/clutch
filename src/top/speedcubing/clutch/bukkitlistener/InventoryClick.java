@@ -1,4 +1,4 @@
-package top.speedcubing.clutch.BukkitEventListener;
+package top.speedcubing.clutch.bukkitlistener;
 
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -10,9 +10,9 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
-import top.speedcubing.clutch.Core.InclinedClutch;
-import top.speedcubing.clutch.Core.NormalClutch;
-import top.speedcubing.clutch.List.ItemStackList;
+import top.speedcubing.clutch.core.InclinedClutch;
+import top.speedcubing.clutch.core.NormalClutch;
+import top.speedcubing.clutch.list.ItemStackList;
 import top.speedcubing.clutch.Member;
 
 public class InventoryClick implements Listener {

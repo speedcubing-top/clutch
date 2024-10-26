@@ -3,7 +3,7 @@ package top.speedcubing.clutch;
 import com.google.gson.JsonObject;
 import net.minecraft.server.v1_8_R3.PacketPlayInChat;
 import org.bukkit.entity.Player;
-import top.speedcubing.clutch.Core.NormalClutch;
+import top.speedcubing.clutch.core.NormalClutch;
 import top.speedcubing.common.configuration.ServerConfig;
 import top.speedcubing.common.events.ConfigReloadEvent;
 import top.speedcubing.common.rank.RankFormat;

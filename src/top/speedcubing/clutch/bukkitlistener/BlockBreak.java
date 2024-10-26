@@ -1,4 +1,4 @@
-package top.speedcubing.clutch.BukkitEventListener;
+package top.speedcubing.clutch.bukkitlistener;
 
 import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;

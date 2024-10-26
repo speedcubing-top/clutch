@@ -1,4 +1,4 @@
-package top.speedcubing.clutch.BukkitEventListener;
+package top.speedcubing.clutch.bukkitlistener;
 
 import net.minecraft.server.v1_8_R3.BlockPosition;
 import org.bukkit.GameMode;
@@ -7,10 +7,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import top.speedcubing.clutch.Core.InclinedClutch;
-import top.speedcubing.clutch.Core.NormalClutch;
-import top.speedcubing.clutch.List.ItemStackList;
-import top.speedcubing.clutch.List.StringList;
+import top.speedcubing.clutch.core.InclinedClutch;
+import top.speedcubing.clutch.core.NormalClutch;
+import top.speedcubing.clutch.list.ItemStackList;
+import top.speedcubing.clutch.list.StringList;
 import top.speedcubing.clutch.Member;
 import top.speedcubing.lib.bukkit.SideBar;
 

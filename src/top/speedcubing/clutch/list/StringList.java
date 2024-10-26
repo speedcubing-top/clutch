@@ -1,4 +1,4 @@
-package top.speedcubing.clutch.List;
+package top.speedcubing.clutch.list;
 
 
 public class StringList {

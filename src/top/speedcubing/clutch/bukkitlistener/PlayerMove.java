@@ -1,4 +1,4 @@
-package top.speedcubing.clutch.BukkitEventListener;
+package top.speedcubing.clutch.bukkitlistener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -9,9 +9,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import top.speedcubing.clutch.Clutch;
-import top.speedcubing.clutch.Core.InclinedClutch;
-import top.speedcubing.clutch.Core.NormalClutch;
-import top.speedcubing.clutch.List.StringList;
+import top.speedcubing.clutch.core.InclinedClutch;
+import top.speedcubing.clutch.core.NormalClutch;
+import top.speedcubing.clutch.list.StringList;
 import top.speedcubing.clutch.Member;
 import top.speedcubing.lib.bukkit.SideBar;
 

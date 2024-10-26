@@ -9,9 +9,9 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import top.speedcubing.clutch.Core.InclinedClutch;
-import top.speedcubing.clutch.Core.NormalClutch;
-import top.speedcubing.clutch.List.ItemStackList;
+import top.speedcubing.clutch.core.InclinedClutch;
+import top.speedcubing.clutch.core.NormalClutch;
+import top.speedcubing.clutch.list.ItemStackList;
 import top.speedcubing.lib.bukkit.WorldUtils;
 import top.speedcubing.server.player.User;
 

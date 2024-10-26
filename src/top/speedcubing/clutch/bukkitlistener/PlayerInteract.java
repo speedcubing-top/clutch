@@ -1,4 +1,4 @@
-package top.speedcubing.clutch.BukkitEventListener;
+package top.speedcubing.clutch.bukkitlistener;
 
 import java.util.Arrays;
 import org.bukkit.Bukkit;
@@ -13,9 +13,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import top.speedcubing.clutch.Core.InclinedClutch;
-import top.speedcubing.clutch.Core.NormalClutch;
-import top.speedcubing.clutch.List.ItemStackList;
+import top.speedcubing.clutch.core.InclinedClutch;
+import top.speedcubing.clutch.core.NormalClutch;
+import top.speedcubing.clutch.list.ItemStackList;
 import top.speedcubing.clutch.Member;
 import top.speedcubing.lib.bukkit.events.inventory.ClickInventoryEvent;
 import top.speedcubing.lib.bukkit.inventory.ItemBuilder;
