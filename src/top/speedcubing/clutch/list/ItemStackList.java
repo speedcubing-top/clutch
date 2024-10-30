@@ -10,9 +10,7 @@ public class ItemStackList {
     public static final ItemStack[] itemstacks = new ItemStack[4];
     public static final ItemStack Blocks = new ItemBuilder(Material.SANDSTONE).amount(64).build();
 
-    public static final String[] blockedit = {"§bBlock Skin", "§bBlock Skin", "§bBlock Skin", "§bBlock Skin"};
-
-    public void Load() {
+     public void Load() {
         String[] display = {"§cpause & settings", "§cpause & settings", "§cpause & settings", "§cpause & settings"};
         String[] extreme = {"§5Extreme", "§5Extreme", "§5Extreme", "§5Extreme"};
         String[] hard = {"§cHard", "§cHard", "§cHard", "§cHard"};
