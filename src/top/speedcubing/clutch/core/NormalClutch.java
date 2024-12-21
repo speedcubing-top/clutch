@@ -16,9 +16,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.util.Vector;
 import top.speedcubing.clutch.Clutch;
+import top.speedcubing.clutch.Member;
 import top.speedcubing.clutch.list.ItemStackList;
 import top.speedcubing.clutch.list.StringList;
-import top.speedcubing.clutch.Member;
 import top.speedcubing.lib.bukkit.PlayerUtils;
 import top.speedcubing.lib.bukkit.SideBar;
 import top.speedcubing.lib.bukkit.WorldUtils;
@@ -32,6 +32,7 @@ public class NormalClutch {
     public static final Set<Integer> rooms = new HashSet<>();
 
     public static final String map = "map_clutch_normal";
+
     public static void Join(Player player, boolean firstjoin) {
         int room = -1;
         for (int h = 1; h < Integer.MAX_VALUE; h++) {
