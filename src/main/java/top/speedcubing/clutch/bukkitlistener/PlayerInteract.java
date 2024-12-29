@@ -53,10 +53,10 @@ public class PlayerInteract implements Listener {
                     player.openInventory(inv);
                 }, 10);
 
-                inventory.setItem(new LangItem(Material.RAW_FISH).name("%lang_clutch_item_hitdelay%").durability(3).lore2("%lang_clutch_lore_hitdelay%", String.valueOf(member.integerCache[normal ? 2 : 4])),
+                inventory.setItem(new LangItem(Material.RAW_FISH).name("%lang_clutch_item_hitdelay%").durability(3).lore2("%lang_clutch_lore_hitdelay%", String.valueOf(member.integerCache.get(normal ? 2 : 4))),
                         PlayerInteract::settings14, 14);
 
-                inventory.setItem(new LangItem(Material.LEATHER_BOOTS).name("%lang_clutch_item_velo%").durability(1).lore2("%lang_clutch_lore_velo%", String.format("%.3f", member.integerCache[normal ? 1 : 3] / 1000D)), (r) -> {
+                inventory.setItem(new LangItem(Material.LEATHER_BOOTS).name("%lang_clutch_item_velo%").durability(1).lore2("%lang_clutch_lore_velo%", String.format("%.3f", member.integerCache.get(normal ? 1 : 3) / 1000D)), (r) -> {
                     player.closeInventory();
                     member.user.sendMessage("%lang_input_input_num%", "0.000", "5.000");
                     member.VeloSettings = true;
@@ -97,9 +97,9 @@ public class PlayerInteract implements Listener {
             case PICKUP_ALL: {
                 Member member = Member.getMember(player);
                 member.user.sound(Sound.CLICK);
-                int x = member.integerCache[index];
+                int x = member.integerCache.get(index);
                 if (x != 1) {
-                    member.integerCache[index] -= 1;
+                    member.integerCache.set(index, member.integerCache.get(index) - 1);
                     member.user.setLangLore(inventory, rawSlot, "%lang_clutch_lore_hitdelay%", Integer.toString(x - 1));
                 } else {
                     member.user.sendMessage("%lang_input_min%", "1.0");
@@ -110,9 +110,9 @@ public class PlayerInteract implements Listener {
             case PICKUP_HALF: {
                 Member member = Member.getMember(player);
                 member.user.sound(Sound.CLICK);
-                int x = member.integerCache[index];
+                int x = member.integerCache.get(index);
                 if (x != 20) {
-                    member.integerCache[index] += 1;
+                    member.integerCache.set(index, member.integerCache.get(index) + 1);
                     member.user.setLangLore(inventory, rawSlot, "%lang_clutch_lore_hitdelay%", Integer.toString(x + 1));
                 } else {
                     member.user.sendMessage("%lang_input_max%", "20.0");

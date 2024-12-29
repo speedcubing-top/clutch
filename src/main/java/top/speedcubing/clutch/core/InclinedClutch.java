@@ -62,7 +62,7 @@ public class InclinedClutch {
                                 } else {
                                     int sub = 2 * (member.KbCache2[hitindex] - 1);
                                     double velo = Clutch.kb[sub + 10];
-                                    player.setVelocity(new Vector(velo, Clutch.kb[sub + 11] * (member.integerCache[3] / 1000D), -velo));
+                                    player.setVelocity(new Vector(velo, Clutch.kb[sub + 11] * (member.integerCache.get(3) / 1000D), -velo));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
                                     SideBar.getSidebar(player).setLineByScore(StringList.SideBarInclined[member.user.lang][9] + (hitindex + 1), 1);
@@ -72,7 +72,7 @@ public class InclinedClutch {
                                         connection.sendPacket(new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, new ChatComponentText("§e" + (hitindex + 1))));
                                     }
                                     hitindex += 1;
-                                    hitdelay = member.integerCache[4];
+                                    hitdelay = member.integerCache.get(4);
                                     PlayerUtils.sendActionBar(player, "§aGo!");
                                 }
                             }

@@ -1,11 +1,11 @@
 package top.speedcubing.clutch.core;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import net.minecraft.server.v1_8_R3.ChatComponentText;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import net.minecraft.server.v1_8_R3.PlayerConnection;
-import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -15,6 +15,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.util.Vector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import top.speedcubing.clutch.Clutch;
 import top.speedcubing.clutch.Member;
 import top.speedcubing.clutch.list.ItemStackList;
@@ -22,7 +24,8 @@ import top.speedcubing.clutch.list.StringList;
 import top.speedcubing.lib.bukkit.PlayerUtils;
 import top.speedcubing.lib.bukkit.SideBar;
 import top.speedcubing.lib.bukkit.WorldUtils;
-import top.speedcubing.server.speedcubingServer;
+import top.speedcubing.lib.utils.SQL.SQLField;
+import top.speedcubing.lib.utils.SQL.SQLRow;
 
 public class NormalClutch {
     public static final int hitcount = 36;
@@ -32,6 +35,7 @@ public class NormalClutch {
     public static final Set<Integer> rooms = new HashSet<>();
 
     public static final String map = "map_clutch_normal";
+    private static final Logger log = LoggerFactory.getLogger(NormalClutch.class);
 
     public static void Join(Player player, boolean firstjoin) {
         int room = -1;
@@ -64,48 +68,51 @@ public class NormalClutch {
 
             @Override
             public void run() {
-                if (player.getGameMode() != GameMode.CREATIVE) {
-                    if (!player.getItemInHand().getType().equals(Material.INK_SACK)) { //Pause
-                        if (member.CurrentDelay == 0) {
-                            if (hitdelay <= 0) {
-                                if (hitindex == hitcount || member.KbCache[hitindex] == 0) {
-                                    member.reset();
-                                    hitindex = 0;
-                                } else {
-                                    int sub = 2 * (member.KbCache[hitindex] - 1);
-                                    player.setVelocity(new Vector(Clutch.kb[sub], Clutch.kb[sub + 1] * (member.integerCache[1] / 1000D), 0));
-                                    player.damage(0);
-                                    player.setLevel(hitindex + 1);
-                                    SideBar.getSidebar(player).setLineByScore(StringList.SideBarNormal[member.user.lang][7] + (hitindex + 1), 1);
-                                    if (member.display) {
-                                        PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
-                                        connection.sendPacket(new PacketPlayOutTitle(0, 60, 5));
-                                        connection.sendPacket(new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, new ChatComponentText("§e" + (hitindex + 1))));
-                                    }
-                                    hitindex += 1;
-                                    hitdelay = member.integerCache[2];
-                                    PlayerUtils.sendActionBar(player, "§aGo!");
-                                }
-                            }
-                            hitdelay -= 1;
-                        } else {
-                            int currentdelay = member.CurrentDelay;
-                            member.CurrentDelay = currentdelay - 1;
-                            if (currentdelay % 2 == 0)
-                                PlayerUtils.sendActionBar(player, "§e" + currentdelay / 20D);
-                        }
+                if (player.getGameMode() == GameMode.CREATIVE) {
+                    return;
+                }
+                if (player.getItemInHand().getType().equals(Material.INK_SACK)) { //Pause
+                    int dd = member.CurrentDelay;
+                    if (dd == 0) {
+                        int b = member.Delay;
+                        member.CurrentDelay = b;
+                        dd = b;
+                        hitdelay = 0;
+                        hitindex = 0;
+                    }
+                    PlayerUtils.sendActionBar(player, "§e" + (dd % 2 != 0 && dd > 0 ? dd - 1 : dd) / 20D);
+                    return;
+                }
+
+                if (member.CurrentDelay != 0) {
+                    int currentdelay = member.CurrentDelay;
+                    member.CurrentDelay = currentdelay - 1;
+                    if (currentdelay % 2 == 0)
+                        PlayerUtils.sendActionBar(player, "§e" + currentdelay / 20D);
+                    return;
+                }
+
+                if (hitdelay <= 0) {
+                    if (hitindex == hitcount || member.KbCache[hitindex] == 0) {
+                        member.reset();
+                        hitindex = 0;
                     } else {
-                        int dd = member.CurrentDelay;
-                        if (dd == 0) {
-                            int b = member.Delay;
-                            member.CurrentDelay = b;
-                            dd = b;
-                            hitdelay = 0;
-                            hitindex = 0;
+                        int sub = 2 * (member.KbCache[hitindex] - 1);
+                        player.setVelocity(new Vector(Clutch.kb[sub], Clutch.kb[sub + 1] * (member.integerCache.get(1) / 1000D), 0));
+                        player.damage(0);
+                        player.setLevel(hitindex + 1);
+                        SideBar.getSidebar(player).setLineByScore(StringList.SideBarNormal[member.user.lang][7] + (hitindex + 1), 1);
+                        if (member.display) {
+                            PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
+                            connection.sendPacket(new PacketPlayOutTitle(0, 60, 5));
+                            connection.sendPacket(new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, new ChatComponentText("§e" + (hitindex + 1))));
                         }
-                        PlayerUtils.sendActionBar(player, "§e" + (dd % 2 != 0 && dd > 0 ? dd - 1 : dd) / 20D);
+                        hitindex += 1;
+                        hitdelay = member.integerCache.get(2);
+                        PlayerUtils.sendActionBar(player, "§aGo!");
                     }
                 }
+                hitdelay -= 1;
             }
         }, 0, 1);
         String[] sidebar = StringList.SideBarNormal[member.user.lang];
@@ -119,24 +126,25 @@ public class NormalClutch {
                 .changeableLine(sidebar[7] + 0, 1)
                 .staticLine(sidebar[8], 0).create();
         member.Length = 0;
-        speedcubingServer.scheduledPool.execute(() -> {
-            if (firstjoin) {
-                member.integerCache = ArrayUtils.toPrimitive(member.user.dbSelect("clutch_blockskin,clutch_normal_ver,clutch_normal_hitdelay,clutch_inclined_ver,clutch_inclined_hitdelay").getIntArray());
-                String[] hits = member.user.dbSelect("clutch_normal_hits,clutch_inclined_hits").getStringArray();
-                int size = hits[0].length();
-                for (int i = 0; i < actualHitCount; i++) {
-                    member.KbCache[i] = i < size ? hits[0].charAt(i) - 48 : 0;
-                }
-                int size2 = hits[1].length();
-                for (int i = 0; i < actualHitCount; i++) {
-                    member.KbCache2[i] = i < size2 ? hits[1].charAt(i) - 48 : 0;
-                }
+        if (firstjoin) {
+            SQLRow result = member.user.dbSelect("clutch_blockskin,clutch_normal_ver,clutch_normal_hitdelay,clutch_inclined_ver,clutch_inclined_hitdelay");
+            for (SQLField f : result) {
+                member.integerCache.add(f.getInt());
             }
-            Inventory inventory = player.getInventory();
-            inventory.setItem(0, ItemStackList.Blocks);
-            inventory.setItem(8, ItemStackList.itemstacks[member.user.lang]);
-            inventory.setItem(7, ItemStackList.join[member.user.lang][1]);
-        });
+            result = member.user.dbSelect("clutch_normal_hits,clutch_inclined_hits");
+            int size = result.getString(0).length();
+            for (int i = 0; i < actualHitCount; i++) {
+                member.KbCache[i] = i < size ? result.getString(0).charAt(i) - 48 : 0;
+            }
+            int size2 = result.getString(1).length();
+            for (int i = 0; i < actualHitCount; i++) {
+                member.KbCache2[i] = i < size2 ? result.getString(1).charAt(i) - 48 : 0;
+            }
+        }
+        Inventory inventory = player.getInventory();
+        inventory.setItem(0, ItemStackList.Blocks);
+        inventory.setItem(8, ItemStackList.itemstacks[member.user.lang]);
+        inventory.setItem(7, ItemStackList.join[member.user.lang][1]);
     }
 
     public static int coordToRoom(int z) {

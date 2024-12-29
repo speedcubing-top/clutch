@@ -1,7 +1,9 @@
 package top.speedcubing.clutch;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import net.minecraft.server.v1_8_R3.BlockPosition;
@@ -34,7 +36,7 @@ public class Member {
     public int Delay;
     public int CurrentDelay;
     public int CountDownTask;
-    public int[] integerCache;
+    public final List<Integer> integerCache  = new ArrayList<>();
     public int Length;
     public int[] KbCache = new int[NormalClutch.actualHitCount];
     public int[] Length2 = new int[2];

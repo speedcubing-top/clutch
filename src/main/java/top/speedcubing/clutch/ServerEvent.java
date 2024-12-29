@@ -57,7 +57,7 @@ public class ServerEvent {
                     if (x < 0 || x > 5000)
                         member.user.sendMessage("%lang_input_number_out%", "0.000", "5.000");
                     else {
-                        member.integerCache[player.getWorld().getName().equals(NormalClutch.map) ? 1 : 3] = x;
+                        member.integerCache.set(player.getWorld().getName().equals(NormalClutch.map) ? 1 : 3, x);
                         member.VeloSettings = false;
                         member.user.setInput(false);
                     }

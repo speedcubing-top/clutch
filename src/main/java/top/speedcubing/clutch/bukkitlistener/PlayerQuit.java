@@ -1,5 +1,6 @@
 package top.speedcubing.clutch.bukkitlistener;
 
+import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,13 +29,13 @@ public class PlayerQuit implements Listener {
                     break;
                 str2.append(ints);
             }
-            int[] ints = member.integerCache;
+            List<Integer> ints = member.integerCache;
             member.user.dbUpdate(
-                    "clutch_blockskin=" + ints[0] +
-                            ",clutch_normal_ver=" + ints[1] +
-                            ",clutch_normal_hitdelay=" + ints[2] +
-                            ",clutch_inclined_ver=" + ints[3] +
-                            ",clutch_inclined_hitdelay=" + ints[4] +
+                    "clutch_blockskin=" + ints.get(0) +
+                            ",clutch_normal_ver=" + ints.get(1) +
+                            ",clutch_normal_hitdelay=" + ints.get(2) +
+                            ",clutch_inclined_ver=" + ints.get(3) +
+                            ",clutch_inclined_hitdelay=" + ints.get(4) +
                             ",clutch_normal_hits='" + str + "'" +
                             ",clutch_inclined_hits='" + str2 + "'"
             );
