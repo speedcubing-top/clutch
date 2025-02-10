@@ -27,8 +27,8 @@ public class Clutch extends JavaPlugin {
     public void onEnable() {
         MinecraftServer.getServer().getPropertyManager().setProperty("server-name", "clutch");
         CubingEventManager.registerListeners(new ServerEvent(), new Configuration());
-        registerListeners();
         Configuration.reload();
+        registerListeners();
         registerWorlds();
 
         new ItemStackList().Load();
