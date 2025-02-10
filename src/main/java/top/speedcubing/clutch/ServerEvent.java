@@ -19,7 +19,7 @@ public class ServerEvent {
 
     @CubingEventHandler
     public void configReloadEvent(ConfigReloadEvent e) {
-        JsonObject object = ServerConfig.config.getAsJsonObject("clutchkb");
+        JsonObject object = ServerConfig.getConfig().getAsJsonObject("clutchkb");
         Clutch.kb = new double[]{
                 object.get("low").getAsJsonArray().get(0).getAsDouble(),
                 object.get("low").getAsJsonArray().get(1).getAsDouble(),
