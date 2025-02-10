@@ -14,23 +14,21 @@ import top.speedcubing.clutch.bukkitlistener.PlayerJoin;
 import top.speedcubing.clutch.bukkitlistener.PlayerMove;
 import top.speedcubing.clutch.bukkitlistener.PlayerQuit;
 import top.speedcubing.clutch.bukkitlistener.PlayerSpawnLocation;
+import top.speedcubing.clutch.configuration.Configuration;
 import top.speedcubing.clutch.core.InclinedClutch;
 import top.speedcubing.clutch.core.NormalClutch;
 import top.speedcubing.clutch.list.ItemStackList;
-import top.speedcubing.common.events.ConfigReloadEvent;
 import top.speedcubing.lib.eventbus.CubingEventManager;
 import top.speedcubing.server.speedcubingServer;
 import top.speedcubing.server.utils.MapManager;
 
 public class Clutch extends JavaPlugin {
 
-    public static double[] kb;
-
     public void onEnable() {
         MinecraftServer.getServer().getPropertyManager().setProperty("server-name", "clutch");
-        CubingEventManager.registerListeners(new ServerEvent());
-        new ConfigReloadEvent().call();
+        CubingEventManager.registerListeners(new ServerEvent(), new Configuration());
         registerListeners();
+        Configuration.reload();
         registerWorlds();
 
         new ItemStackList().Load();

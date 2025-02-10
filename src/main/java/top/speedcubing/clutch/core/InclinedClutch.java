@@ -15,6 +15,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.util.Vector;
 import top.speedcubing.clutch.Clutch;
+import top.speedcubing.clutch.configuration.Configuration;
 import top.speedcubing.clutch.list.ItemStackList;
 import top.speedcubing.clutch.list.StringList;
 import top.speedcubing.clutch.Member;
@@ -61,8 +62,8 @@ public class InclinedClutch {
                                     hitindex = 0;
                                 } else {
                                     int sub = 2 * (member.KbCache2[hitindex] - 1);
-                                    double velo = Clutch.kb[sub + 10];
-                                    player.setVelocity(new Vector(velo, Clutch.kb[sub + 11] * (member.integerCache.get(3) / 1000D), -velo));
+                                    double velo = Configuration.kb[sub + 10];
+                                    player.setVelocity(new Vector(velo, Configuration.kb[sub + 11] * (member.integerCache.get(3) / 1000D), -velo));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
                                     SideBar.getSidebar(player).setLineByScore(StringList.SideBarInclined[member.user.lang][9] + (hitindex + 1), 1);

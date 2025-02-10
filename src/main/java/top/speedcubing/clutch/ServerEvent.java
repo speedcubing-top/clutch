@@ -18,33 +18,6 @@ import top.speedcubing.server.share.Chat;
 public class ServerEvent {
 
     @CubingEventHandler
-    public void configReloadEvent(ConfigReloadEvent e) {
-        JsonObject object = ServerConfig.getConfig().getAsJsonObject("clutchkb");
-        Clutch.kb = new double[]{
-                object.get("low").getAsJsonArray().get(0).getAsDouble(),
-                object.get("low").getAsJsonArray().get(1).getAsDouble(),
-                object.get("mid").getAsJsonArray().get(0).getAsDouble(),
-                object.get("mid").getAsJsonArray().get(1).getAsDouble(),
-                object.get("diff").getAsJsonArray().get(0).getAsDouble(),
-                object.get("diff").getAsJsonArray().get(1).getAsDouble(),
-                object.get("high").getAsJsonArray().get(0).getAsDouble(),
-                object.get("high").getAsJsonArray().get(1).getAsDouble(),
-                object.get("extreme").getAsJsonArray().get(0).getAsDouble(),
-                object.get("extreme").getAsJsonArray().get(1).getAsDouble(),
-                object.get("low").getAsJsonArray().get(2).getAsDouble(),
-                object.get("low").getAsJsonArray().get(3).getAsDouble(),
-                object.get("mid").getAsJsonArray().get(2).getAsDouble(),
-                object.get("mid").getAsJsonArray().get(3).getAsDouble(),
-                object.get("diff").getAsJsonArray().get(2).getAsDouble(),
-                object.get("diff").getAsJsonArray().get(3).getAsDouble(),
-                object.get("high").getAsJsonArray().get(2).getAsDouble(),
-                object.get("high").getAsJsonArray().get(3).getAsDouble(),
-                object.get("extreme").getAsJsonArray().get(2).getAsDouble(),
-                object.get("extreme").getAsJsonArray().get(3).getAsDouble()
-        };
-    }
-
-    @CubingEventHandler
     public void playInEvent(PlayInEvent e) {
         if (e.getPacket() instanceof PacketPlayInChat) {
             Player player = e.getPlayer();

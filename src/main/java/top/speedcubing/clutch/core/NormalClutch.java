@@ -1,6 +1,5 @@
 package top.speedcubing.clutch.core;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import net.minecraft.server.v1_8_R3.ChatComponentText;
@@ -19,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.speedcubing.clutch.Clutch;
 import top.speedcubing.clutch.Member;
+import top.speedcubing.clutch.configuration.Configuration;
 import top.speedcubing.clutch.list.ItemStackList;
 import top.speedcubing.clutch.list.StringList;
 import top.speedcubing.lib.bukkit.PlayerUtils;
@@ -98,7 +98,7 @@ public class NormalClutch {
                         hitindex = 0;
                     } else {
                         int sub = 2 * (member.KbCache[hitindex] - 1);
-                        player.setVelocity(new Vector(Clutch.kb[sub], Clutch.kb[sub + 1] * (member.integerCache.get(1) / 1000D), 0));
+                        player.setVelocity(new Vector(Configuration.kb[sub], Configuration.kb[sub + 1] * (member.integerCache.get(1) / 1000D), 0));
                         player.damage(0);
                         player.setLevel(hitindex + 1);
                         SideBar.getSidebar(player).setLineByScore(StringList.SideBarNormal[member.user.lang][7] + (hitindex + 1), 1);
