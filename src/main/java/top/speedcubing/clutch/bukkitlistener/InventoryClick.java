@@ -17,7 +17,7 @@ import top.speedcubing.clutch.Member;
 
 public class InventoryClick implements Listener {
     @EventHandler
-    public void InvetoryClickEvent(InventoryClickEvent e) {
+    public void InventoryClickEvent(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
         int RawSlot = e.getRawSlot();
         if (RawSlot != -999) {
