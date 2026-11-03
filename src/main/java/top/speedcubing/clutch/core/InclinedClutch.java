@@ -74,7 +74,7 @@ public class InclinedClutch {
                                     }
                                     hitindex += 1;
                                     hitdelay = member.integerCache.get(4);
-                                    PlayerUtils.sendActionBar(player, "§aGo!");
+                                    PlayerUtils.sendActionBar(player, StringList.GO[member.user.lang]);
                                 }
                             }
                             hitdelay -= 1;

@@ -11,15 +11,15 @@ public class ItemStackList {
     public static final ItemStack Blocks = new ItemBuilder(Material.SANDSTONE).amount(64).build();
 
      public void Load() {
-        String[] display = {"§cpause & settings", "§cpause & settings", "§cpause & settings", "§cpause & settings"};
-        String[] extreme = {"§5Extreme", "§5Extreme", "§5Extreme", "§5Extreme"};
-        String[] hard = {"§cHard", "§cHard", "§cHard", "§cHard"};
-        String[] difficult = {"§6Difficult", "§6Difficult", "§6Difficult", "§6Difficult"};
-        String[] normal = {"§eNormal", "§eNormal", "§eNormal", "§eNormal"};
-        String[] easy = {"§aEasy", "§aEasy", "§aEasy", "§aEasy"};
-        String[] none = {"§7None", "§7None", "§7None", "§7None"};
-        String[] goinclined = {"§ago to Inclined Mode", "§ago to Inclined Mode", "§ago to Inclined Mode", "§ago to Inclined Mode"};
-        String[] gostraight = {"§ago to Normal Mode", "§ago to Normal Mode", "§ago to Normal Mode", "§ago to Normal Mode"};
+        String[] display = StringList.lang("clutch_item_pause_settings");
+        String[] extreme = StringList.lang("clutch_difficulty_extreme");
+        String[] hard = StringList.lang("clutch_difficulty_hard");
+        String[] difficult = StringList.lang("clutch_difficulty_difficult");
+        String[] normal = StringList.lang("clutch_difficulty_normal");
+        String[] easy = StringList.lang("clutch_difficulty_easy");
+        String[] none = StringList.lang("clutch_difficulty_none");
+        String[] goinclined = StringList.lang("clutch_item_go_inclined");
+        String[] gostraight = StringList.lang("clutch_item_go_normal");
 
         for (int i = 0; i < 4; i++) {
             settings[i][0] =new ItemBuilder(Material.STAINED_GLASS).durability(8).name(none[i]).build();

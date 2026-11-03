@@ -109,7 +109,7 @@ public class NormalClutch {
                         }
                         hitindex += 1;
                         hitdelay = member.integerCache.get(2);
-                        PlayerUtils.sendActionBar(player, "§aGo!");
+                        PlayerUtils.sendActionBar(player, StringList.GO[member.user.lang]);
                     }
                 }
                 hitdelay -= 1;

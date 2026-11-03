@@ -19,6 +19,7 @@ import top.speedcubing.clutch.list.ItemStackList;
 import top.speedcubing.clutch.Member;
 import top.speedcubing.lib.bukkit.events.inventory.ClickInventoryEvent;
 import top.speedcubing.lib.bukkit.inventory.ItemBuilder;
+import top.speedcubing.server.lang.Lang;
 import top.speedcubing.server.lang.LangInv;
 import top.speedcubing.server.lang.LangItem;
 
@@ -41,7 +42,7 @@ public class PlayerInteract implements Listener {
                 inventory.setItem(new LangItem(Material.SANDSTONE).name("%lang_item_blockskin%"), 13);
 
                 inventory.setItem(new LangItem(Material.STICK).name("%lang_clutch_item_hits%").glow(), (r) -> {
-                    Inventory inv = Bukkit.createInventory(normal ? NormalClutch.KB : InclinedClutch.KB, NormalClutch.hitcount + 9, "§bHits");
+                    Inventory inv = Bukkit.createInventory(normal ? NormalClutch.KB : InclinedClutch.KB, NormalClutch.hitcount + 9, Lang.of("%lang_clutch_inv_hits%").getString(member.user.lang));
                     int length = normal ? NormalClutch.hitcount : InclinedClutch.hitcount;
                     int[] settings = normal ? member.KbCache : member.KbCache2;
                     ItemStack[] stacks = ItemStackList.settings[member.user.lang];
@@ -49,7 +50,7 @@ public class PlayerInteract implements Listener {
                         inv.setItem(i, stacks[settings[i]]);
                         inv.getItem(i).setAmount(i + 1);
                     }
-                    inv.setItem(NormalClutch.hitcount + 8, new ItemBuilder(Material.ARROW).name("next page").build());
+                    inv.setItem(NormalClutch.hitcount + 8, new ItemBuilder(Material.ARROW).name(Lang.of("%lang_replay_button_nextpage%").getString(member.user.lang)).build());
                     player.openInventory(inv);
                 }, 10);
 
@@ -63,12 +64,12 @@ public class PlayerInteract implements Listener {
                     member.user.setInput(true);
                 }, 15);
 
-                inventory.setItem(new LangItem(Material.GLOWSTONE_DUST).name("display hits in title").lore2("\n" + (member.display ? "click to turn off" : "click to turn on")), (r) -> {
+                inventory.setItem(new LangItem(Material.GLOWSTONE_DUST).name("%lang_clutch_item_display_hits%").lore2("\n" + (member.display ? "%lang_clutch_lore_click_off%" : "%lang_clutch_lore_click_on%")), (r) -> {
                     Inventory inv = r.getEvent().getInventory();
                     member.display = !member.display;
                     ItemStack stack = inv.getItem(r.getEvent().getRawSlot());
                     ItemMeta meta = stack.getItemMeta();
-                    meta.setLore(Arrays.asList(" ", member.display ? "click to turn off" : "click to turn on"));
+                    meta.setLore(Arrays.asList(" ", Lang.of(member.display ? "%lang_clutch_lore_click_off%" : "%lang_clutch_lore_click_on%").getString(member.user.lang)));
                     member.user.sound(Sound.NOTE_PLING);
                     stack.setItemMeta(meta);
                 }, 16);
