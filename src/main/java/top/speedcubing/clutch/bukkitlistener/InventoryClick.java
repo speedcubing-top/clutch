@@ -32,11 +32,6 @@ public class InventoryClick implements Listener {
                     Inventory clickedInventory = e.getClickedInventory();
                     Member member = Member.getMember(player);
                     int[] settings = member.KbCache;
-
-                    if (RawSlot > 45) { //page setting
-
-                        return;
-                    }
                     ItemStack[] hits = ItemStackList.settings[member.user.lang];
                     if (RawSlot >= 0 && RawSlot < NormalClutch.hitcount) {
                         if (RawSlot != 0 && settings[RawSlot - 1] == 0) {

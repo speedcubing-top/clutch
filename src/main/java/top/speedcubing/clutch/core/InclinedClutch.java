@@ -40,9 +40,10 @@ public class InclinedClutch {
         }
         Member member = Member.getMember(player);
         Bukkit.getScheduler().cancelTask(member.CountDownTask);
-        member.VeloSettings = false;
+        member.cancelInput();
         member.Length = -1;
-        member.clear(Bukkit.getWorld(NormalClutch.map), member.PlayerCoord, true);
+        member.clear(member.PlayerCoord, true);
+        member.inclined = true;
         int coord = 5 * (room * (room % 2 == 0 ? -1 : 1) + room % 2);
         player.teleport(new Location(Bukkit.getWorld(map), coord + 0.5, 100, coord + 0.5, 45, 0));
         WorldUtils.cloneArea(1, 99, -1, -1, 98, 1, coord + 1, 99, coord - 1, player.getWorld());
@@ -63,7 +64,7 @@ public class InclinedClutch {
                                 } else {
                                     int sub = 2 * (member.KbCache2[hitindex] - 1);
                                     double velo = Configuration.kb[sub + 10];
-                                    player.setVelocity(new Vector(velo, Configuration.kb[sub + 11] * (member.integerCache.get(3) / 1000D), -velo));
+                                    player.setVelocity(new Vector(velo, Configuration.kb[sub + 11] * (member.integerCache.get(2) / 1000D), -velo));
                                     player.damage(0);
                                     player.setLevel(hitindex + 1);
                                     SideBar.getSidebar(player).setLineByScore(StringList.SideBarInclined[member.user.lang][9] + (hitindex + 1), 1);
@@ -73,7 +74,7 @@ public class InclinedClutch {
                                         connection.sendPacket(new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, new ChatComponentText("§e" + (hitindex + 1))));
                                     }
                                     hitindex += 1;
-                                    hitdelay = member.integerCache.get(4);
+                                    hitdelay = member.integerCache.get(3);
                                     PlayerUtils.sendActionBar(player, StringList.GO[member.user.lang]);
                                 }
                             }

@@ -32,7 +32,7 @@ public class PlayerMove implements Listener {
                                 .setLineByScore(sidebar[4] + 0, 4)
                                 .setLineByScore(sidebar[7] + 0, 1);
                         member.Length = 0;
-                        member.reset2(player, world);
+                        member.reset2(player);
                         Bukkit.getScheduler().runTask(Clutch.getPlugin(Clutch.class), () -> player.teleport(new Location(player.getWorld(), 0.5, 100, member.PlayerCoord + 0.5, 90, 0)));
                     }
                 }
@@ -48,7 +48,7 @@ public class PlayerMove implements Listener {
                                 .setLineByScore(sidebar[6] + 0, 4)
                                 .setLineByScore(sidebar[9] + 0, 1);
                         member.Length2 = new int[]{member.PlayerCoord, member.PlayerCoord};
-                        member.reset2(player, world);
+                        member.reset2(player);
                         Bukkit.getScheduler().runTask(Clutch.getPlugin(Clutch.class), () -> player.teleport(new Location(player.getWorld(), member.PlayerCoord + 0.5, 100, member.PlayerCoord + 0.5, 45, 0)));
                     }
                     break;

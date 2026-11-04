@@ -18,7 +18,6 @@ import top.speedcubing.clutch.core.NormalClutch;
 import top.speedcubing.clutch.list.ItemStackList;
 import top.speedcubing.clutch.Member;
 import top.speedcubing.lib.bukkit.events.inventory.ClickInventoryEvent;
-import top.speedcubing.lib.bukkit.inventory.ItemBuilder;
 import top.speedcubing.server.lang.Lang;
 import top.speedcubing.server.lang.LangInv;
 import top.speedcubing.server.lang.LangItem;
@@ -39,10 +38,8 @@ public class PlayerInteract implements Listener {
                 inventory.setItem(new LangItem(Material.WATCH).name("%lang_clutch_item_cooldown%").lore2("%lang_clutch_lore_cooldown%", String.valueOf(member.Delay / 20D)),
                         PlayerInteract::settings12, 12);
 
-                inventory.setItem(new LangItem(Material.SANDSTONE).name("%lang_item_blockskin%"), 13);
-
                 inventory.setItem(new LangItem(Material.STICK).name("%lang_clutch_item_hits%").glow(), (r) -> {
-                    Inventory inv = Bukkit.createInventory(normal ? NormalClutch.KB : InclinedClutch.KB, NormalClutch.hitcount + 9, Lang.of("%lang_clutch_inv_hits%").getString(member.user.lang));
+                    Inventory inv = Bukkit.createInventory(normal ? NormalClutch.KB : InclinedClutch.KB, NormalClutch.hitcount, Lang.of("%lang_clutch_inv_hits%").getString(member.user.lang));
                     int length = normal ? NormalClutch.hitcount : InclinedClutch.hitcount;
                     int[] settings = normal ? member.KbCache : member.KbCache2;
                     ItemStack[] stacks = ItemStackList.settings[member.user.lang];
@@ -50,14 +47,13 @@ public class PlayerInteract implements Listener {
                         inv.setItem(i, stacks[settings[i]]);
                         inv.getItem(i).setAmount(i + 1);
                     }
-                    inv.setItem(NormalClutch.hitcount + 8, new ItemBuilder(Material.ARROW).name(Lang.of("%lang_replay_button_nextpage%").getString(member.user.lang)).build());
                     player.openInventory(inv);
                 }, 10);
 
-                inventory.setItem(new LangItem(Material.RAW_FISH).name("%lang_clutch_item_hitdelay%").durability(3).lore2("%lang_clutch_lore_hitdelay%", String.valueOf(member.integerCache.get(normal ? 2 : 4))),
+                inventory.setItem(new LangItem(Material.RAW_FISH).name("%lang_clutch_item_hitdelay%").durability(3).lore2("%lang_clutch_lore_hitdelay%", String.valueOf(member.integerCache.get(normal ? 1 : 3))),
                         PlayerInteract::settings14, 14);
 
-                inventory.setItem(new LangItem(Material.LEATHER_BOOTS).name("%lang_clutch_item_velo%").durability(1).lore2("%lang_clutch_lore_velo%", String.format("%.3f", member.integerCache.get(normal ? 1 : 3) / 1000D)), (r) -> {
+                inventory.setItem(new LangItem(Material.LEATHER_BOOTS).name("%lang_clutch_item_velo%").durability(1).lore2("%lang_clutch_lore_velo%", String.format("%.3f", member.integerCache.get(normal ? 0 : 2) / 1000D)), (r) -> {
                     player.closeInventory();
                     member.user.sendMessage("%lang_input_input_num%", "0.000", "5.000");
                     member.VeloSettings = true;
@@ -93,7 +89,7 @@ public class PlayerInteract implements Listener {
         Inventory inventory = e.getInventory();
         InventoryAction action = e.getAction();
 
-        int index = player.getWorld().getName().equals(NormalClutch.map) ? 2 : 4;
+        int index = player.getWorld().getName().equals(NormalClutch.map) ? 1 : 3;
         switch (action) {
             case PICKUP_ALL: {
                 Member member = Member.getMember(player);

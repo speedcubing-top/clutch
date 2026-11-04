@@ -54,9 +54,10 @@ public class NormalClutch {
         } else {
             member = Member.getMember(player);
             Bukkit.getScheduler().cancelTask(member.CountDownTask);
-            member.VeloSettings = false;
+            member.cancelInput();
             member.Length2 = null;
-            member.clear(Bukkit.getWorld(InclinedClutch.map), member.PlayerCoord, true);
+            member.clear(member.PlayerCoord, true);
+            member.inclined = false;
         }
         int coord = 6 * (room * (room % 2 == 0 ? -1 : 1) + room % 2);
         player.teleport(new Location(Bukkit.getWorld(map), 0.5, 100, coord + 0.5, 90, 0));
@@ -98,7 +99,7 @@ public class NormalClutch {
                         hitindex = 0;
                     } else {
                         int sub = 2 * (member.KbCache[hitindex] - 1);
-                        player.setVelocity(new Vector(Configuration.kb[sub], Configuration.kb[sub + 1] * (member.integerCache.get(1) / 1000D), 0));
+                        player.setVelocity(new Vector(Configuration.kb[sub], Configuration.kb[sub + 1] * (member.integerCache.get(0) / 1000D), 0));
                         player.damage(0);
                         player.setLevel(hitindex + 1);
                         SideBar.getSidebar(player).setLineByScore(StringList.SideBarNormal[member.user.lang][7] + (hitindex + 1), 1);
@@ -108,7 +109,7 @@ public class NormalClutch {
                             connection.sendPacket(new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, new ChatComponentText("§e" + (hitindex + 1))));
                         }
                         hitindex += 1;
-                        hitdelay = member.integerCache.get(2);
+                        hitdelay = member.integerCache.get(1);
                         PlayerUtils.sendActionBar(player, StringList.GO[member.user.lang]);
                     }
                 }
@@ -127,7 +128,7 @@ public class NormalClutch {
                 .staticLine(sidebar[8], 0).create();
         member.Length = 0;
         if (firstjoin) {
-            SQLRow result = member.user.dbSelect("clutch_blockskin,clutch_normal_ver,clutch_normal_hitdelay,clutch_inclined_ver,clutch_inclined_hitdelay");
+            SQLRow result = member.user.dbSelect("clutch_normal_ver,clutch_normal_hitdelay,clutch_inclined_ver,clutch_inclined_hitdelay");
             for (SQLField f : result) {
                 member.integerCache.add(f.getInt());
             }
